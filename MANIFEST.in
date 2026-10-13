@@ -1,0 +1,21 @@
+include README.md LICENSE THIRD_PARTY_NOTICES.md CHANGELOG.md CONTRIBUTING.md SECURITY.md CODE_OF_CONDUCT.md pyproject.toml
+
+# Package files are listed explicitly so stray tool folders never enter a release.
+include src/lecture_studio/*.py src/lecture_studio/py.typed
+recursive-include src/lecture_studio/components *.py
+include src/lecture_studio/assets/*.css src/lecture_studio/assets/*.js
+include src/lecture_studio/assets/fonts/*.woff2 src/lecture_studio/assets/fonts/*.txt src/lecture_studio/assets/fonts/*.json
+include src/jupyter_lecture_studio/*.py src/jupyter_lecture_studio/py.typed
+recursive-include src/jupyter_lecture_studio/docs *.html *.css *.js *.json *.svg *.png *.woff *.woff2 *.inv *.map *.txt
+
+include docs/*.md docs/*.rst docs/conf.py docs/_templates/*.html
+recursive-include docs/_static *.css *.woff2 *.txt
+recursive-include tests *.py
+include examples/*.json examples/*.ipynb examples/build_showcase.py examples/tour.py
+include tools/build_docs.py tools/publish_pypi.py tools/verify_release.py tools/verify_pdf.py tools/build_design_audit.py
+include tools/parity/*.py
+
+exclude docs/DESIGN_PARITY.md docs/VERIFICATION.md docs/DEVELOPMENT.md docs/PDF_VERIFICATION.md
+prune src/jupyter_lecture_studio/docs/.claude-flow
+prune src/jupyter_lecture_studio/docs/.swarm
+global-exclude *.py[cod] .DS_Store

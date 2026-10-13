@@ -1,0 +1,7 @@
+{% extends "!page.html" %}
+{% block extrahead %}
+{{ super() }}
+{% if pagename in ['USAGE_AR', 'API', 'MIGRATION'] %}
+<style>article{direction:rtl;text-align:right;font-family:Cairo,Tahoma,Arial,sans-serif;line-height:1.95}article pre{direction:ltr;text-align:left}article code{unicode-bidi:isolate;direction:ltr}</style>
+{% endif %}
+{% endblock %}

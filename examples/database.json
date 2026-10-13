@@ -1,0 +1,99 @@
+{
+  "brand": {
+    "course": "قواعد البيانات",
+    "series": "DATABASE SERIES",
+    "lesson": "المحاضرة الأولى",
+    "language": "sql"
+  },
+  "theme": {
+    "preset": "emerald",
+    "direction": "rtl",
+    "motion": true
+  },
+  "components": [
+    {
+      "type": "cover",
+      "title": "من البيانات إلى المعلومة",
+      "description": "نمثل المعلومات في جداول واضحة.\nنقرأ ما نحتاجه باستخدام استعلامات بسيطة.",
+      "tags": [
+        "نمذجة",
+        "استعلام",
+        "تفسير"
+      ],
+      "hero_code": "SELECT name\nFROM students;",
+      "hero_result": "Student names",
+      "hero_label": "DATA LAB",
+      "sections": [
+        {
+          "title": "الجداول",
+          "description": "صفوف وأعمدة ومفاتيح"
+        },
+        {
+          "title": "الاستعلامات",
+          "description": "اختيار وتصفية البيانات"
+        }
+      ]
+    },
+    {
+      "type": "slide",
+      "title": "اختيار أعمدة الجدول",
+      "description": "نحدد ما نحتاجه بدل استرجاع كل شيء.",
+      "cards": [
+        {
+          "title": "اختيار",
+          "code": "SELECT name, grade\nFROM students;"
+        },
+        {
+          "title": "تصفية",
+          "code": "SELECT name\nFROM students\nWHERE grade >= 60;"
+        }
+      ],
+      "diagram": {
+        "title": "مسار الاستعلام",
+        "direction": "rtl",
+        "nodes": [
+          {
+            "value": "جدول",
+            "note": "بيانات الطلاب"
+          },
+          {
+            "value": "شرط",
+            "note": "درجة النجاح"
+          },
+          {
+            "value": "نتيجة",
+            "note": "الأسماء المطابقة",
+            "selected": true
+          }
+        ],
+        "caption": "نقرأ البيانات ونطبق الشرط ثم نعرض الأعمدة المطلوبة."
+      },
+      "activity": {
+        "question": "هل يتغير الجدول عند تنفيذ SELECT؟",
+        "answer": "لا؛ هذا الاستعلام يقرأ البيانات ويعيد نتيجة."
+      }
+    },
+    {
+      "type": "table",
+      "title": "مكونات الاستعلام",
+      "headers": [
+        "الجزء",
+        "الوظيفة"
+      ],
+      "rows": [
+        [
+          "SELECT",
+          "تحديد الأعمدة"
+        ],
+        [
+          "FROM",
+          "تحديد الجدول"
+        ],
+        [
+          "WHERE",
+          "تحديد شرط التصفية"
+        ]
+      ]
+    }
+  ]
+}

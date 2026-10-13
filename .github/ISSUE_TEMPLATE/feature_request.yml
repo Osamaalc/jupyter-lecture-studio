@@ -1,0 +1,23 @@
+name: Feature or component idea / اقتراح ميزة أو مكوّن
+description: A component, theme, language or workflow that would help your teaching.
+labels: [enhancement]
+body:
+  - type: textarea
+    id: need
+    attributes:
+      label: Teaching need / الحاجة التعليمية
+      description: Which subject and lesson would use it, and what should students see?
+    validations:
+      required: true
+  - type: textarea
+    id: proposal
+    attributes:
+      label: Proposed API or example / الشكل المقترح
+      render: python
+  - type: checkboxes
+    id: scope
+    attributes:
+      label: Scope
+      options:
+        - label: It should work in Arabic (RTL) and English (LTR)
+        - label: It could be a plugin first

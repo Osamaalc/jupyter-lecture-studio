@@ -1,0 +1,181 @@
+/* Lecture Studio notebook style (notebook_style=True): an RTL reading layout for the whole notebook.
+ * - Every color is a --lsn-* token on the notebook. The light tokens keep the original design.
+ * - Under a dark JupyterLab / Notebook 7 theme (body[data-jp-theme-light="false"]) the dark tokens
+ *   take over, and the host's --jp-* variables are redefined inside the notebook, so editors, markdown,
+ *   tables, links and outputs never pair a light surface with dark-theme text (or the reverse).
+ * - Lecture Studio output cells keep their own deck design in both modes.
+ */
+
+/* 1. Tokens ---------------------------------------------------------------- */
+.jp-Notebook:has(.lecture-studio[data-notebook-style="true"]) {
+  --lsn-page: #e9e9e5;
+  --lsn-card: #fbfaf6;
+  --lsn-card-border: #d8d7ce;
+  --lsn-card-rule: #b8a271;
+  --lsn-card-shadow: 0 5px 18px rgba(34,43,45,.025);
+  --lsn-text: #263444;
+  --lsn-heading: #152535;
+  --lsn-heading-2: #162635;
+  --lsn-code-bg: #eaf0f0;
+  --lsn-code: #2b5358;
+  --lsn-editor-bg: #fbfcfd;
+  --lsn-editor-border: #cdd6de;
+  --lsn-editor-bar: linear-gradient(100deg, #202e3d, #101d2d);
+  --lsn-editor-bar-text: #e1cca0;
+  --lsn-output-bg: #e5eeeb;
+  --lsn-output-border: #c7d8d1;
+  --lsn-output-text: #244a41;
+  --lsn-prompt: #56687a;
+  --lsn-summary: #775a28;
+  --lsn-details-bg: #f8f5ee;
+  --lsn-details-border: #d9d1bf;
+  --lsn-nav-bg: #efeee7;
+  --lsn-nav-border: #d8ceb9;
+  --lsn-nav-text: #605137;
+  /* Terminal colors on the tinted output panel (tracebacks, colored logs). */
+  --lsn-ansi-red: #b42318;
+  --lsn-ansi-green: #1e7a3c;
+  --lsn-ansi-yellow: #8a6100;
+  --lsn-ansi-blue: #1f5fa8;
+  --lsn-ansi-magenta: #8e3fa0;
+  --lsn-ansi-cyan: #17707a;
+  --jp-cell-editor-background: #fbfcfd;
+  --jp-mirror-editor-keyword-color: #74509a;
+  --jp-mirror-editor-string-color: #28675a;
+  --jp-mirror-editor-comment-color: #687588;
+  --jp-code-font-size: 14px;
+  color-scheme: light;
+  background: var(--lsn-page) !important;
+  padding: 22px 24px 70px !important;
+}
+body[data-jp-theme-light="false"] .jp-Notebook:has(.lecture-studio[data-notebook-style="true"]),
+body[data-jp-theme-light="false"].jp-Notebook:has(.lecture-studio[data-notebook-style="true"]) {
+  --lsn-page: #0e151e;
+  --lsn-card: #141e2a;
+  --lsn-card-border: #2a3746;
+  --lsn-card-rule: #b8a271;
+  --lsn-card-shadow: 0 6px 20px rgba(0,0,0,.28);
+  --lsn-text: #ccd6e0;
+  --lsn-heading: #f2e7cd;
+  --lsn-heading-2: #f2e7cd;
+  --lsn-code-bg: #253844;
+  --lsn-code: #b3ddd9;
+  --lsn-editor-bg: #0c1724;
+  --lsn-editor-border: #2c3b4c;
+  --lsn-output-bg: #0f1c22;
+  --lsn-output-border: #34504f;
+  --lsn-output-text: #c6eadf;
+  --lsn-prompt: #8193a6;
+  --lsn-summary: #e1cca0;
+  --lsn-details-bg: #1a2431;
+  --lsn-details-border: #3a4656;
+  --lsn-nav-bg: #1a2431;
+  --lsn-nav-border: #3d4a58;
+  --lsn-nav-text: #e1cca0;
+  --lsn-ansi-red: #f28b82;
+  --lsn-ansi-green: #7fd6a4;
+  --lsn-ansi-yellow: #f1d49b;
+  --lsn-ansi-blue: #8fc3e8;
+  --lsn-ansi-magenta: #d9b4ef;
+  --lsn-ansi-cyan: #8fd8d2;
+  /* Host variables: the gold palette of the slides, so practice code matches the deck. */
+  --jp-layout-color0: #141e2a;
+  --jp-content-font-color0: #f2e7cd;
+  --jp-content-font-color1: #e3e9f2;
+  --jp-content-font-color2: #b9c4cf;
+  --jp-content-font-color3: #8494a5;
+  --jp-content-link-color: #8fc3e8;
+  --jp-rendermime-table-row-background: #19242f;
+  --jp-rendermime-table-row-hover-background: rgba(231,204,146,.07);
+  --jp-notebook-select-background: rgba(231,204,146,.05);
+  --jp-notebook-multiselected-color: rgba(231,204,146,.10);
+  --jp-cell-editor-background: #0c1724;
+  --jp-cell-editor-active-background: #0c1724;
+  --jp-cell-editor-border-color: #2c3b4c;
+  --jp-cell-editor-active-border-color: #8b7c5f;
+  --jp-editor-cursor-color: #e7cc92;
+  --jp-editor-selected-background: rgba(144,198,223,.16);
+  --jp-editor-selected-focused-background: rgba(144,198,223,.26);
+  --jp-mirror-editor-keyword-color: #d9b4ef;
+  --jp-mirror-editor-atom-color: #d9b4ef;
+  --jp-mirror-editor-number-color: #f1d49b;
+  --jp-mirror-editor-def-color: #f0dfb3;
+  --jp-mirror-editor-variable-color: #e3e9f2;
+  --jp-mirror-editor-variable-2-color: #e3e9f2;
+  --jp-mirror-editor-variable-3-color: #90c6df;
+  --jp-mirror-editor-punctuation-color: #aab9c7;
+  --jp-mirror-editor-property-color: #c5d1dd;
+  --jp-mirror-editor-operator-color: #e3e9f2;
+  --jp-mirror-editor-comment-color: #97adbd;
+  --jp-mirror-editor-string-color: #b6e0ca;
+  --jp-mirror-editor-string-2-color: #b6e0ca;
+  --jp-mirror-editor-meta-color: #f0dfb3;
+  --jp-mirror-editor-qualifier-color: #f0dfb3;
+  --jp-mirror-editor-builtin-color: #90c6df;
+  --jp-mirror-editor-bracket-color: #aab9c7;
+  --jp-mirror-editor-tag-color: #d9b4ef;
+  --jp-mirror-editor-attribute-color: #f0dfb3;
+  --jp-mirror-editor-header-color: #f2e7cd;
+  --jp-mirror-editor-quote-color: #b6e0ca;
+  --jp-mirror-editor-link-color: #8fc3e8;
+  --jp-mirror-editor-error-color: #f28b82;
+  --jp-mirror-editor-hr-color: #5f7184;
+  color-scheme: dark;
+}
+
+/* 2. Layout ---------------------------------------------------------------- */
+.jp-Notebook:has(.lecture-studio[data-notebook-style="true"]) .jp-Cell{max-width:1360px;margin:0 auto 12px!important;}
+.jp-Notebook:has(.lecture-studio[data-notebook-style="true"]) .jp-RenderedMarkdown{box-sizing:border-box;direction:rtl;text-align:right;background:var(--lsn-card);border:1px solid var(--lsn-card-border);border-right:3px solid var(--lsn-card-rule);border-radius:16px;padding:23px 27px!important;font-family:'Cairo',Tahoma,sans-serif;font-size:16px;color:var(--lsn-text);line-height:1.95;box-shadow:var(--lsn-card-shadow);}
+.jp-Notebook:has(.lecture-studio[data-notebook-style="true"]) .jp-RenderedMarkdown h1,.jp-Notebook:has(.lecture-studio[data-notebook-style="true"]) .jp-RenderedMarkdown h2,.jp-Notebook:has(.lecture-studio[data-notebook-style="true"]) .jp-RenderedMarkdown h3{font-family:inherit;font-weight:800;color:var(--lsn-heading);line-height:1.8;margin:0 0 12px!important;}
+.jp-Notebook:has(.lecture-studio[data-notebook-style="true"]) .jp-RenderedMarkdown h1{font-size:29px;}
+.jp-Notebook:has(.lecture-studio[data-notebook-style="true"]) .jp-RenderedMarkdown h2{font-size:24px;color:var(--lsn-heading-2);}
+.jp-Notebook:has(.lecture-studio[data-notebook-style="true"]) .jp-RenderedMarkdown h3{font-size:20px;}
+.jp-Notebook:has(.lecture-studio[data-notebook-style="true"]) .jp-RenderedMarkdown p{line-height:1.95;margin:8px 0;text-align:right;}
+.jp-Notebook:has(.lecture-studio[data-notebook-style="true"]) .jp-RenderedMarkdown ul,.jp-Notebook:has(.lecture-studio[data-notebook-style="true"]) .jp-RenderedMarkdown ol{padding-right:25px;padding-left:0;}
+.jp-Notebook:has(.lecture-studio[data-notebook-style="true"]) .jp-RenderedMarkdown li{margin-bottom:5px;}
+.jp-Notebook:has(.lecture-studio[data-notebook-style="true"]) .jp-RenderedMarkdown code{direction:ltr;unicode-bidi:isolate;display:inline-block;background:var(--lsn-code-bg);color:var(--lsn-code);border-radius:4px;padding:0 5px;font-family:'JetBrains Mono',monospace;font-size:13px;line-height:1.7;}
+.jp-Notebook:has(.lecture-studio[data-notebook-style="true"]) .jp-RenderedMarkdown:has(.ls-cover,.luxury-cover){padding:0!important;border:none;background:transparent;box-shadow:none;}
+.jp-Notebook:has(.lecture-studio[data-notebook-style="true"]) .jp-RenderedMarkdown .anchor-link{display:none!important;}
+.jp-Notebook:has(.lecture-studio[data-notebook-style="true"]) .jp-RenderedMarkdown h2 > .jp-InternalAnchorLink{display:none;}
+.jp-Notebook:has(.lecture-studio[data-notebook-style="true"]) .jp-RenderedMarkdown details{margin:12px 0;padding:12px 15px;border:1px solid var(--lsn-details-border);border-radius:10px;background:var(--lsn-details-bg);}
+.jp-Notebook:has(.lecture-studio[data-notebook-style="true"]) .jp-RenderedMarkdown details summary{cursor:pointer;font-weight:700;color:var(--lsn-summary);}
+.jp-Notebook:has(.lecture-studio[data-notebook-style="true"]) .jp-RenderedMarkdown details pre{direction:ltr;text-align:left;font-size:15px;line-height:1.8;overflow-x:auto;}
+.jp-Notebook:has(.lecture-studio[data-notebook-style="true"]) .jp-RenderedMarkdown table{width:100%;font-size:15px;color:var(--lsn-text);}
+.jp-Notebook:has(.lecture-studio[data-notebook-style="true"]) .jp-RenderedMarkdown table th,.jp-Notebook:has(.lecture-studio[data-notebook-style="true"]) .jp-RenderedMarkdown table td{text-align:right;padding:9px 12px;}
+
+/* 3. Code cells and outputs ------------------------------------------------ */
+.jp-Notebook:has(.lecture-studio[data-notebook-style="true"]) .jp-InputArea-editor{border:1px solid var(--lsn-editor-border);border-radius:10px;overflow:hidden;background:var(--lsn-editor-bg);}
+.jp-Notebook:has(.lecture-studio[data-notebook-style="true"]) .jp-CodeCell .jp-InputArea-editor::before{content:'CODE  /  مثال تطبيقي';display:block;direction:ltr;text-align:left;padding:9px 14px;background:var(--lsn-editor-bar);color:var(--lsn-editor-bar-text);font-family:'JetBrains Mono',Tahoma,monospace;font-size:11px;letter-spacing:1.5px;}
+.jp-Notebook:has(.lecture-studio[data-notebook-style="true"]) .cm-editor{padding:10px 8px;font-size:16px;line-height:1.8;}
+.jp-Notebook:has(.lecture-studio[data-notebook-style="true"]) .jp-InputPrompt,.jp-Notebook:has(.lecture-studio[data-notebook-style="true"]) .jp-OutputPrompt{font-size:11px;color:var(--lsn-prompt);}
+.jp-Notebook:has(.lecture-studio[data-notebook-style="true"]) .jp-OutputArea-output{max-width:100%;box-sizing:border-box;}
+.jp-Notebook:has(.lecture-studio[data-notebook-style="true"]) .jp-OutputArea-output:has(>.jp-RenderedText),.jp-Notebook:has(.lecture-studio[data-notebook-style="true"]) .jp-OutputArea-output.jp-RenderedText{margin-top:6px;background:var(--lsn-output-bg);border:1px solid var(--lsn-output-border);border-radius:9px;padding:12px 15px;}
+.jp-Notebook:has(.lecture-studio[data-notebook-style="true"]) .jp-RenderedText pre{font-size:15px;line-height:1.85;color:var(--lsn-output-text);white-space:pre-wrap;overflow-wrap:anywhere;}
+.jp-Notebook:has(.lecture-studio[data-notebook-style="true"]) .jp-RenderedText .ansi-red-fg{color:var(--lsn-ansi-red);}
+.jp-Notebook:has(.lecture-studio[data-notebook-style="true"]) .jp-RenderedText .ansi-green-fg{color:var(--lsn-ansi-green);}
+.jp-Notebook:has(.lecture-studio[data-notebook-style="true"]) .jp-RenderedText .ansi-yellow-fg{color:var(--lsn-ansi-yellow);}
+.jp-Notebook:has(.lecture-studio[data-notebook-style="true"]) .jp-RenderedText .ansi-blue-fg{color:var(--lsn-ansi-blue);}
+.jp-Notebook:has(.lecture-studio[data-notebook-style="true"]) .jp-RenderedText .ansi-magenta-fg{color:var(--lsn-ansi-magenta);}
+.jp-Notebook:has(.lecture-studio[data-notebook-style="true"]) .jp-RenderedText .ansi-cyan-fg{color:var(--lsn-ansi-cyan);}
+/* Lecture cells: hide the collapsed-source line and let the slide grow to its full height. */
+.jp-Notebook:has(.lecture-studio[data-notebook-style="true"]) .jp-CodeCell:has(.lecture-studio,.luxury-slide-container,.luxury-cover) .jp-InputPlaceholder{font-size:0!important;color:transparent!important;height:8px!important;min-height:8px!important;padding:0!important;overflow:hidden;background:transparent!important;border:0!important;}
+.jp-Notebook:has(.lecture-studio[data-notebook-style="true"]) .jp-CodeCell:has(.lecture-studio,.luxury-slide-container,.luxury-cover) .jp-OutputArea{max-height:none!important;height:auto!important;overflow:visible!important;}
+
+/* 4. Lecture navigation and reference maps (always dark) ------------------- */
+.jp-Notebook:has(.lecture-studio[data-notebook-style="true"]) .lecture-nav{display:flex;flex-wrap:wrap;gap:10px;margin:12px 0 18px;}
+.jp-Notebook:has(.lecture-studio[data-notebook-style="true"]) .lecture-nav span{display:inline-block;padding:7px 13px;border:1px solid var(--lsn-nav-border);border-radius:7px;background:var(--lsn-nav-bg);color:var(--lsn-nav-text)!important;text-decoration:none;font-weight:700;font-size:13px;}
+.jp-Notebook:has(.lecture-studio[data-notebook-style="true"]) .reference-map{display:grid;grid-template-columns:1fr 1fr;gap:22px;background:linear-gradient(120deg,#152330,#0e1926);border:1px solid #8b7c5f;border-radius:16px;padding:25px;margin:18px 0;color:#e3eeed;direction:ltr;}
+.jp-Notebook:has(.lecture-studio[data-notebook-style="true"]) .reference-column{display:flex;flex-direction:column;align-items:center;gap:8px;padding:15px;background:linear-gradient(145deg,#283b49,#192b39);border:1px solid #708d90;border-radius:12px;}
+.jp-Notebook:has(.lecture-studio[data-notebook-style="true"]) .reference-names{display:flex;gap:10px;flex-wrap:wrap;justify-content:center;}
+.jp-Notebook:has(.lecture-studio[data-notebook-style="true"]) .reference-names span{font-family:'JetBrains Mono',monospace;font-size:15px;padding:7px 11px;border:1px solid #6bcbb8;border-radius:6px;background:#234b4a;color:#b7efe1;}
+.jp-Notebook:has(.lecture-studio[data-notebook-style="true"]) .reference-arrow{font-size:26px;color:#81cdbb;animation:ls-rise .5s ease both;}
+.jp-Notebook:has(.lecture-studio[data-notebook-style="true"]) .reference-object{font-family:'JetBrains Mono',monospace;font-size:24px;padding:12px 22px;border:1px solid #527180;border-radius:10px;background:#10222d;color:#e3eeed;}
+.jp-Notebook:has(.lecture-studio[data-notebook-style="true"]) .reference-caption{direction:rtl;font-size:14px;color:#b5d2d5;text-align:center;}
+.jp-Notebook:has(.lecture-studio[data-notebook-style="true"]) .reference-column.independent{border-color:#7a6a48;}
+.jp-Notebook:has(.lecture-studio[data-notebook-style="true"]) .reference-column.independent .reference-names span{border-color:#b69f66;color:#ecd6a2;background:#35352c;}
+
+/* 5. Responsive, motion and print ----------------------------------------- */
+@media(max-width:900px){.jp-Notebook:has(.lecture-studio[data-notebook-style="true"]){padding:15px 10px!important}}
+@media(max-width:650px){.jp-Notebook:has(.lecture-studio[data-notebook-style="true"]) .jp-RenderedMarkdown{padding:18px!important}.jp-Notebook:has(.lecture-studio[data-notebook-style="true"]) .reference-map{grid-template-columns:1fr;gap:12px;padding:16px}}
+@media(prefers-reduced-motion:reduce){.jp-Notebook:has(.lecture-studio[data-notebook-style="true"]) .reference-arrow{animation:none!important}}
+@media print{.jp-Notebook:has(.lecture-studio[data-notebook-style="true"]){background:white!important}}

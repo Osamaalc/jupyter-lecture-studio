@@ -1,0 +1,544 @@
+<!doctype html>
+<html class="no-js" lang="en" data-content_root="./">
+  <head><meta charset="utf-8">
+    <meta name="viewport" content="width=device-width,initial-scale=1">
+    <meta name="color-scheme" content="light dark"><meta name="viewport" content="width=device-width, initial-scale=1" />
+<link rel="index" title="Index" href="genindex.html"><link rel="search" title="Search" href="search.html"><link rel="next" title="Formulas and subject visuals" href="visuals.html"><link rel="prev" title="Install and build your first lecture" href="getting-started.html">
+
+    <!-- Generated with Sphinx 9.1.0 and Furo 2025.12.19 -->
+        <title>Components - Jupyter Lecture Studio — Animated Jupyter Lectures</title>
+      <link rel="stylesheet" type="text/css" href="_static/pygments.css?v=d111a655" />
+    <link rel="stylesheet" type="text/css" href="_static/styles/furo.css?v=7bdb33bb" />
+    <link rel="stylesheet" type="text/css" href="_static/styles/furo-extensions.css?v=8dab3a3b" />
+    <link rel="stylesheet" type="text/css" href="_static/studio-docs.css?v=c7505cbd" />
+    
+    
+
+
+<style>
+  body {
+    --color-code-background: #f2f2f2;
+  --color-code-foreground: #1e1e1e;
+  --color-brand-primary: #705427;
+  --color-brand-content: #705427;
+  
+  }
+  @media not print {
+    body[data-theme="dark"] {
+      --color-code-background: #202020;
+  --color-code-foreground: #d0d0d0;
+  --color-brand-primary: #ecd29a;
+  --color-brand-content: #ecd29a;
+  
+    }
+    @media (prefers-color-scheme: dark) {
+      body:not([data-theme="light"]) {
+        --color-code-background: #202020;
+  --color-code-foreground: #d0d0d0;
+  --color-brand-primary: #ecd29a;
+  --color-brand-content: #ecd29a;
+  
+      }
+    }
+  }
+</style>
+
+
+</head>
+  <body>
+    
+    <script>
+      document.body.dataset.theme = localStorage.getItem("theme") || "auto";
+    </script>
+    
+
+<svg xmlns="http://www.w3.org/2000/svg" style="display: none;">
+  <symbol id="svg-toc" viewBox="0 0 24 24">
+    <title>Contents</title>
+    <svg stroke="currentColor" fill="currentColor" stroke-width="0" viewBox="0 0 1024 1024">
+      <path d="M408 442h480c4.4 0 8-3.6 8-8v-56c0-4.4-3.6-8-8-8H408c-4.4 0-8 3.6-8 8v56c0 4.4 3.6 8 8 8zm-8 204c0 4.4 3.6 8 8 8h480c4.4 0 8-3.6 8-8v-56c0-4.4-3.6-8-8-8H408c-4.4 0-8 3.6-8 8v56zm504-486H120c-4.4 0-8 3.6-8 8v56c0 4.4 3.6 8 8 8h784c4.4 0 8-3.6 8-8v-56c0-4.4-3.6-8-8-8zm0 632H120c-4.4 0-8 3.6-8 8v56c0 4.4 3.6 8 8 8h784c4.4 0 8-3.6 8-8v-56c0-4.4-3.6-8-8-8zM115.4 518.9L271.7 642c5.8 4.6 14.4.5 14.4-6.9V388.9c0-7.4-8.5-11.5-14.4-6.9L115.4 505.1a8.74 8.74 0 0 0 0 13.8z"/>
+    </svg>
+  </symbol>
+  <symbol id="svg-menu" viewBox="0 0 24 24">
+    <title>Menu</title>
+    <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="none" stroke="currentColor"
+      stroke-width="2" stroke-linecap="round" stroke-linejoin="round" class="feather-menu">
+      <line x1="3" y1="12" x2="21" y2="12"></line>
+      <line x1="3" y1="6" x2="21" y2="6"></line>
+      <line x1="3" y1="18" x2="21" y2="18"></line>
+    </svg>
+  </symbol>
+  <symbol id="svg-arrow-right" viewBox="0 0 24 24">
+    <title>Expand</title>
+    <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="none" stroke="currentColor"
+      stroke-width="2" stroke-linecap="round" stroke-linejoin="round" class="feather-chevron-right">
+      <polyline points="9 18 15 12 9 6"></polyline>
+    </svg>
+  </symbol>
+  <symbol id="svg-sun" viewBox="0 0 24 24">
+    <title>Light mode</title>
+    <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="none" stroke="currentColor"
+      stroke-width="1" stroke-linecap="round" stroke-linejoin="round" class="feather-sun">
+      <circle cx="12" cy="12" r="5"></circle>
+      <line x1="12" y1="1" x2="12" y2="3"></line>
+      <line x1="12" y1="21" x2="12" y2="23"></line>
+      <line x1="4.22" y1="4.22" x2="5.64" y2="5.64"></line>
+      <line x1="18.36" y1="18.36" x2="19.78" y2="19.78"></line>
+      <line x1="1" y1="12" x2="3" y2="12"></line>
+      <line x1="21" y1="12" x2="23" y2="12"></line>
+      <line x1="4.22" y1="19.78" x2="5.64" y2="18.36"></line>
+      <line x1="18.36" y1="5.64" x2="19.78" y2="4.22"></line>
+    </svg>
+  </symbol>
+  <symbol id="svg-moon" viewBox="0 0 24 24">
+    <title>Dark mode</title>
+    <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="none" stroke="currentColor"
+      stroke-width="1" stroke-linecap="round" stroke-linejoin="round" class="icon-tabler-moon">
+      <path stroke="none" d="M0 0h24v24H0z" fill="none" />
+      <path d="M12 3c.132 0 .263 0 .393 0a7.5 7.5 0 0 0 7.92 12.446a9 9 0 1 1 -8.313 -12.454z" />
+    </svg>
+  </symbol>
+  <symbol id="svg-sun-with-moon" viewBox="0 0 24 24">
+    <title>Auto light/dark, in light mode</title>
+    <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="none" stroke="currentColor"
+      stroke-width="1" stroke-linecap="round" stroke-linejoin="round"
+      class="icon-custom-derived-from-feather-sun-and-tabler-moon">
+      <path style="opacity: 50%" d="M 5.411 14.504 C 5.471 14.504 5.532 14.504 5.591 14.504 C 3.639 16.319 4.383 19.569 6.931 20.352 C 7.693 20.586 8.512 20.551 9.25 20.252 C 8.023 23.207 4.056 23.725 2.11 21.184 C 0.166 18.642 1.702 14.949 4.874 14.536 C 5.051 14.512 5.231 14.5 5.411 14.5 L 5.411 14.504 Z"/>
+      <line x1="14.5" y1="3.25" x2="14.5" y2="1.25"/>
+      <line x1="14.5" y1="15.85" x2="14.5" y2="17.85"/>
+      <line x1="10.044" y1="5.094" x2="8.63" y2="3.68"/>
+      <line x1="19" y1="14.05" x2="20.414" y2="15.464"/>
+      <line x1="8.2" y1="9.55" x2="6.2" y2="9.55"/>
+      <line x1="20.8" y1="9.55" x2="22.8" y2="9.55"/>
+      <line x1="10.044" y1="14.006" x2="8.63" y2="15.42"/>
+      <line x1="19" y1="5.05" x2="20.414" y2="3.636"/>
+      <circle cx="14.5" cy="9.55" r="3.6"/>
+    </svg>
+  </symbol>
+  <symbol id="svg-moon-with-sun" viewBox="0 0 24 24">
+    <title>Auto light/dark, in dark mode</title>
+    <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="none" stroke="currentColor"
+      stroke-width="1" stroke-linecap="round" stroke-linejoin="round"
+      class="icon-custom-derived-from-feather-sun-and-tabler-moon">
+      <path d="M 8.282 7.007 C 8.385 7.007 8.494 7.007 8.595 7.007 C 5.18 10.184 6.481 15.869 10.942 17.24 C 12.275 17.648 13.706 17.589 15 17.066 C 12.851 22.236 5.91 23.143 2.505 18.696 C -0.897 14.249 1.791 7.786 7.342 7.063 C 7.652 7.021 7.965 7 8.282 7 L 8.282 7.007 Z"/>
+      <line style="opacity: 50%" x1="18" y1="3.705" x2="18" y2="2.5"/>
+      <line style="opacity: 50%" x1="18" y1="11.295" x2="18" y2="12.5"/>
+      <line style="opacity: 50%" x1="15.316" y1="4.816" x2="14.464" y2="3.964"/>
+      <line style="opacity: 50%" x1="20.711" y1="10.212" x2="21.563" y2="11.063"/>
+      <line style="opacity: 50%" x1="14.205" y1="7.5" x2="13.001" y2="7.5"/>
+      <line style="opacity: 50%" x1="21.795" y1="7.5" x2="23" y2="7.5"/>
+      <line style="opacity: 50%" x1="15.316" y1="10.184" x2="14.464" y2="11.036"/>
+      <line style="opacity: 50%" x1="20.711" y1="4.789" x2="21.563" y2="3.937"/>
+      <circle style="opacity: 50%" cx="18" cy="7.5" r="2.169"/>
+    </svg>
+  </symbol>
+  <symbol id="svg-pencil" viewBox="0 0 24 24">
+    <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="none" stroke="currentColor"
+      stroke-width="1" stroke-linecap="round" stroke-linejoin="round" class="icon-tabler-pencil-code">
+      <path d="M4 20h4l10.5 -10.5a2.828 2.828 0 1 0 -4 -4l-10.5 10.5v4" />
+      <path d="M13.5 6.5l4 4" />
+      <path d="M20 21l2 -2l-2 -2" />
+      <path d="M17 17l-2 2l2 2" />
+    </svg>
+  </symbol>
+  <symbol id="svg-eye" viewBox="0 0 24 24">
+    <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="none" stroke="currentColor"
+      stroke-width="1" stroke-linecap="round" stroke-linejoin="round" class="icon-tabler-eye-code">
+      <path stroke="none" d="M0 0h24v24H0z" fill="none" />
+      <path d="M10 12a2 2 0 1 0 4 0a2 2 0 0 0 -4 0" />
+      <path
+        d="M11.11 17.958c-3.209 -.307 -5.91 -2.293 -8.11 -5.958c2.4 -4 5.4 -6 9 -6c3.6 0 6.6 2 9 6c-.21 .352 -.427 .688 -.647 1.008" />
+      <path d="M20 21l2 -2l-2 -2" />
+      <path d="M17 17l-2 2l2 2" />
+    </svg>
+  </symbol>
+</svg>
+
+<input type="checkbox" class="sidebar-toggle" name="__navigation" id="__navigation" aria-label="Toggle site navigation sidebar">
+<input type="checkbox" class="sidebar-toggle" name="__toc" id="__toc" aria-label="Toggle table of contents sidebar">
+<label class="overlay sidebar-overlay" for="__navigation"></label>
+<label class="overlay toc-overlay" for="__toc"></label>
+
+<a class="skip-to-content muted-link" href="#furo-main-content">Skip to content</a>
+
+
+
+<div class="page">
+  <header class="mobile-header">
+    <div class="header-left">
+      <label class="nav-overlay-icon" for="__navigation">
+        <span class="icon"><svg><use href="#svg-menu"></use></svg></span>
+      </label>
+    </div>
+    <div class="header-center">
+      <a href="index.html"><div class="brand">Jupyter Lecture Studio — Animated Jupyter Lectures</div></a>
+    </div>
+    <div class="header-right">
+      <div class="theme-toggle-container theme-toggle-header">
+        <button class="theme-toggle" aria-label="Toggle Light / Dark / Auto color theme">
+          <svg class="theme-icon-when-auto-light"><use href="#svg-sun-with-moon"></use></svg>
+          <svg class="theme-icon-when-auto-dark"><use href="#svg-moon-with-sun"></use></svg>
+          <svg class="theme-icon-when-dark"><use href="#svg-moon"></use></svg>
+          <svg class="theme-icon-when-light"><use href="#svg-sun"></use></svg>
+        </button>
+      </div>
+      <label class="toc-overlay-icon toc-header-icon" for="__toc">
+        <span class="icon"><svg><use href="#svg-toc"></use></svg></span>
+      </label>
+    </div>
+  </header>
+  <aside class="sidebar-drawer">
+    <div class="sidebar-container">
+      
+      <div class="sidebar-sticky"><a class="sidebar-brand" href="index.html">
+  
+  <span class="sidebar-brand-text">Jupyter Lecture Studio — Animated Jupyter Lectures</span>
+  
+</a><form class="sidebar-search-container" method="get" action="search.html" role="search">
+  <input class="sidebar-search" placeholder="Search" name="q" aria-label="Search">
+  <input type="hidden" name="check_keywords" value="yes">
+  <input type="hidden" name="area" value="default">
+</form>
+<div id="searchbox"></div><div class="sidebar-scroll"><div class="sidebar-tree">
+  <p class="caption" role="heading"><span class="caption-text">Learn</span></p>
+<ul class="current">
+<li class="toctree-l1"><a class="reference internal" href="getting-started.html">Install and build your first lecture</a></li>
+<li class="toctree-l1 current current-page"><a class="current reference internal" href="#">Components</a></li>
+<li class="toctree-l1"><a class="reference internal" href="visuals.html">Formulas and subject visuals</a></li>
+<li class="toctree-l1"><a class="reference internal" href="presenting.html">Teaching, sharing and presenting</a></li>
+<li class="toctree-l1"><a class="reference internal" href="themes.html">Themes and design tokens</a></li>
+<li class="toctree-l1"><a class="reference internal" href="languages.html">Languages</a></li>
+<li class="toctree-l1"><a class="reference internal" href="cookbook.html">Teaching recipes</a></li>
+<li class="toctree-l1"><a class="reference internal" href="pdf.html">Save your lecture as PDF</a></li>
+<li class="toctree-l1"><a class="reference internal" href="cli.html">CLI and JSON workflow</a></li>
+</ul>
+<p class="caption" role="heading"><span class="caption-text">Develop</span></p>
+<ul>
+<li class="toctree-l1"><a class="reference internal" href="reference.html">Python API reference</a></li>
+<li class="toctree-l1"><a class="reference internal" href="extending.html">Extending Lecture Studio</a></li>
+<li class="toctree-l1"><a class="reference internal" href="architecture.html">Architecture</a></li>
+</ul>
+<p class="caption" role="heading"><span class="caption-text">العربية</span></p>
+<ul>
+<li class="toctree-l1"><a class="reference internal" href="USAGE_AR.html">دليل الاستخدام</a></li>
+<li class="toctree-l1"><a class="reference internal" href="API.html">مرجع الواجهة — 1.0</a></li>
+<li class="toctree-l1"><a class="reference internal" href="MIGRATION.html">الانتقال إلى الإصدار 1.0</a></li>
+</ul>
+<p class="caption" role="heading"><span class="caption-text">Project</span></p>
+<ul>
+<li class="toctree-l1"><a class="reference internal" href="troubleshooting.html">Troubleshooting and supported behavior</a></li>
+<li class="toctree-l1"><a class="reference internal" href="licensing.html">Licensing and bundled assets</a></li>
+<li class="toctree-l1"><a class="reference internal" href="release-notes.html">Release notes</a></li>
+</ul>
+
+</div>
+</div>
+
+      </div>
+      
+    </div>
+  </aside>
+  <div class="main">
+    <div class="content">
+      <div class="article-container">
+        <a href="#" class="back-to-top muted-link">
+          <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24">
+            <path d="M13 20h-2V8l-5.5 5.5-1.42-1.42L12 4.16l7.92 7.92-1.42 1.42L13 8v12z"></path>
+          </svg>
+          <span>Back to top</span>
+        </a>
+        <div class="content-icon-container">
+          
+
+<div class="theme-toggle-container theme-toggle-content">
+            <button class="theme-toggle" aria-label="Toggle Light / Dark / Auto color theme">
+              <svg class="theme-icon-when-auto-light"><use href="#svg-sun-with-moon"></use></svg>
+              <svg class="theme-icon-when-auto-dark"><use href="#svg-moon-with-sun"></use></svg>
+              <svg class="theme-icon-when-dark"><use href="#svg-moon"></use></svg>
+              <svg class="theme-icon-when-light"><use href="#svg-sun"></use></svg>
+            </button>
+          </div>
+          <label class="toc-overlay-icon toc-content-icon" for="__toc">
+            <span class="icon"><svg><use href="#svg-toc"></use></svg></span>
+          </label>
+        </div>
+        <article role="main" id="furo-main-content">
+          <section id="components">
+<h1>Components<a class="headerlink" href="#components" title="Link to this heading">¶</a></h1>
+<p>Every component is a method on <code class="docutils literal notranslate"><span class="pre">LectureDeck</span></code>, a model class you can pass to <code class="docutils literal notranslate"><span class="pre">deck.add(...)</span></code>, and a JSON <code class="docutils literal notranslate"><span class="pre">&quot;type&quot;</span></code>. All of them accept <code class="docutils literal notranslate"><span class="pre">notes=&quot;...&quot;</span></code> (speaker notes, shown only in presentation mode), <code class="docutils literal notranslate"><span class="pre">id=&quot;...&quot;</span></code> (replace instead of append) and <code class="docutils literal notranslate"><span class="pre">show=False</span></code> (return HTML instead of displaying it).</p>
+<div class="table-wrapper colwidths-auto docutils container">
+<table class="docutils align-default">
+<thead>
+<tr class="row-odd"><th class="head"><p>Method</p></th>
+<th class="head"><p>JSON <code class="docutils literal notranslate"><span class="pre">type</span></code></p></th>
+<th class="head"><p>Use it for</p></th>
+</tr>
+</thead>
+<tbody>
+<tr class="row-even"><td><p><code class="docutils literal notranslate"><span class="pre">cover</span></code></p></td>
+<td><p><code class="docutils literal notranslate"><span class="pre">cover</span></code></p></td>
+<td><p>Lecture title page with tags, section cards and a code emblem</p></td>
+</tr>
+<tr class="row-odd"><td><p><code class="docutils literal notranslate"><span class="pre">agenda</span></code> / <code class="docutils literal notranslate"><span class="pre">recap</span></code></p></td>
+<td><p><code class="docutils literal notranslate"><span class="pre">agenda</span></code></p></td>
+<td><p>Learning goals at the start, key takeaways at the end</p></td>
+</tr>
+<tr class="row-even"><td><p><code class="docutils literal notranslate"><span class="pre">slide</span></code></p></td>
+<td><p><code class="docutils literal notranslate"><span class="pre">slide</span></code></p></td>
+<td><p>A numbered concept: explanation cards, diagram and a predict-then-reveal activity</p></td>
+</tr>
+<tr class="row-odd"><td><p><code class="docutils literal notranslate"><span class="pre">code</span></code></p></td>
+<td><p><code class="docutils literal notranslate"><span class="pre">code</span></code></p></td>
+<td><p>Code with its expected output, highlighted lines and line numbers</p></td>
+</tr>
+<tr class="row-even"><td><p><code class="docutils literal notranslate"><span class="pre">trace</span></code></p></td>
+<td><p><code class="docutils literal notranslate"><span class="pre">trace</span></code></p></td>
+<td><p>Step through code line by line with variables and output</p></td>
+</tr>
+<tr class="row-odd"><td><p><code class="docutils literal notranslate"><span class="pre">compare</span></code></p></td>
+<td><p><code class="docutils literal notranslate"><span class="pre">compare</span></code></p></td>
+<td><p>A common mistake next to the better approach, or before/after</p></td>
+</tr>
+<tr class="row-even"><td><p><code class="docutils literal notranslate"><span class="pre">quiz</span></code></p></td>
+<td><p><code class="docutils literal notranslate"><span class="pre">quiz</span></code></p></td>
+<td><p>Multiple choice that marks the chosen answer right or wrong</p></td>
+</tr>
+<tr class="row-odd"><td><p><code class="docutils literal notranslate"><span class="pre">exercise</span></code></p></td>
+<td><p><code class="docutils literal notranslate"><span class="pre">exercise</span></code></p></td>
+<td><p>A practice task with progressive hints and a hidden solution</p></td>
+</tr>
+<tr class="row-even"><td><p><code class="docutils literal notranslate"><span class="pre">callout</span></code></p></td>
+<td><p><code class="docutils literal notranslate"><span class="pre">callout</span></code></p></td>
+<td><p>Tip, warning, common mistake, key idea, info or success</p></td>
+</tr>
+<tr class="row-odd"><td><p><code class="docutils literal notranslate"><span class="pre">figure</span></code></p></td>
+<td><p><code class="docutils literal notranslate"><span class="pre">figure</span></code></p></td>
+<td><p>An image, embedded so the lecture stays self-contained</p></td>
+</tr>
+<tr class="row-even"><td><p><code class="docutils literal notranslate"><span class="pre">divider</span></code></p></td>
+<td><p><code class="docutils literal notranslate"><span class="pre">divider</span></code></p></td>
+<td><p>A section break between parts of a long lecture</p></td>
+</tr>
+<tr class="row-odd"><td><p><code class="docutils literal notranslate"><span class="pre">note</span></code></p></td>
+<td><p><code class="docutils literal notranslate"><span class="pre">note</span></code></p></td>
+<td><p>A light reading panel</p></td>
+</tr>
+<tr class="row-even"><td><p><code class="docutils literal notranslate"><span class="pre">table</span></code></p></td>
+<td><p><code class="docutils literal notranslate"><span class="pre">table</span></code></p></td>
+<td><p>A comparison table</p></td>
+</tr>
+</tbody>
+</table>
+</div>
+<p>Interactive parts (quiz choices, trace steps, reveals and hints) use native form controls and <code class="docutils literal notranslate"><span class="pre">&lt;details&gt;</span></code>, so they work in notebooks, exported HTML and offline, with no JavaScript.</p>
+<p>Formulas, arrays, matrices, charts, neural networks, trees, graphs, memory diagrams and database schemas have their own page: <a class="reference internal" href="visuals.html"><span class="std std-doc">Formulas and subject visuals</span></a>.</p>
+<section id="text-formatting">
+<h2>Text formatting<a class="headerlink" href="#text-formatting" title="Link to this heading">¶</a></h2>
+<p>Plain strings are escaped, so they can never inject HTML. Three pieces of lightweight markup are applied on top:</p>
+<ul class="simple">
+<li><p><code class="docutils literal notranslate"><span class="pre">`code`</span></code> becomes inline code, isolated left-to-right inside Arabic text;</p></li>
+<li><p><code class="docutils literal notranslate"><span class="pre">**bold**</span></code> becomes strong text (<code class="docutils literal notranslate"><span class="pre">a**2</span></code> and <code class="docutils literal notranslate"><span class="pre">**kwargs</span></code> stay untouched);</p></li>
+<li><p><code class="docutils literal notranslate"><span class="pre">$x^2</span> <span class="pre">+</span> <span class="pre">1$</span></code> becomes an inline formula (<a class="reference internal" href="visuals.html"><span class="std std-doc">LaTeX subset</span></a>); prices such as <code class="docutils literal notranslate"><span class="pre">$5</span> <span class="pre">to</span> <span class="pre">$10</span></code> stay text and <code class="docutils literal notranslate"><span class="pre">\$</span></code> is a literal dollar sign.</p></li>
+</ul>
+<p>In right-to-left lectures, terms such as <code class="docutils literal notranslate"><span class="pre">C++</span></code> and <code class="docutils literal notranslate"><span class="pre">C#</span></code> are isolated automatically so their symbols stay on the correct side. Pass <code class="docutils literal notranslate"><span class="pre">markup=&quot;text&quot;</span></code> to the deck to turn markup off. For trusted HTML you wrote yourself, use <code class="docutils literal notranslate"><span class="pre">RichText(&quot;&lt;em&gt;...&lt;/em&gt;&quot;)</span></code> (JSON: <code class="docutils literal notranslate"><span class="pre">{&quot;html&quot;:</span> <span class="pre">&quot;...&quot;}</span></code>).</p>
+</section>
+<section id="cover">
+<h2>Cover<a class="headerlink" href="#cover" title="Link to this heading">¶</a></h2>
+<div class="highlight-python notranslate"><div class="highlight"><pre><span></span><span class="n">deck</span><span class="o">.</span><span class="n">cover</span><span class="p">(</span>
+    <span class="s2">"Loops and iteration"</span><span class="p">,</span>
+    <span class="s2">"Repeat work without repeating code.</span><span class="se">\n</span><span class="s2">Trace every pass and explain the result."</span><span class="p">,</span>
+    <span class="n">kicker</span><span class="o">=</span><span class="s2">"Lecture three"</span><span class="p">,</span> <span class="n">tags</span><span class="o">=</span><span class="p">[</span><span class="s2">"Understand"</span><span class="p">,</span> <span class="s2">"Trace"</span><span class="p">,</span> <span class="s2">"Practice"</span><span class="p">],</span>
+    <span class="n">sections</span><span class="o">=</span><span class="p">[{</span><span class="s2">"title"</span><span class="p">:</span> <span class="s2">"01 / for loops"</span><span class="p">,</span> <span class="s2">"description"</span><span class="p">:</span> <span class="s2">"Walk through a list"</span><span class="p">},</span>
+              <span class="p">{</span><span class="s2">"title"</span><span class="p">:</span> <span class="s2">"02 / Accumulators"</span><span class="p">,</span> <span class="s2">"description"</span><span class="p">:</span> <span class="s2">"Build a running total"</span><span class="p">}],</span>
+    <span class="n">hero_code</span><span class="o">=</span><span class="s2">"&gt;&gt;&gt; for x in [1, 2]:</span><span class="se">\n</span><span class="s2">...     print(x)"</span><span class="p">,</span> <span class="n">hero_result</span><span class="o">=</span><span class="s2">"1  2"</span><span class="p">,</span>
+<span class="p">)</span>
+</pre></div>
+</div>
+<p>Omit <code class="docutils literal notranslate"><span class="pre">hero_code</span></code> and <code class="docutils literal notranslate"><span class="pre">hero_result</span></code> for a text-only cover. Two sections keep the two-column layout; other counts adapt. Inside a trusted description, <code class="docutils literal notranslate"><span class="pre">&lt;span</span> <span class="pre">class=&quot;cover-prerequisite&quot;&gt;</span></code> styles a secondary line.</p>
+</section>
+<section id="agenda-and-recap">
+<h2>Agenda and recap<a class="headerlink" href="#agenda-and-recap" title="Link to this heading">¶</a></h2>
+<div class="highlight-python notranslate"><div class="highlight"><pre><span></span><span class="n">deck</span><span class="o">.</span><span class="n">agenda</span><span class="p">([</span><span class="s2">"Write a `for` loop over a list"</span><span class="p">,</span> <span class="s2">"Trace an **accumulator** step by step"</span><span class="p">])</span>
+<span class="n">deck</span><span class="o">.</span><span class="n">recap</span><span class="p">([</span><span class="s2">"Initialise before the loop"</span><span class="p">,</span> <span class="s2">"Trace variables to explain output"</span><span class="p">])</span>
+</pre></div>
+</div>
+</section>
+<section id="slide">
+<h2>Slide<a class="headerlink" href="#slide" title="Link to this heading">¶</a></h2>
+<div class="highlight-python notranslate"><div class="highlight"><pre><span></span><span class="n">deck</span><span class="o">.</span><span class="n">slide</span><span class="p">(</span>
+    <span class="s2">"A running total"</span><span class="p">,</span> <span class="s2">"The loop repeats one line for every item."</span><span class="p">,</span>
+    <span class="n">cards</span><span class="o">=</span><span class="p">[{</span><span class="s2">"title"</span><span class="p">:</span> <span class="s2">"The idea"</span><span class="p">,</span> <span class="s2">"explanation"</span><span class="p">:</span> <span class="s2">"Start with `total = 0`."</span><span class="p">,</span> <span class="s2">"code"</span><span class="p">:</span> <span class="s2">"total += grade"</span><span class="p">,</span>
+            <span class="s2">"reason"</span><span class="p">:</span> <span class="s2">"Initialise before the loop, not inside it."</span><span class="p">}],</span>
+    <span class="n">diagram</span><span class="o">=</span><span class="s2">"loop"</span><span class="p">,</span>
+    <span class="n">activity</span><span class="o">=</span><span class="p">{</span><span class="s2">"question"</span><span class="p">:</span> <span class="s2">"What does the program print?"</span><span class="p">,</span> <span class="s2">"answer"</span><span class="p">:</span> <span class="s2">"80.0, the average."</span><span class="p">},</span>
+<span class="p">)</span>
+</pre></div>
+</div>
+<p>A card accepts <code class="docutils literal notranslate"><span class="pre">title</span></code>, <code class="docutils literal notranslate"><span class="pre">explanation</span></code>, <code class="docutils literal notranslate"><span class="pre">code</span></code>, <code class="docutils literal notranslate"><span class="pre">reason</span></code> and <code class="docutils literal notranslate"><span class="pre">language</span></code>. A diagram accepts <code class="docutils literal notranslate"><span class="pre">title</span></code>, <code class="docutils literal notranslate"><span class="pre">nodes</span></code> (<code class="docutils literal notranslate"><span class="pre">value</span></code>, <code class="docutils literal notranslate"><span class="pre">note</span></code>, <code class="docutils literal notranslate"><span class="pre">selected</span></code>), <code class="docutils literal notranslate"><span class="pre">caption</span></code>, <code class="docutils literal notranslate"><span class="pre">direction</span></code>, <code class="docutils literal notranslate"><span class="pre">arrows</span></code> and <code class="docutils literal notranslate"><span class="pre">kind</span></code>, or the name of a Python preset: <code class="docutils literal notranslate"><span class="pre">journey</span></code>, <code class="docutils literal notranslate"><span class="pre">names</span></code>, <code class="docutils literal notranslate"><span class="pre">cast</span></code>, <code class="docutils literal notranslate"><span class="pre">arithmetic</span></code>, <code class="docutils literal notranslate"><span class="pre">index</span></code>, <code class="docutils literal notranslate"><span class="pre">decision</span></code>, <code class="docutils literal notranslate"><span class="pre">loop</span></code>, <code class="docutils literal notranslate"><span class="pre">list</span></code>, <code class="docutils literal notranslate"><span class="pre">collections</span></code>, <code class="docutils literal notranslate"><span class="pre">function</span></code>, <code class="docutils literal notranslate"><span class="pre">error</span></code>. An activity accepts <code class="docutils literal notranslate"><span class="pre">question</span></code>, <code class="docutils literal notranslate"><span class="pre">answer</span></code>, <code class="docutils literal notranslate"><span class="pre">code</span></code>, <code class="docutils literal notranslate"><span class="pre">language</span></code>, <code class="docutils literal notranslate"><span class="pre">label</span></code> and <code class="docutils literal notranslate"><span class="pre">reveal</span></code>. Close and reopen a diagram to replay its animation.</p>
+</section>
+<section id="code-example">
+<h2>Code example<a class="headerlink" href="#code-example" title="Link to this heading">¶</a></h2>
+<div class="highlight-python notranslate"><div class="highlight"><pre><span></span><span class="n">deck</span><span class="o">.</span><span class="n">code</span><span class="p">(</span><span class="s1">'scores = {"Ali": 88}</span><span class="se">\n</span><span class="s1">for name, score in scores.items():</span><span class="se">\n</span><span class="s1">    print(name, score)'</span><span class="p">,</span>
+          <span class="n">title</span><span class="o">=</span><span class="s2">"Iterating a dictionary"</span><span class="p">,</span> <span class="n">output</span><span class="o">=</span><span class="s2">"Ali 88"</span><span class="p">,</span> <span class="n">highlight</span><span class="o">=</span><span class="p">[</span><span class="mi">2</span><span class="p">],</span> <span class="n">line_numbers</span><span class="o">=</span><span class="kc">True</span><span class="p">)</span>
+</pre></div>
+</div>
+<p>Code is displayed, never executed. Python, C, C++, Java, C#, JavaScript, TypeScript, Kotlin, Go, Rust, Dart, Swift, SQL, Bash, R, MATLAB, JSON, HTML and CSS are highlighted by the library itself, identically on every computer; other languages use the <code class="docutils literal notranslate"><span class="pre">highlight</span></code> extra (Pygments) or <code class="docutils literal notranslate"><span class="pre">register_highlighter</span></code> (<a class="reference internal" href="visuals.html"><span class="std std-doc">details</span></a>). Unknown languages fall back to escaped plain text.</p>
+</section>
+<section id="execution-trace">
+<h2>Execution trace<a class="headerlink" href="#execution-trace" title="Link to this heading">¶</a></h2>
+<div class="highlight-python notranslate"><div class="highlight"><pre><span></span><span class="n">deck</span><span class="o">.</span><span class="n">trace</span><span class="p">(</span><span class="s2">"total = 0</span><span class="se">\n</span><span class="s2">for g in [70, 80]:</span><span class="se">\n</span><span class="s2">    total += g</span><span class="se">\n</span><span class="s2">print(total)"</span><span class="p">,</span> <span class="p">[</span>
+    <span class="p">{</span><span class="s2">"line"</span><span class="p">:</span> <span class="mi">1</span><span class="p">,</span> <span class="s2">"variables"</span><span class="p">:</span> <span class="p">{</span><span class="s2">"total"</span><span class="p">:</span> <span class="mi">0</span><span class="p">}},</span>
+    <span class="p">{</span><span class="s2">"line"</span><span class="p">:</span> <span class="mi">3</span><span class="p">,</span> <span class="s2">"variables"</span><span class="p">:</span> <span class="p">{</span><span class="s2">"total"</span><span class="p">:</span> <span class="mi">70</span><span class="p">,</span> <span class="s2">"g"</span><span class="p">:</span> <span class="mi">70</span><span class="p">}},</span>
+    <span class="p">{</span><span class="s2">"line"</span><span class="p">:</span> <span class="mi">3</span><span class="p">,</span> <span class="s2">"variables"</span><span class="p">:</span> <span class="p">{</span><span class="s2">"total"</span><span class="p">:</span> <span class="mi">150</span><span class="p">,</span> <span class="s2">"g"</span><span class="p">:</span> <span class="mi">80</span><span class="p">}},</span>
+    <span class="p">{</span><span class="s2">"line"</span><span class="p">:</span> <span class="mi">4</span><span class="p">,</span> <span class="s2">"variables"</span><span class="p">:</span> <span class="p">{</span><span class="s2">"total"</span><span class="p">:</span> <span class="mi">150</span><span class="p">},</span> <span class="s2">"output"</span><span class="p">:</span> <span class="s2">"150"</span><span class="p">,</span> <span class="s2">"note"</span><span class="p">:</span> <span class="s2">"The loop has finished."</span><span class="p">},</span>
+<span class="p">],</span> <span class="n">title</span><span class="o">=</span><span class="s2">"Trace the loop"</span><span class="p">)</span>
+</pre></div>
+</div>
+<p>Students choose a step (or use the arrow keys once the steps have focus) to see the current line, the variables and the output. Values that are not strings are shown with <code class="docutils literal notranslate"><span class="pre">repr</span></code>. A trace holds up to 60 steps.</p>
+</section>
+<section id="compare">
+<h2>Compare<a class="headerlink" href="#compare" title="Link to this heading">¶</a></h2>
+<div class="highlight-python notranslate"><div class="highlight"><pre><span></span><span class="n">deck</span><span class="o">.</span><span class="n">compare</span><span class="p">(</span><span class="s2">"Resetting inside the loop"</span><span class="p">,</span>
+             <span class="s2">"for g in grades:</span><span class="se">\n</span><span class="s2">    total = 0</span><span class="se">\n</span><span class="s2">    total += g"</span><span class="p">,</span>
+             <span class="s2">"total = 0</span><span class="se">\n</span><span class="s2">for g in grades:</span><span class="se">\n</span><span class="s2">    total += g"</span><span class="p">,</span>
+             <span class="n">before_note</span><span class="o">=</span><span class="s2">"The total restarts every pass."</span><span class="p">,</span> <span class="n">after_note</span><span class="o">=</span><span class="s2">"Initialise once."</span><span class="p">)</span>
+</pre></div>
+</div>
+<p><code class="docutils literal notranslate"><span class="pre">mode=&quot;wrong-right&quot;</span></code> (default) labels the sides as a common mistake and a better approach; <code class="docutils literal notranslate"><span class="pre">mode=&quot;before-after&quot;</span></code> labels them neutrally. Override either with <code class="docutils literal notranslate"><span class="pre">before_label</span></code> / <code class="docutils literal notranslate"><span class="pre">after_label</span></code>.</p>
+</section>
+<section id="quiz">
+<h2>Quiz<a class="headerlink" href="#quiz" title="Link to this heading">¶</a></h2>
+<div class="highlight-python notranslate"><div class="highlight"><pre><span></span><span class="n">deck</span><span class="o">.</span><span class="n">quiz</span><span class="p">(</span><span class="s2">"How many times does `for i in range(3)` run?"</span><span class="p">,</span>
+          <span class="p">[</span><span class="s2">"Twice"</span><span class="p">,</span> <span class="s2">"Three times"</span><span class="p">,</span> <span class="s2">"Four times"</span><span class="p">],</span> <span class="n">answer</span><span class="o">=</span><span class="mi">1</span><span class="p">,</span>
+          <span class="n">explanation</span><span class="o">=</span><span class="s2">"`range(3)` yields 0, 1 and 2."</span><span class="p">)</span>
+</pre></div>
+</div>
+<p><code class="docutils literal notranslate"><span class="pre">answer</span></code> is the option index (from 0) or the option text. Choosing an option shows “Correct” or “Try again”; the reveal shows the answer with its explanation.</p>
+</section>
+<section id="exercise">
+<h2>Exercise<a class="headerlink" href="#exercise" title="Link to this heading">¶</a></h2>
+<div class="highlight-python notranslate"><div class="highlight"><pre><span></span><span class="n">deck</span><span class="o">.</span><span class="n">exercise</span><span class="p">(</span><span class="s2">"Average grade"</span><span class="p">,</span> <span class="s2">"Print the average and the **highest** grade."</span><span class="p">,</span>
+              <span class="n">starter</span><span class="o">=</span><span class="s2">"grades = [72, 91, 85]</span><span class="se">\n</span><span class="s2"># your solution"</span><span class="p">,</span>
+              <span class="n">hints</span><span class="o">=</span><span class="p">[</span><span class="s2">"Use `sum` and `len`."</span><span class="p">,</span> <span class="s2">"`max` returns the largest item."</span><span class="p">],</span>
+              <span class="n">solution</span><span class="o">=</span><span class="s2">"print(sum(grades) / len(grades))</span><span class="se">\n</span><span class="s2">print(max(grades))"</span><span class="p">)</span>
+</pre></div>
+</div>
+</section>
+<section id="callout">
+<h2>Callout<a class="headerlink" href="#callout" title="Link to this heading">¶</a></h2>
+<div class="highlight-python notranslate"><div class="highlight"><pre><span></span><span class="n">deck</span><span class="o">.</span><span class="n">callout</span><span class="p">(</span><span class="s2">"Do not modify a list while iterating over it."</span><span class="p">,</span> <span class="n">style</span><span class="o">=</span><span class="s2">"mistake"</span><span class="p">)</span>
+</pre></div>
+</div>
+<p>Styles: <code class="docutils literal notranslate"><span class="pre">info</span></code>, <code class="docutils literal notranslate"><span class="pre">tip</span></code>, <code class="docutils literal notranslate"><span class="pre">warning</span></code>, <code class="docutils literal notranslate"><span class="pre">mistake</span></code>, <code class="docutils literal notranslate"><span class="pre">success</span></code>, <code class="docutils literal notranslate"><span class="pre">key</span></code>. The default title comes from the locale; pass <code class="docutils literal notranslate"><span class="pre">title=</span></code> to change it.</p>
+</section>
+<section id="figure">
+<h2>Figure<a class="headerlink" href="#figure" title="Link to this heading">¶</a></h2>
+<div class="highlight-python notranslate"><div class="highlight"><pre><span></span><span class="n">deck</span><span class="o">.</span><span class="n">figure</span><span class="p">(</span><span class="s2">"images/network.png"</span><span class="p">,</span> <span class="n">caption</span><span class="o">=</span><span class="s2">"A two-layer network"</span><span class="p">,</span> <span class="n">width</span><span class="o">=</span><span class="mi">720</span><span class="p">)</span>
+</pre></div>
+</div>
+<p>Local images (PNG, JPEG, GIF, WebP, SVG and AVIF, up to 15 MB) are embedded. <code class="docutils literal notranslate"><span class="pre">http(s)</span></code> URLs are linked and need a connection. In JSON courses, relative paths resolve from the JSON file’s folder.</p>
+</section>
+<section id="divider-note-and-table">
+<h2>Divider, note and table<a class="headerlink" href="#divider-note-and-table" title="Link to this heading">¶</a></h2>
+<div class="highlight-python notranslate"><div class="highlight"><pre><span></span><span class="n">deck</span><span class="o">.</span><span class="n">divider</span><span class="p">(</span><span class="s2">"Part two: nested loops"</span><span class="p">,</span> <span class="s2">"A loop inside a loop"</span><span class="p">)</span>
+<span class="n">deck</span><span class="o">.</span><span class="n">note</span><span class="p">(</span><span class="s2">"Remember"</span><span class="p">,</span> <span class="s2">"State the assumption.</span><span class="se">\n</span><span class="s2">Test a boundary case."</span><span class="p">)</span>
+<span class="n">deck</span><span class="o">.</span><span class="n">table</span><span class="p">(</span><span class="s2">"Comparison"</span><span class="p">,</span> <span class="p">[</span><span class="s2">"Structure"</span><span class="p">,</span> <span class="s2">"Use"</span><span class="p">],</span> <span class="p">[[</span><span class="s2">"list"</span><span class="p">,</span> <span class="s2">"Ordered values"</span><span class="p">],</span> <span class="p">[</span><span class="s2">"dict"</span><span class="p">,</span> <span class="s2">"Named fields"</span><span class="p">]])</span>
+</pre></div>
+</div>
+<p>Every table row must match the number of headers. Wide tables and code scroll inside their containers.</p>
+</section>
+<section id="answers-and-student-copies">
+<h2>Answers and student copies<a class="headerlink" href="#answers-and-student-copies" title="Link to this heading">¶</a></h2>
+<p>Activity answers, quiz keys and exercise solutions are part of the teacher’s HTML. Export a student copy without them:</p>
+<div class="highlight-python notranslate"><div class="highlight"><pre><span></span><span class="n">deck</span><span class="o">.</span><span class="n">export</span><span class="p">(</span><span class="s2">"lecture-student.html"</span><span class="p">,</span> <span class="n">include_answers</span><span class="o">=</span><span class="kc">False</span><span class="p">)</span>
+</pre></div>
+</div>
+</section>
+</section>
+
+        </article>
+      </div>
+      <footer>
+        
+        <div class="related-pages">
+          <a class="next-page" href="visuals.html">
+              <div class="page-info">
+                <div class="context">
+                  <span>Next</span>
+                </div>
+                <div class="title">Formulas and subject visuals</div>
+              </div>
+              <svg class="furo-related-icon"><use href="#svg-arrow-right"></use></svg>
+            </a>
+          <a class="prev-page" href="getting-started.html">
+              <svg class="furo-related-icon"><use href="#svg-arrow-right"></use></svg>
+              <div class="page-info">
+                <div class="context">
+                  <span>Previous</span>
+                </div>
+                
+                <div class="title">Install and build your first lecture</div>
+                
+              </div>
+            </a>
+        </div>
+        <div class="bottom-of-page">
+          <div class="left-details">
+            <div class="copyright">
+                Copyright &#169; 2026, Jupyter Lecture Studio contributors
+            </div>
+            Made with <a href="https://www.sphinx-doc.org/">Sphinx</a> and <a class="muted-link" href="https://pradyunsg.me">@pradyunsg</a>'s
+            
+            <a href="https://github.com/pradyunsg/furo">Furo</a>
+            
+          </div>
+          <div class="right-details">
+            
+          </div>
+        </div>
+        
+      </footer>
+    </div>
+    <aside class="toc-drawer">
+      
+      
+      <div class="toc-sticky toc-scroll">
+        <div class="toc-title-container">
+          <span class="toc-title">
+            On this page
+          </span>
+        </div>
+        <div class="toc-tree-container">
+          <div class="toc-tree">
+            <ul>
+<li><a class="reference internal" href="#">Components</a><ul>
+<li><a class="reference internal" href="#text-formatting">Text formatting</a></li>
+<li><a class="reference internal" href="#cover">Cover</a></li>
+<li><a class="reference internal" href="#agenda-and-recap">Agenda and recap</a></li>
+<li><a class="reference internal" href="#slide">Slide</a></li>
+<li><a class="reference internal" href="#code-example">Code example</a></li>
+<li><a class="reference internal" href="#execution-trace">Execution trace</a></li>
+<li><a class="reference internal" href="#compare">Compare</a></li>
+<li><a class="reference internal" href="#quiz">Quiz</a></li>
+<li><a class="reference internal" href="#exercise">Exercise</a></li>
+<li><a class="reference internal" href="#callout">Callout</a></li>
+<li><a class="reference internal" href="#figure">Figure</a></li>
+<li><a class="reference internal" href="#divider-note-and-table">Divider, note and table</a></li>
+<li><a class="reference internal" href="#answers-and-student-copies">Answers and student copies</a></li>
+</ul>
+</li>
+</ul>
+
+          </div>
+        </div>
+      </div>
+      
+      
+    </aside>
+  </div>
+</div><script src="_static/documentation_options.js?v=68b195bf"></script>
+    <script src="_static/doctools.js?v=fd6eb6e6"></script>
+    <script src="_static/sphinx_highlight.js?v=6ffebe34"></script>
+    <script src="_static/scripts/furo.js?v=46bd48cc"></script>
+    </body>
+</html>

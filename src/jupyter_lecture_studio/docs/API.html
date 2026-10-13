@@ -1,0 +1,611 @@
+<!doctype html>
+<html class="no-js" lang="en" data-content_root="./">
+  <head><meta charset="utf-8">
+    <meta name="viewport" content="width=device-width,initial-scale=1">
+    <meta name="color-scheme" content="light dark"><meta name="viewport" content="width=device-width, initial-scale=1" />
+<link rel="index" title="Index" href="genindex.html"><link rel="search" title="Search" href="search.html"><link rel="next" title="الانتقال إلى الإصدار 1.0" href="MIGRATION.html"><link rel="prev" title="دليل الاستخدام" href="USAGE_AR.html">
+
+    <!-- Generated with Sphinx 9.1.0 and Furo 2025.12.19 -->
+        <title>مرجع الواجهة — 1.0 - Jupyter Lecture Studio — Animated Jupyter Lectures</title>
+      <link rel="stylesheet" type="text/css" href="_static/pygments.css?v=d111a655" />
+    <link rel="stylesheet" type="text/css" href="_static/styles/furo.css?v=7bdb33bb" />
+    <link rel="stylesheet" type="text/css" href="_static/styles/furo-extensions.css?v=8dab3a3b" />
+    <link rel="stylesheet" type="text/css" href="_static/studio-docs.css?v=c7505cbd" />
+    
+    
+
+
+<style>
+  body {
+    --color-code-background: #f2f2f2;
+  --color-code-foreground: #1e1e1e;
+  --color-brand-primary: #705427;
+  --color-brand-content: #705427;
+  
+  }
+  @media not print {
+    body[data-theme="dark"] {
+      --color-code-background: #202020;
+  --color-code-foreground: #d0d0d0;
+  --color-brand-primary: #ecd29a;
+  --color-brand-content: #ecd29a;
+  
+    }
+    @media (prefers-color-scheme: dark) {
+      body:not([data-theme="light"]) {
+        --color-code-background: #202020;
+  --color-code-foreground: #d0d0d0;
+  --color-brand-primary: #ecd29a;
+  --color-brand-content: #ecd29a;
+  
+      }
+    }
+  }
+</style>
+
+
+<style>article{direction:rtl;text-align:right;font-family:Cairo,Tahoma,Arial,sans-serif;line-height:1.95}article pre{direction:ltr;text-align:left}article code{unicode-bidi:isolate;direction:ltr}</style>
+
+</head>
+  <body>
+    
+    <script>
+      document.body.dataset.theme = localStorage.getItem("theme") || "auto";
+    </script>
+    
+
+<svg xmlns="http://www.w3.org/2000/svg" style="display: none;">
+  <symbol id="svg-toc" viewBox="0 0 24 24">
+    <title>Contents</title>
+    <svg stroke="currentColor" fill="currentColor" stroke-width="0" viewBox="0 0 1024 1024">
+      <path d="M408 442h480c4.4 0 8-3.6 8-8v-56c0-4.4-3.6-8-8-8H408c-4.4 0-8 3.6-8 8v56c0 4.4 3.6 8 8 8zm-8 204c0 4.4 3.6 8 8 8h480c4.4 0 8-3.6 8-8v-56c0-4.4-3.6-8-8-8H408c-4.4 0-8 3.6-8 8v56zm504-486H120c-4.4 0-8 3.6-8 8v56c0 4.4 3.6 8 8 8h784c4.4 0 8-3.6 8-8v-56c0-4.4-3.6-8-8-8zm0 632H120c-4.4 0-8 3.6-8 8v56c0 4.4 3.6 8 8 8h784c4.4 0 8-3.6 8-8v-56c0-4.4-3.6-8-8-8zM115.4 518.9L271.7 642c5.8 4.6 14.4.5 14.4-6.9V388.9c0-7.4-8.5-11.5-14.4-6.9L115.4 505.1a8.74 8.74 0 0 0 0 13.8z"/>
+    </svg>
+  </symbol>
+  <symbol id="svg-menu" viewBox="0 0 24 24">
+    <title>Menu</title>
+    <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="none" stroke="currentColor"
+      stroke-width="2" stroke-linecap="round" stroke-linejoin="round" class="feather-menu">
+      <line x1="3" y1="12" x2="21" y2="12"></line>
+      <line x1="3" y1="6" x2="21" y2="6"></line>
+      <line x1="3" y1="18" x2="21" y2="18"></line>
+    </svg>
+  </symbol>
+  <symbol id="svg-arrow-right" viewBox="0 0 24 24">
+    <title>Expand</title>
+    <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="none" stroke="currentColor"
+      stroke-width="2" stroke-linecap="round" stroke-linejoin="round" class="feather-chevron-right">
+      <polyline points="9 18 15 12 9 6"></polyline>
+    </svg>
+  </symbol>
+  <symbol id="svg-sun" viewBox="0 0 24 24">
+    <title>Light mode</title>
+    <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="none" stroke="currentColor"
+      stroke-width="1" stroke-linecap="round" stroke-linejoin="round" class="feather-sun">
+      <circle cx="12" cy="12" r="5"></circle>
+      <line x1="12" y1="1" x2="12" y2="3"></line>
+      <line x1="12" y1="21" x2="12" y2="23"></line>
+      <line x1="4.22" y1="4.22" x2="5.64" y2="5.64"></line>
+      <line x1="18.36" y1="18.36" x2="19.78" y2="19.78"></line>
+      <line x1="1" y1="12" x2="3" y2="12"></line>
+      <line x1="21" y1="12" x2="23" y2="12"></line>
+      <line x1="4.22" y1="19.78" x2="5.64" y2="18.36"></line>
+      <line x1="18.36" y1="5.64" x2="19.78" y2="4.22"></line>
+    </svg>
+  </symbol>
+  <symbol id="svg-moon" viewBox="0 0 24 24">
+    <title>Dark mode</title>
+    <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="none" stroke="currentColor"
+      stroke-width="1" stroke-linecap="round" stroke-linejoin="round" class="icon-tabler-moon">
+      <path stroke="none" d="M0 0h24v24H0z" fill="none" />
+      <path d="M12 3c.132 0 .263 0 .393 0a7.5 7.5 0 0 0 7.92 12.446a9 9 0 1 1 -8.313 -12.454z" />
+    </svg>
+  </symbol>
+  <symbol id="svg-sun-with-moon" viewBox="0 0 24 24">
+    <title>Auto light/dark, in light mode</title>
+    <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="none" stroke="currentColor"
+      stroke-width="1" stroke-linecap="round" stroke-linejoin="round"
+      class="icon-custom-derived-from-feather-sun-and-tabler-moon">
+      <path style="opacity: 50%" d="M 5.411 14.504 C 5.471 14.504 5.532 14.504 5.591 14.504 C 3.639 16.319 4.383 19.569 6.931 20.352 C 7.693 20.586 8.512 20.551 9.25 20.252 C 8.023 23.207 4.056 23.725 2.11 21.184 C 0.166 18.642 1.702 14.949 4.874 14.536 C 5.051 14.512 5.231 14.5 5.411 14.5 L 5.411 14.504 Z"/>
+      <line x1="14.5" y1="3.25" x2="14.5" y2="1.25"/>
+      <line x1="14.5" y1="15.85" x2="14.5" y2="17.85"/>
+      <line x1="10.044" y1="5.094" x2="8.63" y2="3.68"/>
+      <line x1="19" y1="14.05" x2="20.414" y2="15.464"/>
+      <line x1="8.2" y1="9.55" x2="6.2" y2="9.55"/>
+      <line x1="20.8" y1="9.55" x2="22.8" y2="9.55"/>
+      <line x1="10.044" y1="14.006" x2="8.63" y2="15.42"/>
+      <line x1="19" y1="5.05" x2="20.414" y2="3.636"/>
+      <circle cx="14.5" cy="9.55" r="3.6"/>
+    </svg>
+  </symbol>
+  <symbol id="svg-moon-with-sun" viewBox="0 0 24 24">
+    <title>Auto light/dark, in dark mode</title>
+    <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="none" stroke="currentColor"
+      stroke-width="1" stroke-linecap="round" stroke-linejoin="round"
+      class="icon-custom-derived-from-feather-sun-and-tabler-moon">
+      <path d="M 8.282 7.007 C 8.385 7.007 8.494 7.007 8.595 7.007 C 5.18 10.184 6.481 15.869 10.942 17.24 C 12.275 17.648 13.706 17.589 15 17.066 C 12.851 22.236 5.91 23.143 2.505 18.696 C -0.897 14.249 1.791 7.786 7.342 7.063 C 7.652 7.021 7.965 7 8.282 7 L 8.282 7.007 Z"/>
+      <line style="opacity: 50%" x1="18" y1="3.705" x2="18" y2="2.5"/>
+      <line style="opacity: 50%" x1="18" y1="11.295" x2="18" y2="12.5"/>
+      <line style="opacity: 50%" x1="15.316" y1="4.816" x2="14.464" y2="3.964"/>
+      <line style="opacity: 50%" x1="20.711" y1="10.212" x2="21.563" y2="11.063"/>
+      <line style="opacity: 50%" x1="14.205" y1="7.5" x2="13.001" y2="7.5"/>
+      <line style="opacity: 50%" x1="21.795" y1="7.5" x2="23" y2="7.5"/>
+      <line style="opacity: 50%" x1="15.316" y1="10.184" x2="14.464" y2="11.036"/>
+      <line style="opacity: 50%" x1="20.711" y1="4.789" x2="21.563" y2="3.937"/>
+      <circle style="opacity: 50%" cx="18" cy="7.5" r="2.169"/>
+    </svg>
+  </symbol>
+  <symbol id="svg-pencil" viewBox="0 0 24 24">
+    <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="none" stroke="currentColor"
+      stroke-width="1" stroke-linecap="round" stroke-linejoin="round" class="icon-tabler-pencil-code">
+      <path d="M4 20h4l10.5 -10.5a2.828 2.828 0 1 0 -4 -4l-10.5 10.5v4" />
+      <path d="M13.5 6.5l4 4" />
+      <path d="M20 21l2 -2l-2 -2" />
+      <path d="M17 17l-2 2l2 2" />
+    </svg>
+  </symbol>
+  <symbol id="svg-eye" viewBox="0 0 24 24">
+    <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="none" stroke="currentColor"
+      stroke-width="1" stroke-linecap="round" stroke-linejoin="round" class="icon-tabler-eye-code">
+      <path stroke="none" d="M0 0h24v24H0z" fill="none" />
+      <path d="M10 12a2 2 0 1 0 4 0a2 2 0 0 0 -4 0" />
+      <path
+        d="M11.11 17.958c-3.209 -.307 -5.91 -2.293 -8.11 -5.958c2.4 -4 5.4 -6 9 -6c3.6 0 6.6 2 9 6c-.21 .352 -.427 .688 -.647 1.008" />
+      <path d="M20 21l2 -2l-2 -2" />
+      <path d="M17 17l-2 2l2 2" />
+    </svg>
+  </symbol>
+</svg>
+
+<input type="checkbox" class="sidebar-toggle" name="__navigation" id="__navigation" aria-label="Toggle site navigation sidebar">
+<input type="checkbox" class="sidebar-toggle" name="__toc" id="__toc" aria-label="Toggle table of contents sidebar">
+<label class="overlay sidebar-overlay" for="__navigation"></label>
+<label class="overlay toc-overlay" for="__toc"></label>
+
+<a class="skip-to-content muted-link" href="#furo-main-content">Skip to content</a>
+
+
+
+<div class="page">
+  <header class="mobile-header">
+    <div class="header-left">
+      <label class="nav-overlay-icon" for="__navigation">
+        <span class="icon"><svg><use href="#svg-menu"></use></svg></span>
+      </label>
+    </div>
+    <div class="header-center">
+      <a href="index.html"><div class="brand">Jupyter Lecture Studio — Animated Jupyter Lectures</div></a>
+    </div>
+    <div class="header-right">
+      <div class="theme-toggle-container theme-toggle-header">
+        <button class="theme-toggle" aria-label="Toggle Light / Dark / Auto color theme">
+          <svg class="theme-icon-when-auto-light"><use href="#svg-sun-with-moon"></use></svg>
+          <svg class="theme-icon-when-auto-dark"><use href="#svg-moon-with-sun"></use></svg>
+          <svg class="theme-icon-when-dark"><use href="#svg-moon"></use></svg>
+          <svg class="theme-icon-when-light"><use href="#svg-sun"></use></svg>
+        </button>
+      </div>
+      <label class="toc-overlay-icon toc-header-icon" for="__toc">
+        <span class="icon"><svg><use href="#svg-toc"></use></svg></span>
+      </label>
+    </div>
+  </header>
+  <aside class="sidebar-drawer">
+    <div class="sidebar-container">
+      
+      <div class="sidebar-sticky"><a class="sidebar-brand" href="index.html">
+  
+  <span class="sidebar-brand-text">Jupyter Lecture Studio — Animated Jupyter Lectures</span>
+  
+</a><form class="sidebar-search-container" method="get" action="search.html" role="search">
+  <input class="sidebar-search" placeholder="Search" name="q" aria-label="Search">
+  <input type="hidden" name="check_keywords" value="yes">
+  <input type="hidden" name="area" value="default">
+</form>
+<div id="searchbox"></div><div class="sidebar-scroll"><div class="sidebar-tree">
+  <p class="caption" role="heading"><span class="caption-text">Learn</span></p>
+<ul>
+<li class="toctree-l1"><a class="reference internal" href="getting-started.html">Install and build your first lecture</a></li>
+<li class="toctree-l1"><a class="reference internal" href="components.html">Components</a></li>
+<li class="toctree-l1"><a class="reference internal" href="visuals.html">Formulas and subject visuals</a></li>
+<li class="toctree-l1"><a class="reference internal" href="presenting.html">Teaching, sharing and presenting</a></li>
+<li class="toctree-l1"><a class="reference internal" href="themes.html">Themes and design tokens</a></li>
+<li class="toctree-l1"><a class="reference internal" href="languages.html">Languages</a></li>
+<li class="toctree-l1"><a class="reference internal" href="cookbook.html">Teaching recipes</a></li>
+<li class="toctree-l1"><a class="reference internal" href="pdf.html">Save your lecture as PDF</a></li>
+<li class="toctree-l1"><a class="reference internal" href="cli.html">CLI and JSON workflow</a></li>
+</ul>
+<p class="caption" role="heading"><span class="caption-text">Develop</span></p>
+<ul>
+<li class="toctree-l1"><a class="reference internal" href="reference.html">Python API reference</a></li>
+<li class="toctree-l1"><a class="reference internal" href="extending.html">Extending Lecture Studio</a></li>
+<li class="toctree-l1"><a class="reference internal" href="architecture.html">Architecture</a></li>
+</ul>
+<p class="caption" role="heading"><span class="caption-text">العربية</span></p>
+<ul class="current">
+<li class="toctree-l1"><a class="reference internal" href="USAGE_AR.html">دليل الاستخدام</a></li>
+<li class="toctree-l1 current current-page"><a class="current reference internal" href="#">مرجع الواجهة — 1.0</a></li>
+<li class="toctree-l1"><a class="reference internal" href="MIGRATION.html">الانتقال إلى الإصدار 1.0</a></li>
+</ul>
+<p class="caption" role="heading"><span class="caption-text">Project</span></p>
+<ul>
+<li class="toctree-l1"><a class="reference internal" href="troubleshooting.html">Troubleshooting and supported behavior</a></li>
+<li class="toctree-l1"><a class="reference internal" href="licensing.html">Licensing and bundled assets</a></li>
+<li class="toctree-l1"><a class="reference internal" href="release-notes.html">Release notes</a></li>
+</ul>
+
+</div>
+</div>
+
+      </div>
+      
+    </div>
+  </aside>
+  <div class="main">
+    <div class="content">
+      <div class="article-container">
+        <a href="#" class="back-to-top muted-link">
+          <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24">
+            <path d="M13 20h-2V8l-5.5 5.5-1.42-1.42L12 4.16l7.92 7.92-1.42 1.42L13 8v12z"></path>
+          </svg>
+          <span>Back to top</span>
+        </a>
+        <div class="content-icon-container">
+          
+
+<div class="theme-toggle-container theme-toggle-content">
+            <button class="theme-toggle" aria-label="Toggle Light / Dark / Auto color theme">
+              <svg class="theme-icon-when-auto-light"><use href="#svg-sun-with-moon"></use></svg>
+              <svg class="theme-icon-when-auto-dark"><use href="#svg-moon-with-sun"></use></svg>
+              <svg class="theme-icon-when-dark"><use href="#svg-moon"></use></svg>
+              <svg class="theme-icon-when-light"><use href="#svg-sun"></use></svg>
+            </button>
+          </div>
+          <label class="toc-overlay-icon toc-content-icon" for="__toc">
+            <span class="icon"><svg><use href="#svg-toc"></use></svg></span>
+          </label>
+        </div>
+        <article role="main" id="furo-main-content">
+          <section id="id1">
+<h1>مرجع الواجهة — 1.0<a class="headerlink" href="#id1" title="Link to this heading">¶</a></h1>
+<section id="lecturedeck">
+<h2>LectureDeck<a class="headerlink" href="#lecturedeck" title="Link to this heading">¶</a></h2>
+<div class="highlight-python notranslate"><div class="highlight"><pre><span></span><span class="n">LectureDeck</span><span class="p">(</span>
+    <span class="n">course</span><span class="o">=</span><span class="kc">None</span><span class="p">,</span> <span class="o">*</span><span class="p">,</span> <span class="n">series</span><span class="o">=</span><span class="kc">None</span><span class="p">,</span> <span class="n">lesson</span><span class="o">=</span><span class="s2">""</span><span class="p">,</span> <span class="n">language</span><span class="o">=</span><span class="s2">"python"</span><span class="p">,</span>
+    <span class="n">theme</span><span class="o">=</span><span class="s2">"gold"</span><span class="p">,</span> <span class="n">brand</span><span class="o">=</span><span class="kc">None</span><span class="p">,</span> <span class="n">locale</span><span class="o">=</span><span class="kc">None</span><span class="p">,</span> <span class="n">markup</span><span class="o">=</span><span class="s2">"markdown"</span><span class="p">,</span> <span class="o">**</span><span class="n">theme_options</span>
+<span class="p">)</span>
+</pre></div>
+</div>
+<p><code class="docutils literal notranslate"><span class="pre">brand</span></code> يقبل <code class="docutils literal notranslate"><span class="pre">Brand</span></code> أو قاموسًا. <code class="docutils literal notranslate"><span class="pre">theme</span></code> يقبل اسم ثيم أو <code class="docutils literal notranslate"><span class="pre">Theme</span></code> أو قاموسًا. <code class="docutils literal notranslate"><span class="pre">locale</span></code> لغة الواجهة: <code class="docutils literal notranslate"><span class="pre">&quot;ar&quot;</span></code> (افتراضي) أو <code class="docutils literal notranslate"><span class="pre">&quot;en&quot;</span></code> أو لغة مسجّلة أو كائن <code class="docutils literal notranslate"><span class="pre">Locale</span></code>. <code class="docutils literal notranslate"><span class="pre">markup=&quot;text&quot;</span></code> يوقف تنسيق <code class="docutils literal notranslate"><span class="pre">`code`</span></code> و<code class="docutils literal notranslate"><span class="pre">**bold**</span></code>. القيم <code class="docutils literal notranslate"><span class="pre">None</span></code> في الهوية تأخذ نصوص اللغة الافتراضية.</p>
+<section id="id2">
+<h3>مكونات العرض<a class="headerlink" href="#id2" title="Link to this heading">¶</a></h3>
+<p>كل الدوال التالية تقبل أيضًا <code class="docutils literal notranslate"><span class="pre">notes=&quot;&quot;</span></code> (ملاحظات المحاضر) و<code class="docutils literal notranslate"><span class="pre">id=None</span></code> (استبدال بدل الإضافة) و<code class="docutils literal notranslate"><span class="pre">show=True</span></code>.</p>
+<div class="table-wrapper colwidths-auto docutils container">
+<table class="docutils align-default">
+<thead>
+<tr class="row-odd"><th class="head"><p>الدالة</p></th>
+<th class="head"><p>المعاملات الأساسية</p></th>
+<th class="head"><p>الاستخدام</p></th>
+</tr>
+</thead>
+<tbody>
+<tr class="row-even"><td><p><code class="docutils literal notranslate"><span class="pre">cover</span></code></p></td>
+<td><p><code class="docutils literal notranslate"><span class="pre">title,</span> <span class="pre">description='',</span> <span class="pre">*,</span> <span class="pre">kicker,</span> <span class="pre">tags,</span> <span class="pre">sections,</span> <span class="pre">hero_code,</span> <span class="pre">hero_result,</span> <span class="pre">hero_label,</span> <span class="pre">footer_label</span></code></p></td>
+<td><p>غلاف المحاضرة</p></td>
+</tr>
+<tr class="row-odd"><td><p><code class="docutils literal notranslate"><span class="pre">agenda</span></code></p></td>
+<td><p><code class="docutils literal notranslate"><span class="pre">items,</span> <span class="pre">*,</span> <span class="pre">title=None,</span> <span class="pre">mode='goals'</span></code></p></td>
+<td><p>أهداف المحاضرة</p></td>
+</tr>
+<tr class="row-even"><td><p><code class="docutils literal notranslate"><span class="pre">recap</span></code></p></td>
+<td><p><code class="docutils literal notranslate"><span class="pre">items,</span> <span class="pre">*,</span> <span class="pre">title=None</span></code></p></td>
+<td><p>الخلاصة</p></td>
+</tr>
+<tr class="row-odd"><td><p><code class="docutils literal notranslate"><span class="pre">slide</span></code></p></td>
+<td><p><code class="docutils literal notranslate"><span class="pre">title,</span> <span class="pre">description='',</span> <span class="pre">*,</span> <span class="pre">cards,</span> <span class="pre">subtitle,</span> <span class="pre">diagram,</span> <span class="pre">activity</span></code></p></td>
+<td><p>شريحة مرقّمة</p></td>
+</tr>
+<tr class="row-even"><td><p><code class="docutils literal notranslate"><span class="pre">code</span></code></p></td>
+<td><p><code class="docutils literal notranslate"><span class="pre">code,</span> <span class="pre">*,</span> <span class="pre">title,</span> <span class="pre">output,</span> <span class="pre">language,</span> <span class="pre">highlight,</span> <span class="pre">line_numbers,</span> <span class="pre">description,</span> <span class="pre">caption</span></code></p></td>
+<td><p>كود مع ناتجه</p></td>
+</tr>
+<tr class="row-odd"><td><p><code class="docutils literal notranslate"><span class="pre">trace</span></code></p></td>
+<td><p><code class="docutils literal notranslate"><span class="pre">code,</span> <span class="pre">steps,</span> <span class="pre">*,</span> <span class="pre">title,</span> <span class="pre">language,</span> <span class="pre">description</span></code></p></td>
+<td><p>تتبّع التنفيذ</p></td>
+</tr>
+<tr class="row-even"><td><p><code class="docutils literal notranslate"><span class="pre">compare</span></code></p></td>
+<td><p><code class="docutils literal notranslate"><span class="pre">title,</span> <span class="pre">before,</span> <span class="pre">after,</span> <span class="pre">*,</span> <span class="pre">mode,</span> <span class="pre">before_label,</span> <span class="pre">after_label,</span> <span class="pre">before_note,</span> <span class="pre">after_note,</span> <span class="pre">description,</span> <span class="pre">language</span></code></p></td>
+<td><p>خطأ شائع وطريقة صحيحة</p></td>
+</tr>
+<tr class="row-odd"><td><p><code class="docutils literal notranslate"><span class="pre">quiz</span></code></p></td>
+<td><p><code class="docutils literal notranslate"><span class="pre">question,</span> <span class="pre">options,</span> <span class="pre">answer,</span> <span class="pre">*,</span> <span class="pre">explanation,</span> <span class="pre">code,</span> <span class="pre">language,</span> <span class="pre">title</span></code></p></td>
+<td><p>اختيار من متعدد</p></td>
+</tr>
+<tr class="row-even"><td><p><code class="docutils literal notranslate"><span class="pre">exercise</span></code></p></td>
+<td><p><code class="docutils literal notranslate"><span class="pre">title,</span> <span class="pre">task,</span> <span class="pre">*,</span> <span class="pre">starter,</span> <span class="pre">hints,</span> <span class="pre">solution,</span> <span class="pre">explanation,</span> <span class="pre">language</span></code></p></td>
+<td><p>تمرين بتلميحات وحل</p></td>
+</tr>
+<tr class="row-odd"><td><p><code class="docutils literal notranslate"><span class="pre">callout</span></code></p></td>
+<td><p><code class="docutils literal notranslate"><span class="pre">body,</span> <span class="pre">*,</span> <span class="pre">style='info',</span> <span class="pre">title=None</span></code></p></td>
+<td><p>تنبيه أو فكرة أساسية</p></td>
+</tr>
+<tr class="row-even"><td><p><code class="docutils literal notranslate"><span class="pre">figure</span></code></p></td>
+<td><p><code class="docutils literal notranslate"><span class="pre">src,</span> <span class="pre">*,</span> <span class="pre">caption,</span> <span class="pre">alt,</span> <span class="pre">title,</span> <span class="pre">width</span></code></p></td>
+<td><p>صورة مضمّنة</p></td>
+</tr>
+<tr class="row-odd"><td><p><code class="docutils literal notranslate"><span class="pre">divider</span></code></p></td>
+<td><p><code class="docutils literal notranslate"><span class="pre">title,</span> <span class="pre">subtitle='',</span> <span class="pre">*,</span> <span class="pre">label=None</span></code></p></td>
+<td><p>فاصل بين أجزاء المحاضرة</p></td>
+</tr>
+<tr class="row-even"><td><p><code class="docutils literal notranslate"><span class="pre">note</span></code></p></td>
+<td><p><code class="docutils literal notranslate"><span class="pre">title,</span> <span class="pre">body=''</span></code></p></td>
+<td><p>فقرة على خلفية فاتحة</p></td>
+</tr>
+<tr class="row-odd"><td><p><code class="docutils literal notranslate"><span class="pre">table</span></code></p></td>
+<td><p><code class="docutils literal notranslate"><span class="pre">title,</span> <span class="pre">headers,</span> <span class="pre">rows</span></code></p></td>
+<td><p>جدول</p></td>
+</tr>
+</tbody>
+</table>
+</div>
+</section>
+<section id="id3">
+<h3>رسومات المواد<a class="headerlink" href="#id3" title="Link to this heading">¶</a></h3>
+<p>كلها تقبل أيضًا <code class="docutils literal notranslate"><span class="pre">title,</span> <span class="pre">description,</span> <span class="pre">caption</span></code>. التفاصيل في <a class="reference internal" href="visuals.html"><span class="std std-doc">صفحة الرسومات</span></a>.</p>
+<div class="table-wrapper colwidths-auto docutils container">
+<table class="docutils align-default">
+<thead>
+<tr class="row-odd"><th class="head"><p>الدالة</p></th>
+<th class="head"><p>المعاملات الأساسية</p></th>
+<th class="head"><p>الاستخدام</p></th>
+</tr>
+</thead>
+<tbody>
+<tr class="row-even"><td><p><code class="docutils literal notranslate"><span class="pre">math</span></code></p></td>
+<td><p><code class="docutils literal notranslate"><span class="pre">latex,</span> <span class="pre">*,</span> <span class="pre">legend</span></code></p></td>
+<td><p>معادلة أو أكثر بلغة LaTeX</p></td>
+</tr>
+<tr class="row-odd"><td><p><code class="docutils literal notranslate"><span class="pre">array</span></code></p></td>
+<td><p><code class="docutils literal notranslate"><span class="pre">values,</span> <span class="pre">*,</span> <span class="pre">name,</span> <span class="pre">highlight,</span> <span class="pre">pointers,</span> <span class="pre">slice,</span> <span class="pre">negative</span></code></p></td>
+<td><p>قائمة بفهارسها ومؤشراتها</p></td>
+</tr>
+<tr class="row-even"><td><p><code class="docutils literal notranslate"><span class="pre">matrix</span></code></p></td>
+<td><p><code class="docutils literal notranslate"><span class="pre">rows,</span> <span class="pre">*,</span> <span class="pre">name,</span> <span class="pre">row_labels,</span> <span class="pre">col_labels,</span> <span class="pre">row_title,</span> <span class="pre">col_title,</span> <span class="pre">heatmap,</span> <span class="pre">highlight,</span> <span class="pre">brackets,</span> <span class="pre">metrics</span></code></p></td>
+<td><p>مصفوفة أو خريطة حرارية</p></td>
+</tr>
+<tr class="row-odd"><td><p><code class="docutils literal notranslate"><span class="pre">confusion_matrix</span></code></p></td>
+<td><p><code class="docutils literal notranslate"><span class="pre">counts,</span> <span class="pre">labels</span></code></p></td>
+<td><p>مصفوفة الالتباس مع الدقة</p></td>
+</tr>
+<tr class="row-even"><td><p><code class="docutils literal notranslate"><span class="pre">chart</span></code></p></td>
+<td><p><code class="docutils literal notranslate"><span class="pre">series,</span> <span class="pre">*,</span> <span class="pre">mode='line',</span> <span class="pre">labels,</span> <span class="pre">x_label,</span> <span class="pre">y_label,</span> <span class="pre">y_min,</span> <span class="pre">y_max</span></code></p></td>
+<td><p>رسم بياني</p></td>
+</tr>
+<tr class="row-odd"><td><p><code class="docutils literal notranslate"><span class="pre">network</span></code></p></td>
+<td><p><code class="docutils literal notranslate"><span class="pre">layers,</span> <span class="pre">*,</span> <span class="pre">labels</span></code></p></td>
+<td><p>شبكة عصبية</p></td>
+</tr>
+<tr class="row-even"><td><p><code class="docutils literal notranslate"><span class="pre">tree</span></code></p></td>
+<td><p><code class="docutils literal notranslate"><span class="pre">root</span></code></p></td>
+<td><p>شجرة</p></td>
+</tr>
+<tr class="row-odd"><td><p><code class="docutils literal notranslate"><span class="pre">graph</span></code></p></td>
+<td><p><code class="docutils literal notranslate"><span class="pre">nodes,</span> <span class="pre">edges=(),</span> <span class="pre">*,</span> <span class="pre">directed=False</span></code></p></td>
+<td><p>graph بأوزان</p></td>
+</tr>
+<tr class="row-even"><td><p><code class="docutils literal notranslate"><span class="pre">memory</span></code></p></td>
+<td><p><code class="docutils literal notranslate"><span class="pre">frames,</span> <span class="pre">objects=(),</span> <span class="pre">*,</span> <span class="pre">stack_label,</span> <span class="pre">heap_label</span></code></p></td>
+<td><p>الذاكرة والمراجع</p></td>
+</tr>
+<tr class="row-odd"><td><p><code class="docutils literal notranslate"><span class="pre">schema</span></code></p></td>
+<td><p><code class="docutils literal notranslate"><span class="pre">tables,</span> <span class="pre">*,</span> <span class="pre">per_row=3</span></code></p></td>
+<td><p>مخطط قاعدة بيانات</p></td>
+</tr>
+</tbody>
+</table>
+</div>
+</section>
+<section id="id4">
+<h3>إدارة المحاضرة<a class="headerlink" href="#id4" title="Link to this heading">¶</a></h3>
+<div class="table-wrapper colwidths-auto docutils container">
+<table class="docutils align-default">
+<thead>
+<tr class="row-odd"><th class="head"><p>الدالة</p></th>
+<th class="head"><p>السلوك</p></th>
+</tr>
+</thead>
+<tbody>
+<tr class="row-even"><td><p><code class="docutils literal notranslate"><span class="pre">add(component,</span> <span class="pre">*,</span> <span class="pre">id=None,</span> <span class="pre">show=True)</span></code></p></td>
+<td><p>إضافة أي مكوّن مسجّل، ومنها مكونات الإضافات</p></td>
+</tr>
+<tr class="row-odd"><td><p><code class="docutils literal notranslate"><span class="pre">render(content,</span> <span class="pre">*,</span> <span class="pre">show=True)</span></code></p></td>
+<td><p>قاموس مكوّن أو قائمة؛ <code class="docutils literal notranslate"><span class="pre">type</span></code> افتراضيًا <code class="docutils literal notranslate"><span class="pre">slide</span></code></p></td>
+</tr>
+<tr class="row-even"><td><p><code class="docutils literal notranslate"><span class="pre">from_file(path)</span></code> / <code class="docutils literal notranslate"><span class="pre">from_dict(data)</span></code></p></td>
+<td><p>تحميل محاضرة JSON مع التحقق</p></td>
+</tr>
+<tr class="row-odd"><td><p><code class="docutils literal notranslate"><span class="pre">to_dict()</span></code> / <code class="docutils literal notranslate"><span class="pre">save(path)</span></code></p></td>
+<td><p>تحويل المحاضرة إلى JSON</p></td>
+</tr>
+<tr class="row-even"><td><p><code class="docutils literal notranslate"><span class="pre">html(*,</span> <span class="pre">include_answers=True,</span> <span class="pre">notes=False)</span></code></p></td>
+<td><p>كل المحاضرة كقطعة HTML واحدة</p></td>
+</tr>
+<tr class="row-odd"><td><p><code class="docutils literal notranslate"><span class="pre">styles()</span></code></p></td>
+<td><p>عرض الخطوط والأنماط مرة واحدة في الدفتر</p></td>
+</tr>
+<tr class="row-even"><td><p><code class="docutils literal notranslate"><span class="pre">export(path,</span> <span class="pre">*,</span> <span class="pre">title=None,</span> <span class="pre">include_answers=True,</span> <span class="pre">present=False,</span> <span class="pre">notes=None,</span> <span class="pre">fragments=False)</span></code></p></td>
+<td><p>ملف HTML مستقل</p></td>
+</tr>
+<tr class="row-odd"><td><p><code class="docutils literal notranslate"><span class="pre">export_pdf(path,</span> <span class="pre">...)</span></code></p></td>
+<td><p>ملف PDF (الإضافة <code class="docutils literal notranslate"><span class="pre">pdf</span></code>)</p></td>
+</tr>
+<tr class="row-even"><td><p><code class="docutils literal notranslate"><span class="pre">clear()</span></code></p></td>
+<td><p>تفريغ المحاضرة</p></td>
+</tr>
+<tr class="row-odd"><td><p><code class="docutils literal notranslate"><span class="pre">components</span></code> / <code class="docutils literal notranslate"><span class="pre">len(deck)</span></code></p></td>
+<td><p>النماذج الحالية بالترتيب وعددها</p></td>
+</tr>
+</tbody>
+</table>
+</div>
+<p>الدوال تعرض داخل Jupyter وتعيد <code class="docutils literal notranslate"><span class="pre">None</span></code>. مع <code class="docutils literal notranslate"><span class="pre">show=False</span></code> تعيد HTML مستقلًا كسلسلة.</p>
+</section>
+</section>
+<section id="id5">
+<h2>النماذج<a class="headerlink" href="#id5" title="Link to this heading">¶</a></h2>
+<p>يمكن استخدام النماذج أو قواميس بنفس أسماء الحقول:</p>
+<div class="highlight-python notranslate"><div class="highlight"><pre><span></span><span class="n">Card</span><span class="p">(</span><span class="n">title</span><span class="p">,</span> <span class="n">explanation</span><span class="o">=</span><span class="s1">''</span><span class="p">,</span> <span class="n">code</span><span class="o">=</span><span class="s1">''</span><span class="p">,</span> <span class="n">reason</span><span class="o">=</span><span class="s1">''</span><span class="p">,</span> <span class="n">language</span><span class="o">=</span><span class="kc">None</span><span class="p">)</span>
+<span class="n">Node</span><span class="p">(</span><span class="n">value</span><span class="p">,</span> <span class="n">note</span><span class="o">=</span><span class="s1">''</span><span class="p">,</span> <span class="n">selected</span><span class="o">=</span><span class="kc">False</span><span class="p">)</span>
+<span class="n">Diagram</span><span class="p">(</span><span class="n">title</span><span class="p">,</span> <span class="n">nodes</span><span class="p">,</span> <span class="n">caption</span><span class="o">=</span><span class="s1">''</span><span class="p">,</span> <span class="n">direction</span><span class="o">=</span><span class="s1">'ltr'</span><span class="p">,</span> <span class="n">arrows</span><span class="o">=</span><span class="kc">True</span><span class="p">,</span> <span class="n">kind</span><span class="o">=</span><span class="s1">'flow'</span><span class="p">)</span>
+<span class="n">Activity</span><span class="p">(</span><span class="n">question</span><span class="p">,</span> <span class="n">answer</span><span class="p">,</span> <span class="n">code</span><span class="o">=</span><span class="s1">''</span><span class="p">,</span> <span class="n">language</span><span class="o">=</span><span class="kc">None</span><span class="p">,</span> <span class="n">label</span><span class="o">=</span><span class="kc">None</span><span class="p">,</span> <span class="n">reveal</span><span class="o">=</span><span class="kc">None</span><span class="p">)</span>
+<span class="n">CoverSection</span><span class="p">(</span><span class="n">title</span><span class="p">,</span> <span class="n">description</span><span class="o">=</span><span class="s1">''</span><span class="p">)</span>
+<span class="n">TraceStep</span><span class="p">(</span><span class="n">line</span><span class="p">,</span> <span class="n">variables</span><span class="o">=</span><span class="p">{},</span> <span class="n">output</span><span class="o">=</span><span class="s1">''</span><span class="p">,</span> <span class="n">note</span><span class="o">=</span><span class="s1">''</span><span class="p">)</span>
+<span class="n">RichText</span><span class="p">(</span><span class="n">html</span><span class="p">)</span>
+
+<span class="n">Brand</span><span class="p">(</span><span class="n">course</span><span class="o">=</span><span class="kc">None</span><span class="p">,</span> <span class="n">series</span><span class="o">=</span><span class="kc">None</span><span class="p">,</span> <span class="n">lesson</span><span class="o">=</span><span class="s1">''</span><span class="p">,</span> <span class="n">footer</span><span class="o">=</span><span class="kc">None</span><span class="p">,</span> <span class="n">language</span><span class="o">=</span><span class="s1">'python'</span><span class="p">)</span>
+<span class="n">Theme</span><span class="p">(</span><span class="n">preset</span><span class="o">=</span><span class="s1">'gold'</span><span class="p">,</span> <span class="n">accent</span><span class="o">=</span><span class="kc">None</span><span class="p">,</span> <span class="n">background</span><span class="o">=</span><span class="kc">None</span><span class="p">,</span> <span class="n">motion</span><span class="o">=</span><span class="kc">True</span><span class="p">,</span> <span class="n">direction</span><span class="o">=</span><span class="kc">None</span><span class="p">,</span>
+      <span class="n">max_width</span><span class="o">=</span><span class="mi">1280</span><span class="p">,</span> <span class="n">notebook_style</span><span class="o">=</span><span class="kc">False</span><span class="p">,</span> <span class="n">external_fonts</span><span class="o">=</span><span class="kc">False</span><span class="p">,</span> <span class="n">tokens</span><span class="o">=</span><span class="kc">None</span><span class="p">)</span>
+</pre></div>
+</div>
+<p>ولكل مكوّن نموذج: <code class="docutils literal notranslate"><span class="pre">Cover</span></code>, <code class="docutils literal notranslate"><span class="pre">Slide</span></code>, <code class="docutils literal notranslate"><span class="pre">Note</span></code>, <code class="docutils literal notranslate"><span class="pre">Table</span></code>, <code class="docutils literal notranslate"><span class="pre">Callout</span></code>, <code class="docutils literal notranslate"><span class="pre">Compare</span></code>, <code class="docutils literal notranslate"><span class="pre">CodeExample</span></code>, <code class="docutils literal notranslate"><span class="pre">Quiz</span></code>, <code class="docutils literal notranslate"><span class="pre">Trace</span></code>, <code class="docutils literal notranslate"><span class="pre">Exercise</span></code>, <code class="docutils literal notranslate"><span class="pre">Agenda</span></code>, <code class="docutils literal notranslate"><span class="pre">Figure</span></code>, <code class="docutils literal notranslate"><span class="pre">Divider</span></code>. كلها غير قابلة للتعديل وتتحقق من بياناتها عند الإنشاء، ولها <code class="docutils literal notranslate"><span class="pre">to_dict()</span></code>.</p>
+<p>الألوان <code class="docutils literal notranslate"><span class="pre">#RRGGBB</span></code>. العرض بين 320 و2400. الثيمات: <code class="docutils literal notranslate"><span class="pre">gold</span></code>, <code class="docutils literal notranslate"><span class="pre">emerald</span></code>, <code class="docutils literal notranslate"><span class="pre">ocean</span></code>, <code class="docutils literal notranslate"><span class="pre">violet</span></code>, <code class="docutils literal notranslate"><span class="pre">ruby</span></code>, <code class="docutils literal notranslate"><span class="pre">paper</span></code> وما تسجله. الحقول غير المعروفة والبيانات غير الصحيحة ترفع <code class="docutils literal notranslate"><span class="pre">ValueError</span></code> أو <code class="docutils literal notranslate"><span class="pre">TypeError</span></code> بدل تجاهلها.</p>
+</section>
+<section id="id6">
+<h2>نقاط التوسيع<a class="headerlink" href="#id6" title="Link to this heading">¶</a></h2>
+<div class="table-wrapper colwidths-auto docutils container">
+<table class="docutils align-default">
+<thead>
+<tr class="row-odd"><th class="head"><p>الدالة</p></th>
+<th class="head"><p>الاستخدام</p></th>
+</tr>
+</thead>
+<tbody>
+<tr class="row-even"><td><p><code class="docutils literal notranslate"><span class="pre">register_component(Model,</span> <span class="pre">render)</span></code></p></td>
+<td><p>إضافة مكوّن جديد (انظر <a class="reference internal" href="extending.html"><span class="std std-doc">دليل التوسيع</span></a>)</p></td>
+</tr>
+<tr class="row-odd"><td><p><code class="docutils literal notranslate"><span class="pre">register_theme(name,</span> <span class="pre">*,</span> <span class="pre">accent,</span> <span class="pre">background,</span> <span class="pre">palette='custom',</span> <span class="pre">tokens=None)</span></code></p></td>
+<td><p>ثيم بهوية الجامعة أو القسم</p></td>
+</tr>
+<tr class="row-even"><td><p><code class="docutils literal notranslate"><span class="pre">register_locale(code,</span> <span class="pre">labels,</span> <span class="pre">*,</span> <span class="pre">direction='ltr',</span> <span class="pre">base='en')</span></code></p></td>
+<td><p>لغة واجهة جديدة</p></td>
+</tr>
+<tr class="row-odd"><td><p><code class="docutils literal notranslate"><span class="pre">get_locale(code).with_labels(...)</span></code></p></td>
+<td><p>تعديل نصوص محددة</p></td>
+</tr>
+<tr class="row-even"><td><p><code class="docutils literal notranslate"><span class="pre">register_highlighter(names,</span> <span class="pre">function,</span> <span class="pre">*,</span> <span class="pre">label=None)</span></code></p></td>
+<td><p>تلوين لغة برمجة إضافية أو استبدال تلوين مدمج</p></td>
+</tr>
+<tr class="row-odd"><td><p><code class="docutils literal notranslate"><span class="pre">to_mathml(latex,</span> <span class="pre">*,</span> <span class="pre">display=True)</span></code></p></td>
+<td><p>تحويل معادلة LaTeX إلى MathML</p></td>
+</tr>
+<tr class="row-even"><td><p><code class="docutils literal notranslate"><span class="pre">component_names()</span></code>, <code class="docutils literal notranslate"><span class="pre">theme_names()</span></code>, <code class="docutils literal notranslate"><span class="pre">available_locales()</span></code></p></td>
+<td><p>القوائم المتاحة</p></td>
+</tr>
+</tbody>
+</table>
+</div>
+</section>
+<section id="id7">
+<h2>رسومات جاهزة<a class="headerlink" href="#id7" title="Link to this heading">¶</a></h2>
+<p><code class="docutils literal notranslate"><span class="pre">diagram_names()</span></code> يعيد أسماء رسومات بايثون، و<code class="docutils literal notranslate"><span class="pre">preset_diagram(name)</span></code> يعيد <code class="docutils literal notranslate"><span class="pre">Diagram</span></code> قابلًا للتعديل.</p>
+</section>
+<section id="id8">
+<h2>واجهة التوافق<a class="headerlink" href="#id8" title="Link to this heading">¶</a></h2>
+<div class="highlight-python notranslate"><div class="highlight"><pre><span></span><span class="kn">from</span><span class="w"> </span><span class="nn">jupyter_lecture_studio.compat</span><span class="w"> </span><span class="kn">import</span> <span class="n">LuxurySlideDeck</span>
+
+<span class="n">deck</span> <span class="o">=</span> <span class="n">LuxurySlideDeck</span><span class="p">()</span>
+<span class="n">deck</span><span class="o">.</span><span class="n">show</span><span class="p">({</span>
+    <span class="s1">'title'</span><span class="p">:</span> <span class="s1">'المفهوم'</span><span class="p">,</span>
+    <span class="s1">'description'</span><span class="p">:</span> <span class="s1">'&lt;p&gt;شرح قديم موثوق&lt;/p&gt;'</span><span class="p">,</span>
+    <span class="s1">'steps_data'</span><span class="p">:</span> <span class="p">[{</span><span class="s1">'title'</span><span class="p">:</span> <span class="s1">'مثال'</span><span class="p">,</span> <span class="s1">'explanation'</span><span class="p">:</span> <span class="s1">'شرح'</span><span class="p">,</span> <span class="s1">'code_snippet'</span><span class="p">:</span> <span class="s1">'print(1)'</span><span class="p">}],</span>
+    <span class="s1">'visual'</span><span class="p">:</span> <span class="s1">'names'</span><span class="p">,</span>
+    <span class="s1">'checkpoint'</span><span class="p">:</span> <span class="p">{</span><span class="s1">'question'</span><span class="p">:</span> <span class="s1">'ماذا يحدث؟'</span><span class="p">,</span> <span class="s1">'answer'</span><span class="p">:</span> <span class="s1">'التفسير'</span><span class="p">},</span>
+<span class="p">})</span>
+</pre></div>
+</div>
+<p>تحافظ على <code class="docutils literal notranslate"><span class="pre">show</span></code>, <code class="docutils literal notranslate"><span class="pre">steps_data</span></code>, <code class="docutils literal notranslate"><span class="pre">code_snippet</span></code>, <code class="docutils literal notranslate"><span class="pre">visual</span></code>, <code class="docutils literal notranslate"><span class="pre">checkpoint</span></code> للمحاضرات القديمة. الواجهة الجديدة هي الخيار المفضل للمحاضرات القادمة.</p>
+</section>
+</section>
+
+        </article>
+      </div>
+      <footer>
+        
+        <div class="related-pages">
+          <a class="next-page" href="MIGRATION.html">
+              <div class="page-info">
+                <div class="context">
+                  <span>Next</span>
+                </div>
+                <div class="title">الانتقال إلى الإصدار 1.0</div>
+              </div>
+              <svg class="furo-related-icon"><use href="#svg-arrow-right"></use></svg>
+            </a>
+          <a class="prev-page" href="USAGE_AR.html">
+              <svg class="furo-related-icon"><use href="#svg-arrow-right"></use></svg>
+              <div class="page-info">
+                <div class="context">
+                  <span>Previous</span>
+                </div>
+                
+                <div class="title">دليل الاستخدام</div>
+                
+              </div>
+            </a>
+        </div>
+        <div class="bottom-of-page">
+          <div class="left-details">
+            <div class="copyright">
+                Copyright &#169; 2026, Jupyter Lecture Studio contributors
+            </div>
+            Made with <a href="https://www.sphinx-doc.org/">Sphinx</a> and <a class="muted-link" href="https://pradyunsg.me">@pradyunsg</a>'s
+            
+            <a href="https://github.com/pradyunsg/furo">Furo</a>
+            
+          </div>
+          <div class="right-details">
+            
+          </div>
+        </div>
+        
+      </footer>
+    </div>
+    <aside class="toc-drawer">
+      
+      
+      <div class="toc-sticky toc-scroll">
+        <div class="toc-title-container">
+          <span class="toc-title">
+            On this page
+          </span>
+        </div>
+        <div class="toc-tree-container">
+          <div class="toc-tree">
+            <ul>
+<li><a class="reference internal" href="#">مرجع الواجهة — 1.0</a><ul>
+<li><a class="reference internal" href="#lecturedeck">LectureDeck</a><ul>
+<li><a class="reference internal" href="#id2">مكونات العرض</a></li>
+<li><a class="reference internal" href="#id3">رسومات المواد</a></li>
+<li><a class="reference internal" href="#id4">إدارة المحاضرة</a></li>
+</ul>
+</li>
+<li><a class="reference internal" href="#id5">النماذج</a></li>
+<li><a class="reference internal" href="#id6">نقاط التوسيع</a></li>
+<li><a class="reference internal" href="#id7">رسومات جاهزة</a></li>
+<li><a class="reference internal" href="#id8">واجهة التوافق</a></li>
+</ul>
+</li>
+</ul>
+
+          </div>
+        </div>
+      </div>
+      
+      
+    </aside>
+  </div>
+</div><script src="_static/documentation_options.js?v=68b195bf"></script>
+    <script src="_static/doctools.js?v=fd6eb6e6"></script>
+    <script src="_static/sphinx_highlight.js?v=6ffebe34"></script>
+    <script src="_static/scripts/furo.js?v=46bd48cc"></script>
+    </body>
+</html>

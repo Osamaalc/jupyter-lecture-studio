@@ -1,0 +1,980 @@
+/* Lecture Studio 1.0 stylesheet.
+ * - Every selector starts with .lecture-studio, so it never touches the host page.
+ * - Every color is a --ls-* design token; palettes only redefine tokens.
+ * - Logical properties mirror layouts automatically for RTL and LTR decks.
+ * - Specificity (two classes or more) beats Jupyter's rendered-HTML rules
+ *   without !important; !important is reserved for motion and print switches.
+ */
+
+/* 1. Tokens: the reference gold palette ------------------------------------ */
+.lecture-studio {
+  --ls-font: 'Cairo', Tahoma, Arial, sans-serif;
+  --ls-font-heading: 'Cairo', Tahoma, sans-serif;
+  --ls-font-mono: 'JetBrains Mono', 'Cairo', monospace;
+  --ls-scheme: dark;
+  --ls-text: #f5f2ea;
+  --ls-muted: #bcc6d2;
+  --ls-frame-bg: #0c141f;
+  --ls-frame-border: #53616a;
+  --ls-frame-shadow: 0 20px 55px rgba(8,16,29,.16), inset 0 1px 0 rgba(255,255,255,.10);
+  --ls-frame-rule: linear-gradient(90deg, transparent, #c5a365 18%, #f6e7c0 45%, #b8d9d8 65%, transparent);
+  --ls-slide-glow: radial-gradient(ellipse at 100% 0, rgba(71,85,102,.26), transparent 48%), radial-gradient(ellipse at 0 100%, rgba(172,138,71,.08), transparent 42%);
+  --ls-cover-bg: #0b1320;
+  --ls-cover-glow: radial-gradient(ellipse at 5% 5%, rgba(119,137,151,.24), transparent 48%), radial-gradient(ellipse at 100% 100%, rgba(182,142,70,.12), transparent 45%);
+  --ls-cover-sheen: rgba(242,218,171,.045);
+  --ls-ring: rgba(236,210,154,.14);
+  --ls-ring-halo: 0 0 0 22px rgba(236,210,154,.025), 0 0 0 45px rgba(236,210,154,.015);
+  --ls-topline: #ddcba6;
+  --ls-topline-line: rgba(215,207,185,.15);
+  --ls-dot: #e7cc92;
+  --ls-dot-glow: 0 0 0 5px rgba(231,204,146,.08), 0 0 18px rgba(231,204,146,.25);
+  --ls-series: #c7b68f;
+  --ls-eyebrow: #bca575;
+  --ls-watermark: rgba(221,208,172,.06);
+  --ls-title: #faf3e5;
+  --ls-subtitle: #bcc6d2;
+  --ls-description: #bfccd5;
+  --ls-description-p: #bcc6d2;
+  --ls-description-rule: #b99a60;
+  --ls-description-heading: #e8d3aa;
+  --ls-strong: #f4ead8;
+  --ls-card-bg: linear-gradient(145deg, rgba(43,53,66,.88), rgba(20,31,43,.96));
+  --ls-card-border: #46505d;
+  --ls-card-border-top: #6c6b62;
+  --ls-card-shadow: inset 0 1px 0 rgba(255,255,255,.025);
+  --ls-card-hover-border: #b69f70;
+  --ls-card-hover-shadow: 0 12px 28px rgba(0,0,0,.20), inset 0 1px 0 rgba(236,210,154,.10);
+  --ls-card-title: #f2e7cd;
+  --ls-card-text: #c5d1dd;
+  --ls-number-bg: linear-gradient(135deg, #c4a466, #f0dfb3);
+  --ls-number-text: #19222b;
+  --ls-number-shadow: 0 4px 12px rgba(0,0,0,.20);
+  --ls-inline-code-bg: #253844;
+  --ls-inline-code: #b3ddd9;
+  --ls-code-bg: linear-gradient(135deg, #0c1724, #080f1a);
+  --ls-code-border: #526172;
+  --ls-code-shadow: 0 8px 20px rgba(0,0,0,.16);
+  --ls-code-rule: linear-gradient(180deg, #b69b68, transparent);
+  --ls-code-bar-bg: linear-gradient(90deg, #202e3d, #172331);
+  --ls-code-bar-line: #3b4b5d;
+  --ls-code-bar-text: #aab9c7;
+  --ls-code-bar-ink: #9eadbf;
+  --ls-code-dot: #8395a6;
+  --ls-code-dot-first: #e2c590;
+  --ls-code-text: #e3e9f2;
+  --ls-tok-keyword: #d9b4ef;
+  --ls-tok-string: #b6e0ca;
+  --ls-tok-number: #f1d49b;
+  --ls-tok-comment: #97adbd;
+  --ls-tok-builtin: #90c6df;
+  --ls-tok-function: #f0dfb3;
+  --ls-tok-operator: #e3e9f2;
+  --ls-mark-bg: rgba(236,210,154,.11);
+  --ls-mark-rule: #ecd29a;
+  --ls-line-number: #5f7184;
+  --ls-reason-text: #dbcba9;
+  --ls-reason-rule: #bc975a;
+  --ls-reason-bg: rgba(221,188,124,.055);
+  --ls-reason-strong: #e8c586;
+  --ls-footer-text: #9bacbc;
+  --ls-footer-line: rgba(215,207,185,.16);
+  --ls-footer-label: #ccb786;
+  --ls-stage-border: #777157;
+  --ls-stage-bg: #111e2b;
+  --ls-stage-shadow: 0 8px 25px rgba(0,0,0,.12);
+  --ls-stage-head: #e3cf9d;
+  --ls-stage-head-bg: linear-gradient(90deg, #253340, #1f2c38);
+  --ls-stage-head-line: #48505a;
+  --ls-stage-toggle: #a9bccb;
+  --ls-stage-icon: #d8c494;
+  --ls-stage-focus: #dfc791;
+  --ls-diagram-bg: radial-gradient(ellipse at 100% 0, rgba(163,147,106,.09), transparent 70%), #14222e;
+  --ls-diagram-eyebrow: #c8b58a;
+  --ls-diagram-title: #e9deca;
+  --ls-node-bg: linear-gradient(145deg, #2b3948, #1d2b3a);
+  --ls-node-border: #6a747b;
+  --ls-node-border-top: #8a8f8e;
+  --ls-node-shadow: 0 5px 14px rgba(0,0,0,.13);
+  --ls-node-hover: #d3bd8c;
+  --ls-node-value: #f5ecdc;
+  --ls-node-note: #b4c6d2;
+  --ls-node-selected-bg: linear-gradient(145deg, #46655f, #2b4a47);
+  --ls-node-selected-border: #b0dbcc;
+  --ls-node-selected-shadow: inset 0 2px 0 #c2e5d6, 0 5px 18px rgba(139,197,174,.10);
+  --ls-node-selected-value: #e3f5dd;
+  --ls-arrow: #dfc893;
+  --ls-caption: #b8c8d3;
+  --ls-caption-line: rgba(219,202,166,.12);
+  --ls-activity-border: #8e7950;
+  --ls-activity-bg: linear-gradient(115deg, rgba(184,145,67,.12), rgba(83,102,119,.06));
+  --ls-activity-label: #efd7a4;
+  --ls-activity-question: #e0e8eb;
+  --ls-reveal-border: #7c765f;
+  --ls-reveal-bg: linear-gradient(110deg, #424333, #2c3b3d);
+  --ls-reveal-text: #edddb8;
+  --ls-reveal-hover-border: #d2b986;
+  --ls-reveal-hover-bg: linear-gradient(110deg, #51513c, #34474a);
+  --ls-reveal-icon: #f0d69b;
+  --ls-answer: #d5e9e3;
+  --ls-kicker: #d8c292;
+  --ls-cover-title: #f5ebd4;
+  --ls-lead: #c2ccd7;
+  --ls-prerequisite: #a3b7c5;
+  --ls-tag-border: #655d48;
+  --ls-tag-bg: rgba(217,188,124,.06);
+  --ls-tag-text: #e1d1ad;
+  --ls-tag-hover-bg: rgba(217,188,124,.14);
+  --ls-tag-hover-border: #b7a16f;
+  --ls-hero-text: #ddbc7c;
+  --ls-hero-bg: linear-gradient(135deg, rgba(46,65,80,.96), rgba(19,32,45,.98));
+  --ls-hero-border: #76818a;
+  --ls-hero-shadow: 0 20px 40px rgba(0,0,0,.23), inset 0 1px 0 rgba(255,255,255,.15);
+  --ls-hero-frame: rgba(232,210,164,.28);
+  --ls-hero-frame-outer: rgba(175,200,215,.19);
+  --ls-hero-line: #596774;
+  --ls-hero-dot-1: #e0c68f;
+  --ls-hero-dot-2: #a3d7d0;
+  --ls-hero-dot-3: #8f9cad;
+  --ls-hero-label: #b5c8d1;
+  --ls-hero-code: #eef3f3;
+  --ls-hero-prompt: #ddc892;
+  --ls-hero-result-bg: linear-gradient(90deg, #273e42, #203338);
+  --ls-hero-result: #bde1d4;
+  --ls-hero-result-border: #698480;
+  --ls-orbit: #f3dfb2;
+  --ls-orbit-glow: 0 0 20px rgba(243,223,178,.45);
+  --ls-section-border: #656554;
+  --ls-section-bg: linear-gradient(145deg, rgba(41,49,58,.76), rgba(23,32,43,.96));
+  --ls-section-rule: linear-gradient(180deg, #e4cea0, transparent);
+  --ls-section-title: #f1dba7;
+  --ls-section-text: #bdc9d4;
+  --ls-section-hover: #7eb4a6;
+  --ls-note-bg: #fbfaf6;
+  --ls-note-text: #263444;
+  --ls-note-border: #d8d7ce;
+  --ls-note-title: #162635;
+  --ls-note-code-bg: #eef0ec;
+  --ls-note-code: #2b5358;
+  --ls-table-head-bg: #ecebe5;
+  --ls-table-stripe: #f1f1ec;
+  --ls-good: #8fd6b4;
+  --ls-bad: #ee9a9a;
+  --ls-output-bg: #0f1c22;
+  --ls-output-border: #34504f;
+  --ls-output-bar-bg: rgba(120,200,180,.08);
+  --ls-output-label: #9fd3c3;
+  --ls-output-text: #c6eadf;
+  --ls-trace-line-bg: rgba(236,210,154,.14);
+  --ls-trace-line-rule: #ecd29a;
+  --ls-trace-active-bg: linear-gradient(135deg, #c4a466, #f0dfb3);
+  --ls-trace-active-text: #19222b;
+  --ls-figure-mat: #ffffff;
+  --ls-var-name: #90c6df;
+  --ls-var-value: #e3e9f2;
+  --ls-viz-1: #ecd29a;
+  --ls-viz-2: #8fd3c7;
+  --ls-viz-3: #9fceff;
+  --ls-viz-4: #f2a2c4;
+  --ls-viz-5: #c7b3ff;
+  --ls-viz-6: #ffb38a;
+  --ls-viz-text: #bcc6d2;
+  --ls-viz-strong: #f5f2ea;
+  --ls-viz-grid: rgba(255,255,255,.07);
+  --ls-viz-axis: rgba(255,255,255,.30);
+  --ls-viz-box: #172331;
+  --ls-viz-box-border: #4a5b6a;
+  --ls-viz-box-head: #22344a;
+  --ls-viz-edge: #7d8e9c;
+  --ls-viz-selected: #8fd6b4;
+  --ls-viz-heat: #ecd29a;
+  --ls-viz-hot-text: #19222b;
+  --ls-viz-cell: rgba(255,255,255,.03);
+  --ls-viz-cell-border: rgba(255,255,255,.13);
+  --ls-viz-mark: #ecd29a;
+  font-family: var(--ls-font);
+  line-height: 1.85;
+  max-width: var(--ls-width);
+  margin: auto;
+  text-align: right;
+}
+.lecture-studio[dir="ltr"] { text-align: left; }
+
+/* 2. Custom palettes: interface accents follow --ls-accent -------------------- */
+.lecture-studio[data-palette="custom"] {
+  --ls-frame-bg: var(--ls-background);
+  --ls-cover-bg: var(--ls-background);
+  --ls-frame-rule: linear-gradient(90deg, transparent, var(--ls-accent), #fff5da, var(--ls-accent), transparent);
+  --ls-slide-glow: radial-gradient(ellipse at 100% 0%, #47556640, transparent 48%);
+  --ls-cover-glow: radial-gradient(ellipse at 5% 5%, #7789973d, transparent 48%), radial-gradient(ellipse at 100% 100%, color-mix(in srgb, var(--ls-accent) 10%, transparent), transparent 45%);
+  --ls-topline: var(--ls-accent);
+  --ls-dot: var(--ls-accent);
+  --ls-series: var(--ls-accent);
+  --ls-eyebrow: var(--ls-accent);
+  --ls-description-rule: var(--ls-accent);
+  --ls-card-hover-border: var(--ls-accent);
+  --ls-number-bg: linear-gradient(135deg, var(--ls-accent), #f5f0db);
+  --ls-code-rule: linear-gradient(180deg, var(--ls-accent), transparent);
+  --ls-footer-label: var(--ls-accent);
+  --ls-stage-border: color-mix(in srgb, var(--ls-accent) 50%, #253440);
+  --ls-stage-head: var(--ls-accent);
+  --ls-diagram-eyebrow: var(--ls-accent);
+  --ls-arrow: var(--ls-accent);
+  --ls-activity-border: color-mix(in srgb, var(--ls-accent) 65%, #253440);
+  --ls-activity-label: var(--ls-accent);
+  --ls-kicker: var(--ls-accent);
+  --ls-tag-text: var(--ls-accent);
+  --ls-tag-border: color-mix(in srgb, var(--ls-accent) 45%, #253440);
+  --ls-orbit: var(--ls-accent);
+  --ls-section-rule: linear-gradient(180deg, var(--ls-accent), transparent);
+  --ls-section-title: var(--ls-accent);
+  --ls-mark-rule: var(--ls-accent);
+  --ls-mark-bg: color-mix(in srgb, var(--ls-accent) 12%, transparent);
+  --ls-trace-line-rule: var(--ls-accent);
+  --ls-trace-line-bg: color-mix(in srgb, var(--ls-accent) 14%, transparent);
+  --ls-trace-active-bg: linear-gradient(135deg, var(--ls-accent), #f5f0db);
+  --ls-viz-1: var(--ls-accent);
+  --ls-viz-heat: var(--ls-accent);
+  --ls-viz-mark: var(--ls-accent);
+}
+
+/* 3. Paper: a light palette for bright rooms and printing --------------------- */
+.lecture-studio[data-palette="paper"] {
+  --ls-scheme: light;
+  --ls-text: #1c2531;
+  --ls-muted: #4f5d6c;
+  --ls-frame-bg: #fbf9f4;
+  --ls-frame-border: #ddd5c4;
+  --ls-frame-shadow: 0 18px 45px rgba(60,48,20,.10), inset 0 1px 0 #ffffff;
+  --ls-frame-rule: linear-gradient(90deg, transparent, #b8913f 18%, #e6c77f 45%, #7fb2ad 65%, transparent);
+  --ls-slide-glow: radial-gradient(ellipse at 100% 0, rgba(184,145,63,.10), transparent 48%), radial-gradient(ellipse at 0 100%, rgba(90,140,150,.07), transparent 42%);
+  --ls-cover-bg: #f7f2e7;
+  --ls-cover-glow: radial-gradient(ellipse at 5% 5%, rgba(127,178,173,.18), transparent 48%), radial-gradient(ellipse at 100% 100%, rgba(184,145,63,.16), transparent 45%);
+  --ls-cover-sheen: rgba(255,255,255,.45);
+  --ls-ring: rgba(184,145,63,.20);
+  --ls-ring-halo: 0 0 0 22px rgba(184,145,63,.05), 0 0 0 45px rgba(184,145,63,.03);
+  --ls-topline: #7d6128;
+  --ls-topline-line: rgba(120,100,60,.18);
+  --ls-dot: #b8913f;
+  --ls-dot-glow: 0 0 0 5px rgba(184,145,63,.12);
+  --ls-series: #8a7448;
+  --ls-eyebrow: #8a6a2c;
+  --ls-watermark: rgba(120,100,60,.07);
+  --ls-title: #121a24;
+  --ls-subtitle: #4f5d6c;
+  --ls-description: #3c4a59;
+  --ls-description-p: #3c4a59;
+  --ls-description-rule: #b8913f;
+  --ls-description-heading: #6b5220;
+  --ls-strong: #121a24;
+  --ls-card-bg: linear-gradient(145deg, #ffffff, #f7f3ea);
+  --ls-card-border: #e2dac8;
+  --ls-card-border-top: #ebe0c6;
+  --ls-card-shadow: 0 1px 2px rgba(60,48,20,.06);
+  --ls-card-hover-border: #c9a85e;
+  --ls-card-hover-shadow: 0 12px 28px rgba(60,48,20,.12);
+  --ls-card-title: #1c2531;
+  --ls-card-text: #3c4a59;
+  --ls-number-bg: linear-gradient(135deg, #c4a466, #ead6a6);
+  --ls-number-text: #1c2531;
+  --ls-number-shadow: 0 3px 8px rgba(60,48,20,.15);
+  --ls-inline-code-bg: #efe8d8;
+  --ls-inline-code: #6b4a12;
+  --ls-reason-text: #5a4416;
+  --ls-reason-rule: #c9a85e;
+  --ls-reason-bg: rgba(201,168,94,.10);
+  --ls-reason-strong: #7a5a18;
+  --ls-footer-text: #6b7785;
+  --ls-footer-line: rgba(120,100,60,.16);
+  --ls-footer-label: #8a6a2c;
+  --ls-stage-border: #e0d5bd;
+  --ls-stage-bg: #fffdf8;
+  --ls-stage-shadow: 0 8px 25px rgba(60,48,20,.06);
+  --ls-stage-head: #7a5a18;
+  --ls-stage-head-bg: linear-gradient(90deg, #f6efe0, #f1e9d7);
+  --ls-stage-head-line: #e5dcc6;
+  --ls-stage-toggle: #6b7785;
+  --ls-stage-icon: #9a7b3c;
+  --ls-stage-focus: #b8913f;
+  --ls-diagram-bg: radial-gradient(ellipse at 100% 0, rgba(184,145,63,.08), transparent 70%), #fffdf8;
+  --ls-diagram-eyebrow: #8a6a2c;
+  --ls-diagram-title: #2a2414;
+  --ls-node-bg: linear-gradient(145deg, #ffffff, #f6f1e6);
+  --ls-node-border: #ddd2ba;
+  --ls-node-border-top: #e7dcc3;
+  --ls-node-shadow: 0 5px 14px rgba(60,48,20,.07);
+  --ls-node-hover: #c9a85e;
+  --ls-node-value: #1c2531;
+  --ls-node-note: #5b6875;
+  --ls-node-selected-bg: linear-gradient(145deg, #e6f3ed, #d5ebe3);
+  --ls-node-selected-border: #7fbfa8;
+  --ls-node-selected-shadow: inset 0 2px 0 #9fd3c0, 0 5px 18px rgba(80,150,120,.12);
+  --ls-node-selected-value: #1d5a47;
+  --ls-arrow: #b8913f;
+  --ls-caption: #4f5d6c;
+  --ls-caption-line: rgba(120,100,60,.15);
+  --ls-activity-border: #dcc58f;
+  --ls-activity-bg: linear-gradient(115deg, rgba(201,168,94,.14), rgba(127,178,173,.08));
+  --ls-activity-label: #7d6128;
+  --ls-activity-question: #1c2531;
+  --ls-reveal-border: #d8c79f;
+  --ls-reveal-bg: linear-gradient(110deg, #f6eedb, #eaf0e9);
+  --ls-reveal-text: #5a4416;
+  --ls-reveal-hover-border: #b8913f;
+  --ls-reveal-hover-bg: linear-gradient(110deg, #f1e4c6, #e0ebe4);
+  --ls-reveal-icon: #8a6a2c;
+  --ls-answer: #22413a;
+  --ls-kicker: #8a6a2c;
+  --ls-cover-title: #121a24;
+  --ls-lead: #3c4a59;
+  --ls-prerequisite: #5b6875;
+  --ls-tag-border: #d9c9a2;
+  --ls-tag-bg: rgba(201,168,94,.08);
+  --ls-tag-text: #6b5220;
+  --ls-tag-hover-bg: rgba(201,168,94,.18);
+  --ls-tag-hover-border: #b8913f;
+  --ls-hero-frame: rgba(184,145,63,.38);
+  --ls-hero-frame-outer: rgba(90,120,140,.25);
+  --ls-orbit: #c9a85e;
+  --ls-orbit-glow: 0 0 16px rgba(201,168,94,.45);
+  --ls-section-border: #e3d8bf;
+  --ls-section-bg: linear-gradient(145deg, #ffffff, #f7f2e6);
+  --ls-section-rule: linear-gradient(180deg, #c9a85e, transparent);
+  --ls-section-title: #6b5220;
+  --ls-section-text: #4f5d6c;
+  --ls-section-hover: #c9a85e;
+  --ls-note-bg: #ffffff;
+  --ls-good: #2f8f68;
+  --ls-bad: #c24b4b;
+  --ls-output-bg: #f1f6f3;
+  --ls-output-border: #cfe0d8;
+  --ls-output-bar-bg: #e5efea;
+  --ls-output-label: #2f6f5c;
+  --ls-output-text: #1d3a33;
+  --ls-trace-active-text: #1c2531;
+  --ls-figure-mat: #ffffff;
+  --ls-var-name: #1f6f8b;
+  --ls-var-value: #1c2531;
+  --ls-viz-1: #a67c2e;
+  --ls-viz-2: #2e8b7a;
+  --ls-viz-3: #2f6fb0;
+  --ls-viz-4: #b44a7a;
+  --ls-viz-5: #6a51b8;
+  --ls-viz-6: #c26a2e;
+  --ls-viz-text: #4f5d6c;
+  --ls-viz-strong: #1c2531;
+  --ls-viz-grid: rgba(60,48,20,.09);
+  --ls-viz-axis: rgba(60,48,20,.35);
+  --ls-viz-box: #ffffff;
+  --ls-viz-box-border: #d6ccb6;
+  --ls-viz-box-head: #f3ecdc;
+  --ls-viz-edge: #9a8f78;
+  --ls-viz-selected: #2f8f68;
+  --ls-viz-heat: #b8913f;
+  --ls-viz-hot-text: #ffffff;
+  --ls-viz-cell: #ffffff;
+  --ls-viz-cell-border: #e2dac8;
+  --ls-viz-mark: #b8913f;
+}
+
+/* 4. Frames: covers, slides and teaching panels ------------------------------ */
+.lecture-studio .ls-frame {
+  box-sizing: border-box; font-family: var(--ls-font); direction: inherit; text-align: inherit; color: var(--ls-text);
+  width: 100%; max-width: var(--ls-width); min-width: 0; margin: 10px auto 22px; position: relative; overflow: hidden;
+  line-height: 1.85; border: 1px solid var(--ls-frame-border); border-radius: 24px; background-color: var(--ls-frame-bg);
+  box-shadow: var(--ls-frame-shadow); container-type: inline-size;
+}
+.lecture-studio .ls-frame * { box-sizing: border-box; }
+.lecture-studio .ls-frame::before { content: ''; position: absolute; inset: 0 0 auto; height: 2px; background: var(--ls-frame-rule); }
+.lecture-studio .ls-slide, .lecture-studio .ls-panel { background: var(--ls-slide-glow), var(--ls-frame-bg); isolation: isolate; }
+.lecture-studio .ls-slide { padding: 30px 36px 25px; }
+.lecture-studio .ls-slide::after {
+  content: ''; position: absolute; width: 190px; height: 190px; top: -100px; inset-inline-start: -95px;
+  border: 1px solid var(--ls-ring); border-radius: 50%; pointer-events: none; z-index: -1; box-shadow: var(--ls-ring-halo);
+}
+
+/* Top line and footer */
+.lecture-studio .ls-topline {
+  display: flex; flex-wrap: wrap; justify-content: space-between; align-items: center; gap: 16px; padding-bottom: 17px;
+  margin-bottom: 24px; border-bottom: 1px solid var(--ls-topline-line); border-color: var(--ls-topline-line);
+  color: var(--ls-topline); font-size: 12px; font-weight: 700;
+}
+.lecture-studio .ls-course { display: inline-flex; align-items: center; gap: 9px; overflow-wrap: anywhere; }
+.lecture-studio .ls-course::before { content: ''; width: 5px; height: 5px; border-radius: 50%; background: var(--ls-dot); box-shadow: var(--ls-dot-glow); }
+.lecture-studio .ls-series { direction: ltr; letter-spacing: 3px; font-family: var(--ls-font-mono); font-size: 10px; color: var(--ls-series); overflow-wrap: anywhere; }
+.lecture-studio .ls-footer {
+  display: flex; flex-wrap: wrap; justify-content: space-between; gap: 16px; margin-top: 22px; padding-top: 13px;
+  border-top: 1px solid var(--ls-footer-line); border-color: var(--ls-footer-line); color: var(--ls-footer-text); font-size: 11px; letter-spacing: .2px;
+}
+.lecture-studio .ls-footer span:last-child { color: var(--ls-footer-label); font-family: var(--ls-font-mono); direction: ltr; letter-spacing: 1.8px; }
+
+/* Slide header */
+.lecture-studio .ls-header { position: relative; margin-bottom: 16px; padding: 0 0 4px; min-height: 94px; isolation: isolate; }
+.lecture-studio .ls-watermark {
+  position: absolute; left: 4px; top: -24px; font-family: var(--ls-font-mono); font-size: 116px; font-weight: 500; line-height: 1.2;
+  color: var(--ls-watermark); letter-spacing: -10px; pointer-events: none; z-index: -1; direction: ltr;
+}
+.lecture-studio[dir="ltr"] .ls-watermark { left: auto; right: 4px; }
+.lecture-studio .ls-eyebrow { display: block; font-family: var(--ls-font-mono); letter-spacing: 2.8px; font-size: 10px; direction: ltr; text-align: right; color: var(--ls-eyebrow); margin-bottom: 8px; }
+.lecture-studio[dir="ltr"] .ls-eyebrow { text-align: left; }
+.lecture-studio .ls-slide .ls-title {
+  font-family: var(--ls-font-heading); font-size: 36px; font-weight: 800; color: var(--ls-title); line-height: 1.6; margin: 0;
+  text-align: start; letter-spacing: 0; overflow-wrap: anywhere;
+}
+.lecture-studio .ls-subtitle { font-size: 14px; color: var(--ls-subtitle); margin-top: 6px; }
+.lecture-studio .ls-slide .ls-description {
+  font-size: 16px; color: var(--ls-description); max-width: 950px; margin: 13px 0 24px; padding: 0; padding-inline-start: 17px;
+  border-inline-start: 2px solid var(--ls-description-rule); line-height: 1.95;
+}
+.lecture-studio .ls-slide .ls-description p { font-size: 16px; line-height: 1.9; margin: 4px 0; color: var(--ls-description-p); text-align: start; }
+.lecture-studio .ls-slide .ls-description h3 { font-family: inherit; font-size: 17px; font-weight: 700; color: var(--ls-description-heading); margin: 0 0 7px; }
+.lecture-studio .ls-slide .ls-description strong { color: var(--ls-strong); }
+.lecture-studio .ls-slide .ls-description:empty, .lecture-studio .ls-slide .ls-cards:empty,
+.lecture-studio .ls-cover .ls-tags:empty, .lecture-studio .ls-cover .ls-sections:empty { display: none; }
+
+/* Cards */
+.lecture-studio .ls-slide .ls-cards { list-style: none; padding: 0; margin: 0; display: grid; grid-template-columns: repeat(2, minmax(0, 1fr)); gap: 18px; counter-reset: step; }
+.lecture-studio .ls-slide .ls-cards.ls-single { grid-template-columns: 1fr; }
+.lecture-studio .ls-slide .ls-cards:not(.ls-single) .ls-card:last-child:nth-child(odd) { grid-column: 1 / -1; }
+.lecture-studio .ls-slide .ls-card {
+  list-style: none; margin: 0; padding: 22px; min-width: 0; position: relative; background: var(--ls-card-bg);
+  border: 1px solid var(--ls-card-border); border-top-color: var(--ls-card-border-top); border-radius: 17px; box-shadow: var(--ls-card-shadow);
+  transition: transform .28s cubic-bezier(.2,.8,.2,1), box-shadow .28s ease, border-color .28s ease;
+  animation: ls-reveal .75s cubic-bezier(.16,1,.3,1) both; animation-delay: calc(var(--order, 0) * 90ms);
+}
+.lecture-studio .ls-slide .ls-card:hover { transform: translateY(-4px); border-color: var(--ls-card-hover-border); box-shadow: var(--ls-card-hover-shadow); }
+.lecture-studio .ls-card-head { display: flex; gap: 12px; align-items: center; margin-bottom: 12px; }
+.lecture-studio .ls-card-number {
+  flex: 0 0 30px; width: 31px; height: 31px; display: grid; place-items: center; border: 0; border-radius: 9px; color: var(--ls-number-text);
+  background: var(--ls-number-bg); font-family: var(--ls-font-mono); font-size: 12px; font-weight: 700; box-shadow: var(--ls-number-shadow);
+}
+.lecture-studio .ls-slide .ls-card-title { font-family: inherit; font-size: 17px; line-height: 1.75; color: var(--ls-card-title); margin: 0; font-weight: 700; text-align: start; }
+.lecture-studio .ls-slide .ls-card-text { font-size: 16px; line-height: 1.95; color: var(--ls-card-text); margin: 0 0 8px; text-align: start; overflow-wrap: anywhere; }
+.lecture-studio .ls-reason {
+  font-size: 15px; color: var(--ls-reason-text); padding: 10px 12px; margin-top: 13px; border-inline-start: 2px solid var(--ls-reason-rule);
+  background: var(--ls-reason-bg); border-radius: 5px; line-height: 1.8;
+}
+.lecture-studio .ls-reason strong { color: var(--ls-reason-strong); }
+
+/* Code */
+/* Students copy what they see: show != and >= as typed, never as ligatures. */
+.lecture-studio code, .lecture-studio pre, .lecture-studio .ls-vars, .lecture-studio .ls-hero, .lecture-studio .ls-node { font-variant-ligatures: none; font-feature-settings: "calt" 0, "liga" 0; }
+.lecture-studio .ls-frame code {
+  font-family: var(--ls-font-mono); direction: ltr; unicode-bidi: isolate; background: var(--ls-inline-code-bg); color: var(--ls-inline-code);
+  padding: 2px 5px; border-radius: 4px; font-size: .9em;
+}
+.lecture-studio .ls-code {
+  margin-top: 14px; border: 1px solid var(--ls-code-border); border-radius: 12px; overflow: hidden; background: var(--ls-code-bg);
+  direction: ltr; text-align: left; box-shadow: var(--ls-code-shadow); position: relative;
+}
+.lecture-studio .ls-code::after { content: ''; position: absolute; left: 0; top: 34px; bottom: 0; width: 2px; background: var(--ls-code-rule); pointer-events: none; }
+.lecture-studio .ls-code-bar {
+  height: 34px; display: flex; align-items: center; gap: 5px; padding: 0 14px; border-bottom: 1px solid var(--ls-code-bar-line);
+  background: var(--ls-code-bar-bg); color: var(--ls-code-bar-ink);
+}
+.lecture-studio .ls-code-bar i { width: 5px; height: 5px; border-radius: 50%; background: var(--ls-code-dot); }
+.lecture-studio .ls-code-bar i:first-child { background: var(--ls-code-dot-first); box-shadow: 0 0 8px rgba(226,197,144,.15); }
+.lecture-studio .ls-code-bar span { font-family: var(--ls-font-mono); font-size: 9px; margin-left: auto; letter-spacing: 2px; color: var(--ls-code-bar-text); }
+.lecture-studio .ls-code pre {
+  margin: 0; padding: 18px; background: transparent; border: none; overflow-x: auto; direction: ltr; text-align: left;
+  white-space: pre; line-height: 1.75;
+}
+.lecture-studio .ls-code pre code {
+  font-size: 16px; line-height: 1.85; background: none; color: var(--ls-code-text); padding: 0; white-space: pre; display: block;
+  direction: ltr; text-align: left; unicode-bidi: plaintext;
+}
+.lecture-studio .ls-code .k, .lecture-studio .ls-code .kc, .lecture-studio .ls-code .kd, .lecture-studio .ls-code .kn, .lecture-studio .ls-code .kp, .lecture-studio .ls-code .kr, .lecture-studio .ls-code .kt, .lecture-studio .ls-code .ow, .lecture-studio .ls-code .cp, .lecture-studio .ls-code .nt { color: var(--ls-tok-keyword); }
+.lecture-studio .ls-code .s, .lecture-studio .ls-code .s1, .lecture-studio .ls-code .s2, .lecture-studio .ls-code .sa, .lecture-studio .ls-code .sb, .lecture-studio .ls-code .sc, .lecture-studio .ls-code .sd, .lecture-studio .ls-code .se, .lecture-studio .ls-code .sh, .lecture-studio .ls-code .si, .lecture-studio .ls-code .sx, .lecture-studio .ls-code .sr, .lecture-studio .ls-code .ss { color: var(--ls-tok-string); }
+.lecture-studio .ls-code .m, .lecture-studio .ls-code .mb, .lecture-studio .ls-code .mf, .lecture-studio .ls-code .mh, .lecture-studio .ls-code .mi, .lecture-studio .ls-code .mo, .lecture-studio .ls-code .il { color: var(--ls-tok-number); }
+.lecture-studio .ls-code .c, .lecture-studio .ls-code .c1, .lecture-studio .ls-code .ch, .lecture-studio .ls-code .cm, .lecture-studio .ls-code .cpf, .lecture-studio .ls-code .cs { color: var(--ls-tok-comment); font-style: normal; }
+.lecture-studio .ls-code .nb, .lecture-studio .ls-code .bp, .lecture-studio .ls-code .nv { color: var(--ls-tok-builtin); }
+.lecture-studio .ls-code .nf, .lecture-studio .ls-code .fm, .lecture-studio .ls-code .nc, .lecture-studio .ls-code .nd, .lecture-studio .ls-code .na { color: var(--ls-tok-function); }
+.lecture-studio .ls-lines { display: block; }
+.lecture-studio .ls-line { display: block; min-height: 1lh; margin: 0 -18px; padding: 0 18px; }
+.lecture-studio .ls-line.ls-marked { background: var(--ls-mark-bg); box-shadow: inset 3px 0 0 var(--ls-mark-rule); }
+.lecture-studio .ls-numbered .ls-line::before {
+  content: attr(data-line); display: inline-block; width: 2em; margin-right: 1.1em; text-align: right; color: var(--ls-line-number);
+  user-select: none; -webkit-user-select: none;
+}
+
+/* Concept diagram */
+.lecture-studio .ls-slide .ls-stage {
+  margin: 0 0 24px; padding: 0; border: 1px solid var(--ls-stage-border); border-radius: 17px; background: var(--ls-stage-bg); overflow: hidden;
+  box-shadow: var(--ls-stage-shadow);
+}
+.lecture-studio .ls-slide .ls-stage > summary {
+  list-style: none; display: flex; justify-content: space-between; align-items: center; gap: 12px; color: var(--ls-stage-head); font-size: 12px;
+  font-weight: 700; padding: 10px 20px; background: var(--ls-stage-head-bg); cursor: pointer; border-bottom: 1px solid var(--ls-stage-head-line);
+}
+.lecture-studio .ls-stage summary::-webkit-details-marker { display: none; }
+.lecture-studio .ls-stage > summary:focus-visible { outline: 2px solid var(--ls-stage-focus); outline-offset: -4px; }
+.lecture-studio .ls-stage-toggle { font-weight: 500; color: var(--ls-stage-toggle); font-size: 10px; }
+.lecture-studio .ls-stage-toggle::after { content: ' +'; color: var(--ls-stage-icon); font-family: var(--ls-font-mono); }
+.lecture-studio .ls-stage[open] .ls-stage-toggle::after { content: ' −'; }
+.lecture-studio .ls-slide .ls-diagram { margin: 0; border: 0; border-radius: 0; padding: 18px 20px 20px; background: var(--ls-diagram-bg); }
+.lecture-studio .ls-diagram figcaption { display: flex; justify-content: space-between; align-items: center; gap: 15px; margin-bottom: 18px; }
+.lecture-studio .ls-diagram figcaption strong { color: var(--ls-diagram-title); font-size: 15px; }
+.lecture-studio .ls-diagram-eyebrow { order: 2; font-family: var(--ls-font-mono); direction: ltr; color: var(--ls-diagram-eyebrow); letter-spacing: 2px; font-size: 9px; }
+.lecture-studio .ls-track { display: flex; align-items: center; gap: 10px; min-width: 0; }
+.lecture-studio .ls-node {
+  flex: 1; min-width: 0; display: flex; flex-direction: column; align-items: center; justify-content: center; gap: 7px; min-height: 88px;
+  padding: 13px 10px; background: var(--ls-node-bg); border: 1px solid var(--ls-node-border); border-top-color: var(--ls-node-border-top);
+  border-radius: 11px; box-shadow: var(--ls-node-shadow); transition: transform .24s ease, border-color .24s ease;
+  animation: ls-rise .6s ease both; animation-delay: calc(var(--order, 0) * 110ms);
+}
+.lecture-studio .ls-stage[open] .ls-node { animation: ls-reveal .8s cubic-bezier(.16,1,.3,1) both; animation-delay: calc(var(--order, 0) * 120ms); }
+.lecture-studio .ls-node:hover { transform: translateY(-3px); border-color: var(--ls-node-hover); }
+.lecture-studio .ls-node b {
+  font-family: 'JetBrains Mono', 'Cairo', monospace; font-size: 22px; color: var(--ls-node-value); direction: ltr; unicode-bidi: isolate;
+  text-align: center; overflow-wrap: anywhere;
+}
+.lecture-studio .ls-node span { font-family: 'Cairo', Tahoma, sans-serif; font-size: 13px; color: var(--ls-node-note); text-align: center; direction: var(--ls-dir, rtl); }
+.lecture-studio .ls-node.ls-selected { background: var(--ls-node-selected-bg); border-color: var(--ls-node-selected-border); box-shadow: var(--ls-node-selected-shadow); }
+.lecture-studio .ls-node.ls-selected b { color: var(--ls-node-selected-value); }
+.lecture-studio .ls-arrow { color: var(--ls-arrow); font-size: 24px; flex: 0 0 20px; text-align: center; opacity: .85; }
+.lecture-studio .ls-diagram[data-kind="journey"] .ls-arrow { transform: rotate(180deg); }
+.lecture-studio .ls-diagram[data-kind="index"] .ls-node { min-height: 78px; }
+.lecture-studio .ls-diagram[data-kind="index"] .ls-node b { font-size: 26px; }
+.lecture-studio .ls-diagram[data-kind="index"] .ls-node span { font-family: var(--ls-font-mono); direction: ltr; }
+.lecture-studio .ls-diagram[data-kind="flow"] .ls-track { flex-wrap: wrap; }
+.lecture-studio .ls-diagram[data-kind="flow"] .ls-node { flex: 1 1 140px; }
+.lecture-studio .ls-slide .ls-caption {
+  margin: 14px 0 0; font-size: 14px; color: var(--ls-caption); text-align: start; line-height: 1.85;
+  border-top: 1px solid var(--ls-caption-line); padding-top: 12px;
+}
+.lecture-studio .ls-slide:has(.ls-diagram[data-kind="journey"]) .ls-cards { grid-template-columns: repeat(4, minmax(0, 1fr)); gap: 12px; }
+.lecture-studio .ls-slide:has(.ls-diagram[data-kind="journey"]) .ls-card { padding: 16px; }
+.lecture-studio .ls-slide:has(.ls-diagram[data-kind="journey"]) .ls-card-title { font-size: 15px; }
+
+/* Predict-then-reveal activity, shared by quiz and exercise reveals */
+.lecture-studio .ls-activity { margin-top: 22px; padding: 20px 23px; border: 1px solid var(--ls-activity-border); border-radius: 16px; background: var(--ls-activity-bg); }
+.lecture-studio .ls-activity-label { display: inline-block; color: var(--ls-activity-label); font-size: 11px; font-weight: 800; letter-spacing: .4px; margin-bottom: 6px; }
+.lecture-studio .ls-activity > p { font-size: 16px; margin: 4px 0 12px; text-align: start; color: var(--ls-activity-question); line-height: 1.95; }
+.lecture-studio .ls-activity details, .lecture-studio .ls-reveal { margin: 12px 0 0; padding: 0; border: 0; background: transparent; }
+.lecture-studio .ls-activity summary, .lecture-studio .ls-reveal > summary {
+  display: flex; align-items: center; justify-content: space-between; cursor: pointer; padding: 12px 16px; border: 1px solid var(--ls-reveal-border);
+  background: var(--ls-reveal-bg); border-radius: 9px; color: var(--ls-reveal-text); font-size: 14px; font-weight: 700; list-style: none;
+  transition: border-color .25s ease, background .25s ease;
+}
+.lecture-studio .ls-activity summary:hover, .lecture-studio .ls-reveal > summary:hover { border-color: var(--ls-reveal-hover-border); background: var(--ls-reveal-hover-bg); }
+.lecture-studio .ls-activity summary::after, .lecture-studio .ls-reveal > summary::after { content: '+'; font-family: var(--ls-font-mono); font-size: 20px; color: var(--ls-reveal-icon); }
+.lecture-studio .ls-activity details[open] summary::after, .lecture-studio .ls-reveal[open] > summary::after { content: '−'; }
+.lecture-studio .ls-reveal > summary::-webkit-details-marker { display: none; }
+.lecture-studio .ls-activity summary:focus-visible, .lecture-studio .ls-reveal > summary:focus-visible { outline: 2px solid var(--ls-accent); outline-offset: 3px; }
+.lecture-studio .ls-answer { padding: 17px 6px 4px; color: var(--ls-answer); font-size: 16px; line-height: 2; }
+.lecture-studio details[open] > .ls-answer { animation: ls-answer-in .45s ease both; }
+
+/* Cover */
+.lecture-studio .ls-cover { padding: 35px 40px 30px; background: var(--ls-cover-glow), var(--ls-cover-bg); isolation: isolate; }
+.lecture-studio .ls-cover::after {
+  content: ''; position: absolute; inset: 0; background: linear-gradient(120deg, transparent 15%, var(--ls-cover-sheen) 30%, transparent 44%);
+  transform: translateX(-30%); animation: ls-sheen 15s ease-in-out infinite; pointer-events: none; z-index: -1;
+}
+.lecture-studio .ls-cover-grid { display: grid; grid-template-columns: minmax(0, 1fr) 270px; gap: 35px; align-items: center; margin: 26px 0 30px; }
+.lecture-studio .ls-cover.ls-no-hero .ls-cover-grid { grid-template-columns: 1fr; }
+.lecture-studio .ls-cover .ls-kicker { font-size: 11px; color: var(--ls-kicker); font-weight: 700; margin-bottom: 10px; letter-spacing: .8px; }
+.lecture-studio .ls-cover .ls-cover-title {
+  font-family: var(--ls-font-heading); font-size: 52px; font-weight: 900; color: var(--ls-cover-title); line-height: 1.5; margin: 0 0 10px;
+  text-shadow: 0 4px 22px rgba(0,0,0,.12); overflow-wrap: anywhere; animation: ls-reveal .85s cubic-bezier(.16,1,.3,1) both;
+}
+.lecture-studio .ls-cover .ls-lead {
+  font-size: 18px; color: var(--ls-lead); line-height: 2; max-width: 650px; text-align: start; margin: 14px 0 0; margin-inline-end: auto; padding: 0;
+  animation: ls-reveal .9s .12s cubic-bezier(.16,1,.3,1) both;
+}
+/* Secondary line inside a cover description, e.g. <span class="cover-prerequisite">...</span>. */
+.lecture-studio .ls-cover .cover-prerequisite { color: var(--ls-prerequisite); font-size: 14px; }
+.lecture-studio .ls-cover .ls-tags { display: flex; flex-wrap: wrap; gap: 8px; margin-top: 18px; }
+.lecture-studio .ls-cover .ls-tag {
+  border: 1px solid var(--ls-tag-border); background: var(--ls-tag-bg); color: var(--ls-tag-text); padding: 6px 13px; font-size: 11px; border-radius: 7px;
+  transition: background .2s ease, border-color .2s ease; animation: ls-reveal .85s .22s cubic-bezier(.16,1,.3,1) both;
+}
+.lecture-studio .ls-cover .ls-tag:hover { background: var(--ls-tag-hover-bg); border-color: var(--ls-tag-hover-border); }
+.lecture-studio .ls-cover .ls-hero {
+  display: flex; flex-direction: column; justify-content: center; align-items: stretch; width: 245px; height: 245px; padding: 26px 23px;
+  position: relative; margin: auto; color: var(--ls-hero-text); background: var(--ls-hero-bg); border: 1px solid var(--ls-hero-border);
+  border-radius: 21px; box-shadow: var(--ls-hero-shadow); font-family: var(--ls-font-mono); font-size: 15px; direction: ltr; isolation: isolate;
+  transform: rotate(-4deg); animation: ls-hero-float 9s ease-in-out infinite;
+}
+.lecture-studio .ls-cover .ls-hero::before { content: ''; position: absolute; inset: -18px; border: 1px solid var(--ls-hero-frame); border-radius: 23px; transform: rotate(12deg); }
+.lecture-studio .ls-cover .ls-hero::after { content: ''; position: absolute; inset: -34px; border: 1px dashed var(--ls-hero-frame-outer); border-radius: 29px; transform: rotate(-7deg); pointer-events: none; }
+.lecture-studio .ls-hero-head { display: flex; align-items: center; gap: 5px; padding-bottom: 15px; border-bottom: 1px solid var(--ls-hero-line); }
+.lecture-studio .ls-hero-head i { width: 6px; height: 6px; border-radius: 50%; background: var(--ls-hero-dot-1); }
+.lecture-studio .ls-hero-head i:nth-child(2) { background: var(--ls-hero-dot-2); }
+.lecture-studio .ls-hero-head i:nth-child(3) { background: var(--ls-hero-dot-3); }
+.lecture-studio .ls-hero-head span { margin-left: auto; font-size: 10px; letter-spacing: 2px; color: var(--ls-hero-label); }
+.lecture-studio .ls-hero-code { font-family: var(--ls-font-mono); font-size: 14px; color: var(--ls-hero-code); line-height: 2.6; padding-top: 12px; white-space: normal; overflow-wrap: anywhere; }
+.lecture-studio .ls-hero-code em { color: var(--ls-hero-prompt); font-style: normal; }
+.lecture-studio .ls-hero-result {
+  display: flex; gap: 7px; align-items: center; margin-top: 13px; padding: 8px 10px; border: 1px solid var(--ls-hero-result-border);
+  border-radius: 8px; background: var(--ls-hero-result-bg); color: var(--ls-hero-result); font-size: 12px; letter-spacing: 1px;
+}
+.lecture-studio .ls-hero-result::before { content: '✓'; font-size: 15px; }
+.lecture-studio .ls-hero-orbit {
+  position: absolute; width: 8px; height: 8px; border-radius: 50%; background: var(--ls-orbit); top: -21px; left: 26px; box-shadow: var(--ls-orbit-glow);
+  animation: ls-orbit 8s ease-in-out infinite; z-index: -1;
+}
+.lecture-studio .ls-cover .ls-sections { display: grid; grid-template-columns: 1fr 1fr; gap: 13px; }
+.lecture-studio .ls-cover.ls-flex-sections .ls-sections { grid-template-columns: repeat(auto-fit, minmax(min(100%, 240px), 1fr)); }
+.lecture-studio .ls-cover .ls-section {
+  padding: 17px 19px; border: 1px solid var(--ls-section-border); background: var(--ls-section-bg); border-radius: 13px; position: relative;
+  overflow: hidden; transition: border-color .2s ease; animation: ls-reveal .9s .3s cubic-bezier(.16,1,.3,1) both;
+}
+.lecture-studio .ls-cover .ls-section:hover { border-color: var(--ls-section-hover); }
+.lecture-studio .ls-cover .ls-section::before { content: ''; position: absolute; top: 0; inset-inline-start: 0; bottom: 0; width: 2px; background: var(--ls-section-rule); }
+.lecture-studio .ls-cover .ls-section b { font-size: 16px; color: var(--ls-section-title); }
+.lecture-studio .ls-cover .ls-section p { font-size: 14px; color: var(--ls-section-text); margin: 6px 0 0; line-height: 1.85; text-align: start; }
+
+/* Notes and tables: light reading panels */
+.lecture-studio .ls-note {
+  box-sizing: border-box; background: var(--ls-note-bg); color: var(--ls-note-text); border: 1px solid var(--ls-note-border);
+  border-inline-start: 3px solid var(--ls-accent); border-radius: 16px; padding: 24px 28px; margin: 12px auto 22px; max-width: var(--ls-width);
+  overflow-wrap: anywhere;
+}
+.lecture-studio .ls-note h2 { font: 800 24px/1.8 'Cairo', Tahoma, sans-serif; margin: 0 0 12px; color: var(--ls-note-title); }
+.lecture-studio .ls-note p { text-align: start; }
+.lecture-studio .ls-note code, .lecture-studio .ls-callout code {
+  font-family: var(--ls-font-mono); direction: ltr; unicode-bidi: isolate; background: var(--ls-note-code-bg); color: var(--ls-note-code);
+  padding: 1px 6px; border-radius: 4px; font-size: .88em;
+}
+.lecture-studio .ls-table { overflow-x: auto; }
+.lecture-studio .ls-table table { width: 100%; border-collapse: collapse; }
+.lecture-studio .ls-table th, .lecture-studio .ls-table td { padding: 12px 16px; text-align: start; border-bottom: 1px solid var(--ls-note-border); }
+.lecture-studio .ls-table th { background: var(--ls-table-head-bg); color: var(--ls-note-text); }
+.lecture-studio .ls-table tr:nth-child(even) { background: var(--ls-table-stripe); }
+
+/* Arabic text in a letter-spaced Latin slot (series, hero label, lesson): keep letters joined. */
+.lecture-studio .ls-frame span.ls-arabic { letter-spacing: 0; font-family: var(--ls-font); }
+
+/* 5. Teaching panels ---------------------------------------------------------- */
+.lecture-studio .ls-panel { padding: 26px 32px 28px; }
+.lecture-studio .ls-panel-head { display: flex; flex-wrap: wrap; align-items: baseline; gap: 6px 14px; margin-bottom: 14px; }
+.lecture-studio .ls-panel-label { font-size: 12px; color: var(--ls-eyebrow); font-weight: 800; }
+.lecture-studio[dir="ltr"] .ls-panel-label { font-family: var(--ls-font-mono); font-size: 11px; letter-spacing: 1.6px; text-transform: uppercase; }
+.lecture-studio .ls-panel .ls-panel-title { flex-basis: 100%; margin: 0; font-family: var(--ls-font-heading); font-size: 26px; font-weight: 800; line-height: 1.6; color: var(--ls-title); text-align: start; }
+.lecture-studio .ls-panel-text { font-size: 16px; line-height: 1.95; color: var(--ls-description); margin: 0 0 14px; text-align: start; }
+.lecture-studio .ls-panel-caption { margin: 12px 0 0; font-size: 14px; color: var(--ls-caption); text-align: start; }
+
+/* Callout */
+.lecture-studio .ls-callout {
+  --ls-callout: #3d7fc4; box-sizing: border-box; display: grid; grid-template-columns: auto minmax(0, 1fr); gap: 14px; align-items: start;
+  max-width: var(--ls-width); margin: 12px auto 22px; padding: 20px 24px; border-radius: 16px; color: var(--ls-note-text);
+  background: color-mix(in srgb, var(--ls-callout) 7%, var(--ls-note-bg)); border: 1px solid color-mix(in srgb, var(--ls-callout) 30%, var(--ls-note-border));
+  border-inline-start: 4px solid var(--ls-callout); line-height: 1.9; overflow-wrap: anywhere;
+}
+.lecture-studio .ls-callout[data-style="tip"] { --ls-callout: #2f9b74; }
+.lecture-studio .ls-callout[data-style="warning"] { --ls-callout: #c98a14; }
+.lecture-studio .ls-callout[data-style="mistake"] { --ls-callout: #c84a4a; }
+.lecture-studio .ls-callout[data-style="success"] { --ls-callout: #3b9a58; }
+.lecture-studio .ls-callout[data-style="key"] { --ls-callout: #a8853b; }
+.lecture-studio .ls-callout-icon { display: grid; place-items: center; width: 40px; height: 40px; border-radius: 12px; color: var(--ls-callout); background: color-mix(in srgb, var(--ls-callout) 14%, transparent); }
+.lecture-studio .ls-callout-title { display: block; font-size: 17px; font-weight: 800; color: color-mix(in srgb, var(--ls-callout) 72%, #17202b); margin-bottom: 2px; }
+.lecture-studio .ls-callout-body { font-size: 16px; }
+.lecture-studio .ls-callout-body p { margin: 4px 0; text-align: start; }
+
+/* Compare */
+.lecture-studio .ls-compare-grid { display: grid; grid-template-columns: repeat(2, minmax(0, 1fr)); gap: 16px; }
+.lecture-studio .ls-compare-side { min-width: 0; padding: 18px; border-radius: 17px; background: var(--ls-card-bg); border: 1px solid var(--ls-card-border); }
+.lecture-studio .ls-compare[data-mode="wrong-right"] .ls-compare-side[data-side="before"] { border-color: color-mix(in srgb, var(--ls-bad) 45%, var(--ls-card-border)); }
+.lecture-studio .ls-compare[data-mode="wrong-right"] .ls-compare-side[data-side="after"] { border-color: color-mix(in srgb, var(--ls-good) 45%, var(--ls-card-border)); }
+.lecture-studio .ls-compare-label { display: flex; align-items: center; gap: 10px; font-size: 15px; font-weight: 800; color: var(--ls-card-title); }
+.lecture-studio .ls-compare-mark { display: grid; place-items: center; width: 28px; height: 28px; border-radius: 9px; font-family: var(--ls-font-mono); font-size: 15px; background: var(--ls-number-bg); color: var(--ls-number-text); }
+.lecture-studio .ls-compare[data-mode="wrong-right"] [data-side="before"] .ls-compare-mark { background: color-mix(in srgb, var(--ls-bad) 22%, transparent); color: var(--ls-bad); }
+.lecture-studio .ls-compare[data-mode="wrong-right"] [data-side="after"] .ls-compare-mark { background: color-mix(in srgb, var(--ls-good) 22%, transparent); color: var(--ls-good); }
+.lecture-studio .ls-compare-note { margin-top: 12px; font-size: 15px; line-height: 1.85; color: var(--ls-card-text); }
+
+/* Code example output */
+.lecture-studio .ls-output { margin-top: 10px; border: 1px solid var(--ls-output-border); border-radius: 12px; overflow: hidden; background: var(--ls-output-bg); direction: ltr; text-align: left; }
+.lecture-studio .ls-output-bar { display: flex; align-items: center; height: 30px; padding: 0 14px; background: var(--ls-output-bar-bg); color: var(--ls-output-label); font-size: 12px; font-weight: 700; }
+.lecture-studio .ls-output-bar span::before { content: '▸ '; font-family: var(--ls-font-mono); }
+.lecture-studio .ls-frame .ls-output pre { margin: 0; padding: 12px 18px 14px; font-family: var(--ls-font-mono); font-size: 15px; line-height: 1.75; color: var(--ls-output-text); background: none; white-space: pre-wrap; overflow-wrap: anywhere; }
+
+/* Quiz */
+.lecture-studio .ls-question { font-size: 20px; font-weight: 700; color: var(--ls-title); margin: 0 0 14px; line-height: 1.8; text-align: start; }
+.lecture-studio .ls-frame .ls-options { list-style: none; padding: 0; margin: 16px 0 0; display: grid; grid-template-columns: repeat(2, minmax(0, 1fr)); gap: 12px; }
+.lecture-studio .ls-option { position: relative; min-width: 0; }
+.lecture-studio .ls-option input, .lecture-studio .ls-step-input { position: absolute; opacity: 0; width: 1px; height: 1px; pointer-events: none; }
+.lecture-studio .ls-option label {
+  display: flex; align-items: center; gap: 12px; height: 100%; padding: 13px 16px; border: 1px solid var(--ls-card-border); border-radius: 14px;
+  background: var(--ls-card-bg); color: var(--ls-card-text); font-size: 16px; cursor: pointer; transition: border-color .2s ease, background .2s ease, transform .2s ease;
+}
+.lecture-studio .ls-option label:hover { border-color: var(--ls-card-hover-border); transform: translateY(-2px); }
+.lecture-studio .ls-option-key {
+  flex: 0 0 32px; height: 32px; display: grid; place-items: center; border-radius: 9px; background: var(--ls-number-bg); color: var(--ls-number-text);
+  font-weight: 800; font-size: 14px;
+}
+.lecture-studio .ls-option-text { flex: 1; min-width: 0; overflow-wrap: anywhere; }
+.lecture-studio .ls-option-state { margin-inline-start: auto; font-size: 13px; font-weight: 800; white-space: nowrap; }
+.lecture-studio .ls-option input:focus-visible + label { outline: 2px solid var(--ls-accent); outline-offset: 3px; }
+.lecture-studio .ls-quiz[data-graded] .ls-option input:checked + label { border-color: var(--ls-bad); background: color-mix(in srgb, var(--ls-bad) 12%, transparent); }
+.lecture-studio .ls-quiz[data-graded] .ls-option input:checked + label .ls-option-state::after { content: attr(data-no); color: var(--ls-bad); }
+.lecture-studio .ls-quiz[data-graded] .ls-option[data-correct] input:checked + label { border-color: var(--ls-good); background: color-mix(in srgb, var(--ls-good) 14%, transparent); }
+.lecture-studio .ls-quiz[data-graded] .ls-option[data-correct] input:checked + label .ls-option-state::after { content: attr(data-yes); color: var(--ls-good); }
+.lecture-studio .ls-quiz:not([data-graded]) .ls-option input:checked + label { border-color: var(--ls-accent); }
+.lecture-studio .ls-quiz:has(.ls-reveal[open]) .ls-option[data-correct] label { border-color: var(--ls-good); box-shadow: inset 0 0 0 1px var(--ls-good); }
+
+/* Execution trace */
+.lecture-studio .ls-trace-controls { display: flex; flex-wrap: wrap; align-items: center; gap: 6px; margin: 2px 0 14px; color: var(--ls-muted); font-size: 13px; }
+.lecture-studio .ls-trace-controls > span { margin-inline-end: 6px; font-weight: 700; }
+.lecture-studio .ls-trace-controls label {
+  display: grid; place-items: center; min-width: 32px; height: 32px; padding: 0 6px; border-radius: 9px; border: 1px solid var(--ls-card-border);
+  background: var(--ls-card-bg); color: var(--ls-card-text); font-family: var(--ls-font-mono); font-size: 13px; cursor: pointer;
+}
+.lecture-studio .ls-trace:has(.ls-step-input:focus-visible) .ls-trace-controls { outline: 2px solid var(--ls-accent); outline-offset: 4px; border-radius: 10px; }
+.lecture-studio .ls-trace-body { display: grid; grid-template-columns: minmax(0, 1.4fr) minmax(0, 1fr); gap: 16px; align-items: start; }
+.lecture-studio .ls-trace-code .ls-code { margin-top: 0; }
+.lecture-studio .ls-trace-code .ls-line { transition: background .2s ease; }
+.lecture-studio .ls-state { display: none; padding: 16px 18px; border-radius: 16px; background: var(--ls-card-bg); border: 1px solid var(--ls-card-border); }
+.lecture-studio .ls-trace:not(:has(.ls-step-input)) .ls-state { display: block; margin-bottom: 10px; }
+.lecture-studio .ls-state-head { font-weight: 800; color: var(--ls-eyebrow); font-size: 13px; }
+.lecture-studio .ls-state-title { font-size: 12px; color: var(--ls-muted); margin: 12px 0 6px; font-weight: 700; }
+.lecture-studio .ls-frame .ls-vars { width: 100%; border-collapse: collapse; direction: ltr; font-family: var(--ls-font-mono); font-size: 15px; }
+.lecture-studio .ls-vars th, .lecture-studio .ls-vars td { padding: 6px 8px; text-align: left; border-bottom: 1px solid var(--ls-card-border); font-weight: 500; }
+.lecture-studio .ls-vars th { color: var(--ls-var-name); width: 40%; }
+.lecture-studio .ls-vars td { color: var(--ls-var-value); overflow-wrap: anywhere; }
+.lecture-studio .ls-frame .ls-state-output { margin: 0; padding: 10px 12px; border-radius: 10px; background: var(--ls-output-bg); color: var(--ls-output-text); font: 15px/1.7 var(--ls-font-mono); direction: ltr; text-align: left; white-space: pre-wrap; }
+.lecture-studio .ls-state-note { margin: 12px 0 0; color: var(--ls-card-text); font-size: 15px; line-height: 1.85; text-align: start; }
+.lecture-studio .ls-step-next {
+  display: inline-flex; margin-top: 14px; padding: 6px 14px; border-radius: 9px; border: 1px solid var(--ls-reveal-border); background: var(--ls-reveal-bg);
+  color: var(--ls-reveal-text); font-size: 13px; font-weight: 700; cursor: pointer;
+}
+/* Static documents (the PDF exporter sets data-static): every trace step at once. */
+.lecture-studio[data-static="true"] .ls-trace-controls, .lecture-studio[data-static="true"] .ls-step-next { display: none; }
+.lecture-studio[data-static="true"] .ls-trace-body { grid-template-columns: 1fr; }
+.lecture-studio[data-static="true"] .ls-trace-states { display: grid; grid-template-columns: repeat(auto-fill, minmax(170px, 1fr)); gap: 12px; }
+.lecture-studio[data-static="true"] .ls-state { display: block; }
+
+/* Exercise */
+.lecture-studio .ls-task { font-size: 17px; color: var(--ls-text); }
+.lecture-studio .ls-hints { display: grid; gap: 8px; margin-top: 14px; }
+.lecture-studio .ls-hint { border: 1px dashed var(--ls-card-border); border-radius: 12px; }
+.lecture-studio .ls-hint > summary { padding: 10px 14px; cursor: pointer; color: var(--ls-activity-label); font-size: 14px; font-weight: 700; list-style: none; }
+.lecture-studio .ls-hint > summary::-webkit-details-marker { display: none; }
+.lecture-studio .ls-hint > summary::before { content: '+ '; font-family: var(--ls-font-mono); }
+.lecture-studio .ls-hint[open] > summary::before { content: '− '; }
+.lecture-studio .ls-hint > div { padding: 0 14px 12px; color: var(--ls-card-text); font-size: 15px; }
+.lecture-studio .ls-solution { margin-top: 14px; }
+
+/* Agenda and recap */
+.lecture-studio .ls-frame .ls-agenda-list { list-style: none; margin: 4px 0 0; padding: 0; display: grid; grid-template-columns: repeat(auto-fit, minmax(min(100%, 280px), 1fr)); gap: 12px; }
+.lecture-studio .ls-agenda-list li {
+  display: flex; align-items: center; gap: 14px; padding: 15px 18px; border-radius: 15px; background: var(--ls-card-bg); border: 1px solid var(--ls-card-border);
+  color: var(--ls-card-title); font-size: 17px; font-weight: 600; line-height: 1.7;
+}
+.lecture-studio .ls-agenda-mark {
+  flex: 0 0 36px; height: 36px; display: grid; place-items: center; border-radius: 10px; background: var(--ls-number-bg); color: var(--ls-number-text);
+  font-family: var(--ls-font-mono); font-size: 13px; font-weight: 700;
+}
+.lecture-studio .ls-agenda[data-mode="recap"] .ls-agenda-mark { background: color-mix(in srgb, var(--ls-good) 20%, transparent); color: var(--ls-good); font-size: 17px; }
+
+/* Figure */
+.lecture-studio .ls-figure { margin: 0; }
+.lecture-studio .ls-figure-mat { display: flex; justify-content: center; padding: 14px; border-radius: 14px; background: var(--ls-figure-mat); border: 1px solid var(--ls-card-border); }
+.lecture-studio .ls-figure img { display: block; max-width: 100%; height: auto; border-radius: 6px; }
+.lecture-studio .ls-figure figcaption { margin-top: 12px; font-size: 14px; color: var(--ls-caption); text-align: start; }
+.lecture-studio .ls-figure figcaption span { color: var(--ls-eyebrow); font-weight: 800; }
+
+/* Divider */
+.lecture-studio .ls-divider { padding: 30px 40px 25px; background: var(--ls-cover-glow), var(--ls-cover-bg); isolation: isolate; }
+.lecture-studio .ls-divider-body { min-height: 230px; display: grid; place-content: center; text-align: center; gap: 6px; }
+.lecture-studio .ls-divider-label { font-size: 14px; font-weight: 800; color: var(--ls-eyebrow); }
+.lecture-studio[dir="ltr"] .ls-divider-label { font-family: var(--ls-font-mono); font-size: 12px; letter-spacing: 3px; text-transform: uppercase; }
+.lecture-studio .ls-divider .ls-divider-title { margin: 0; font-family: var(--ls-font-heading); font-size: 46px; font-weight: 900; line-height: 1.5; color: var(--ls-cover-title); animation: ls-reveal .85s cubic-bezier(.16,1,.3,1) both; }
+.lecture-studio .ls-divider-subtitle { margin: 0; font-size: 18px; color: var(--ls-lead); }
+
+.lecture-studio .ls-notes { display: none; }
+
+/* 5b. Subject visuals: formulas, arrays, matrices and SVG figures ------------- */
+/* Formulas (MathML) */
+.lecture-studio math { font-family: 'STIX Two Math', 'Cambria Math', 'Latin Modern Math', math; }
+.lecture-studio .ls-equations { display: grid; gap: 10px; margin: 4px 0 2px; }
+.lecture-studio .ls-equation {
+  overflow-x: auto; padding: 16px 20px; border-radius: 14px; border: 1px solid var(--ls-card-border); background: var(--ls-card-bg);
+  color: var(--ls-viz-strong); direction: ltr;
+}
+.lecture-studio .ls-equation math { font-size: 1.5em; }
+.lecture-studio .ls-legend { display: flex; flex-wrap: wrap; align-items: baseline; gap: 8px 24px; margin: 14px 0 0; color: var(--ls-card-text); }
+.lecture-studio .ls-legend-title { font-weight: 800; color: var(--ls-eyebrow); }
+.lecture-studio .ls-legend div { display: flex; align-items: baseline; gap: 8px; }
+.lecture-studio .ls-legend dt { color: var(--ls-viz-strong); font-size: 1.15em; }
+.lecture-studio .ls-legend dd { margin: 0; }
+
+/* Arrays */
+.lecture-studio .ls-array { display: flex; align-items: center; gap: 14px; overflow-x: auto; padding: 6px 2px 2px; direction: ltr; }
+.lecture-studio .ls-array-name { font-family: var(--ls-font-mono); font-size: 17px; color: var(--ls-viz-strong); white-space: nowrap; }
+.lecture-studio .ls-array-track { display: grid; grid-template-columns: repeat(var(--ls-count), minmax(52px, 76px)); row-gap: 8px; }
+.lecture-studio .ls-array-cell { grid-row: 1; display: grid; grid-template-rows: auto 54px auto auto; align-content: start; text-align: center; }
+.lecture-studio .ls-array-index, .lecture-studio .ls-array-neg { font-family: var(--ls-font-mono); font-size: 12px; line-height: 1.7; color: var(--ls-viz-text); }
+.lecture-studio .ls-array-value {
+  display: grid; place-items: center; padding: 0 4px; margin-inline-start: -1px; border: 1px solid var(--ls-viz-cell-border);
+  background: var(--ls-viz-cell); color: var(--ls-viz-strong); font-family: var(--ls-font-mono); font-size: 17px; line-height: 1.2; overflow-wrap: anywhere;
+}
+.lecture-studio .ls-array-cell.is-first .ls-array-value { border-start-start-radius: 10px; border-end-start-radius: 10px; }
+.lecture-studio .ls-array-cell.is-last .ls-array-value { border-start-end-radius: 10px; border-end-end-radius: 10px; }
+.lecture-studio .ls-array-cell.is-marked .ls-array-value { position: relative; border-color: var(--ls-viz-mark); background: color-mix(in srgb, var(--ls-viz-mark) 24%, var(--ls-viz-cell)); }
+.lecture-studio .ls-array-cell.in-slice .ls-array-value { box-shadow: inset 0 -3px 0 var(--ls-viz-selected); }
+.lecture-studio .ls-array-cell.is-ghost .ls-array-value { border-style: dashed; background: transparent; }
+.lecture-studio .ls-array-pointers { display: flex; flex-direction: column; align-items: center; margin-top: 2px; }
+.lecture-studio .ls-array-pointers b { font-family: var(--ls-font-mono); font-size: 13px; color: var(--ls-viz-selected); }
+.lecture-studio .ls-array-pointers b::before { content: '▲ '; font-size: 10px; }
+.lecture-studio .ls-array-slice { grid-row: 2; margin: 0 6px; padding-top: 4px; border-top: 2px solid var(--ls-viz-selected); text-align: center; }
+.lecture-studio .ls-array-slice span { font-family: var(--ls-font-mono); font-size: 13px; color: var(--ls-viz-selected); }
+
+/* Matrices and heatmaps */
+.lecture-studio .ls-matrix-wrap { display: flex; align-items: center; justify-content: center; gap: 14px; direction: ltr; }
+.lecture-studio .ls-matrix-scroll { max-width: 100%; overflow-x: auto; }
+.lecture-studio .ls-matrix-name { font-family: var(--ls-font-mono); font-size: 18px; color: var(--ls-viz-strong); white-space: nowrap; }
+.lecture-studio .ls-frame .ls-matrix { margin: 0; border-collapse: separate; border-spacing: 4px; font-family: var(--ls-font-mono); }
+.lecture-studio .ls-matrix td {
+  min-width: 48px; height: 44px; padding: 4px 10px; border: 1px solid var(--ls-viz-cell-border); border-radius: 8px;
+  background: var(--ls-viz-cell); color: var(--ls-viz-strong); font-size: 16px; text-align: center;
+}
+.lecture-studio .ls-matrix td.is-heat { background: color-mix(in srgb, var(--ls-viz-heat) calc(var(--ls-heat) * 88%), var(--ls-viz-cell)); }
+.lecture-studio .ls-matrix td.is-hot { color: var(--ls-viz-hot-text); font-weight: 700; }
+.lecture-studio .ls-matrix td.is-marked { outline: 2px solid var(--ls-viz-selected); outline-offset: -2px; }
+.lecture-studio .ls-matrix th { padding: 4px 8px; color: var(--ls-viz-text); font-family: var(--ls-font); font-size: 13px; font-weight: 700; text-align: center; }
+.lecture-studio .ls-matrix .ls-matrix-axis { color: var(--ls-eyebrow); }
+.lecture-studio .ls-matrix .ls-matrix-axis-row span { display: inline-block; writing-mode: vertical-rl; transform: rotate(180deg); }
+.lecture-studio .ls-matrix.ls-brackets { padding: 0 6px; border-inline: 2px solid var(--ls-viz-strong); border-radius: 10px; }
+.lecture-studio .ls-matrix.ls-brackets td { border-color: transparent; background: transparent; }
+.lecture-studio .ls-metrics { display: flex; flex-wrap: wrap; justify-content: center; gap: 10px; margin-top: 14px; }
+.lecture-studio .ls-metrics span {
+  padding: 6px 14px; border: 1px solid var(--ls-card-border); border-radius: 999px; background: var(--ls-card-bg);
+  color: var(--ls-viz-strong); font-family: var(--ls-font-mono); font-size: 14px;
+}
+.lecture-studio .ls-metrics b { margin-inline-end: 6px; color: var(--ls-eyebrow); font-family: var(--ls-font); }
+
+/* SVG figures: charts, networks, trees, graphs, memory and schemas */
+.lecture-studio .ls-figure-svg { margin-top: 4px; overflow-x: auto; text-align: center; }
+.lecture-studio .ls-svg { display: inline-block; max-width: 100%; height: auto; overflow: visible; font-family: var(--ls-font); vertical-align: top; }
+.lecture-studio .ls-svg text { fill: var(--ls-viz-text); font-size: 13px; }
+.lecture-studio .ls-svg .ls-mono { font-family: var(--ls-font-mono); }
+.lecture-studio .ls-svg .ls-grid { stroke: var(--ls-viz-grid); }
+.lecture-studio .ls-svg .ls-axis { stroke: var(--ls-viz-axis); stroke-width: 1.2; }
+.lecture-studio .ls-svg .ls-axis-label, .lecture-studio .ls-svg .ls-layer-label, .lecture-studio .ls-svg .ls-column-title { fill: var(--ls-eyebrow); font-size: 14px; font-weight: 700; }
+.lecture-studio .ls-svg .ls-line-path { fill: none; stroke: var(--ls-c); stroke-width: 2.6; stroke-linecap: round; stroke-linejoin: round; }
+.lecture-studio .ls-svg .ls-point, .lecture-studio .ls-svg .ls-bar { fill: var(--ls-c); }
+.lecture-studio .ls-svg .ls-point { stroke: var(--ls-viz-box); stroke-width: 1.5; }
+.lecture-studio .ls-chart-legend { display: flex; flex-wrap: wrap; justify-content: center; gap: 6px 18px; margin: 10px 0 0; padding: 0; list-style: none; color: var(--ls-card-text); font-size: 14px; }
+.lecture-studio .ls-chart-legend li { display: inline-flex; align-items: center; gap: 8px; }
+.lecture-studio .ls-chart-legend i { width: 14px; height: 14px; border-radius: 4px; background: var(--ls-c); }
+.lecture-studio .ls-svg .ls-synapses line { stroke: var(--ls-viz-edge); stroke-opacity: .35; }
+.lecture-studio .ls-svg .ls-neuron { fill: var(--ls-viz-box); stroke: var(--ls-viz-1); stroke-width: 2.4; }
+.lecture-studio .ls-svg .ls-neuron[data-role="input"] { stroke: var(--ls-viz-2); }
+.lecture-studio .ls-svg .ls-neuron[data-role="output"] { stroke: var(--ls-viz-3); }
+.lecture-studio .ls-svg .ls-ellipsis { fill: var(--ls-viz-text); font-size: 24px; font-weight: 700; }
+.lecture-studio .ls-svg .ls-box { fill: var(--ls-viz-box); stroke: var(--ls-viz-box-border); stroke-width: 1.4; }
+.lecture-studio .ls-svg .ls-box.is-selected { fill: color-mix(in srgb, var(--ls-viz-selected) 22%, var(--ls-viz-box)); stroke: var(--ls-viz-selected); stroke-width: 2.2; }
+.lecture-studio .ls-svg .ls-box-head { fill: var(--ls-viz-box-head); stroke: var(--ls-viz-box-border); stroke-width: 1.4; }
+.lecture-studio .ls-svg .ls-label { fill: var(--ls-viz-strong); font-size: 15px; font-weight: 600; }
+.lecture-studio .ls-svg .ls-box-title { fill: var(--ls-viz-strong); font-size: 14px; font-weight: 800; }
+.lecture-studio .ls-svg .ls-node-note { font-size: 12px; }
+.lecture-studio .ls-svg .ls-edge { fill: none; stroke: var(--ls-viz-edge); stroke-width: 1.8; }
+.lecture-studio .ls-svg .ls-edge.is-selected { stroke: var(--ls-viz-selected); stroke-width: 3; }
+.lecture-studio .ls-svg .ls-edge-label {
+  fill: var(--ls-viz-strong); font-size: 13px; font-weight: 700; paint-order: stroke; stroke: var(--ls-viz-box); stroke-width: 5px; stroke-linejoin: round;
+}
+.lecture-studio .ls-svg .ls-arrowhead { fill: var(--ls-viz-edge); }
+.lecture-studio .ls-svg .ls-sep { stroke: var(--ls-viz-box-border); stroke-opacity: .6; }
+.lecture-studio .ls-svg .ls-slot-name { fill: var(--ls-var-name); font-size: 14px; }
+.lecture-studio .ls-svg .ls-slot-value { fill: var(--ls-viz-strong); font-size: 14px; }
+.lecture-studio .ls-svg .ls-slot-type { font-size: 12px; }
+.lecture-studio .ls-svg .ls-frame-box.is-active .ls-box { stroke: var(--ls-viz-1); stroke-width: 2.2; }
+.lecture-studio .ls-svg .ls-ref { fill: none; stroke: var(--ls-viz-1); stroke-width: 2; }
+.lecture-studio .ls-svg .ls-ref-dot, .lecture-studio .ls-svg .ls-ref-head { fill: var(--ls-viz-1); }
+.lecture-studio .ls-svg .ls-relation { fill: none; stroke: var(--ls-viz-edge); stroke-width: 1.8; }
+.lecture-studio .ls-svg .ls-marker { fill: none; stroke: var(--ls-viz-edge); stroke-width: 1.6; }
+.lecture-studio .ls-svg .ls-key { font-size: 11px; font-weight: 800; fill: var(--ls-viz-5); }
+.lecture-studio .ls-svg .ls-key[data-key="pk"] { fill: var(--ls-viz-1); }
+.lecture-studio .ls-svg .ls-key[data-key="fk"] { fill: var(--ls-viz-2); }
+
+/* 5c. Host isolation ----------------------------------------------------------
+ * Notebook front ends restyle code and tables inside rendered HTML with their light or dark theme:
+ * JupyterLab gives every `:not(pre) > code` a grey chip, stripes and highlights every `tbody tr`,
+ * colors tables and `pre` with its own text color and sets `color-scheme`, using selectors up to
+ * (0,2,2) specific. The doubled root class (0,3,x) restates the deck's values, so a lecture looks
+ * the same under light and dark hosts and in exported HTML and PDF.
+ */
+.lecture-studio.lecture-studio .ls-frame { color-scheme: var(--ls-scheme); }
+.lecture-studio.lecture-studio .ls-note, .lecture-studio.lecture-studio .ls-callout { color-scheme: light; }
+.lecture-studio.lecture-studio .ls-frame :not(pre) > code { background: var(--ls-inline-code-bg); color: var(--ls-inline-code); padding: 2px 5px; }
+.lecture-studio.lecture-studio .ls-note :not(pre) > code, .lecture-studio.lecture-studio .ls-callout :not(pre) > code {
+  background: var(--ls-note-code-bg); color: var(--ls-note-code); padding: 1px 6px;
+}
+.lecture-studio.lecture-studio .ls-code pre { background: transparent; color: var(--ls-code-text); }
+.lecture-studio.lecture-studio table { color: inherit; }
+.lecture-studio.lecture-studio thead { border-bottom: 0; }
+.lecture-studio.lecture-studio tbody > tr:nth-child(n), .lecture-studio.lecture-studio tbody > tr:hover { background: transparent; }
+.lecture-studio.lecture-studio .ls-table tbody > tr:nth-child(even) { background: var(--ls-table-stripe); }
+
+/* 6. Responsive: frames are size containers ---------------------------------- */
+@media (max-width: 900px) { .lecture-studio .ls-cover { padding: 26px; } }
+@media (max-width: 760px) { .lecture-studio .ls-panel, .lecture-studio .ls-divider { padding: 22px; } }
+@container (max-width: 1000px) {
+  .lecture-studio .ls-cover .ls-cover-grid { grid-template-columns: minmax(0, 1fr) 260px; gap: 30px; margin: 20px 0 23px; }
+  .lecture-studio .ls-cover .ls-cover-title { font-size: 46px; }
+  .lecture-studio .ls-cover .ls-lead { font-size: 17px; margin-top: 11px; line-height: 1.9; }
+  .lecture-studio .ls-cover .ls-tags { margin-top: 14px; }
+  .lecture-studio .ls-cover .ls-section { padding: 13px 16px; }
+  .lecture-studio .ls-cover .ls-section p { font-size: 13px; }
+  .lecture-studio .ls-cover .ls-footer { margin-top: 16px; padding-top: 11px; }
+  .lecture-studio .ls-cover .ls-hero { width: 230px; height: 230px; }
+  .lecture-studio .ls-slide .ls-title { font-size: 31px; }
+  .lecture-studio .ls-header { min-height: 85px; }
+  .lecture-studio .ls-watermark { font-size: 95px; }
+}
+@container (max-width: 850px) {
+  .lecture-studio .ls-slide:has(.ls-diagram[data-kind="journey"]) .ls-cards { grid-template-columns: repeat(2, minmax(0, 1fr)); }
+  .lecture-studio .ls-node b { font-size: 19px; }
+  .lecture-studio .ls-node span { font-size: 12px; }
+}
+@container (max-width: 700px) {
+  .lecture-studio .ls-cover .ls-cover-grid { grid-template-columns: 1fr; }
+  .lecture-studio .ls-cover .ls-hero { display: none; }
+  .lecture-studio .ls-cover .ls-cover-title { font-size: 38px; }
+  .lecture-studio .ls-watermark { font-size: 78px; left: 0; top: -10px; }
+  .lecture-studio[dir="ltr"] .ls-watermark { left: auto; right: 0; }
+  .lecture-studio .ls-slide .ls-title { font-size: 27px; }
+  .lecture-studio .ls-eyebrow { font-size: 9px; }
+  .lecture-studio .ls-slide .ls-cards { grid-template-columns: 1fr; }
+  .lecture-studio .ls-track { flex-wrap: wrap; }
+  .lecture-studio .ls-node { flex: 1 1 40%; }
+  .lecture-studio .ls-diagram[data-kind="index"] .ls-node { flex: 1 1 12%; }
+  .lecture-studio .ls-arrow { display: none; }
+  .lecture-studio .ls-compare-grid, .lecture-studio .ls-trace-body, .lecture-studio .ls-frame .ls-options { grid-template-columns: 1fr; }
+  .lecture-studio .ls-divider .ls-divider-title { font-size: 34px; }
+}
+@container (max-width: 650px) {
+  .lecture-studio .ls-topline { gap: 8px; }
+  .lecture-studio .ls-cover .ls-sections { grid-template-columns: 1fr; }
+  .lecture-studio .ls-diagram figcaption { display: block; }
+  .lecture-studio .ls-diagram-eyebrow { display: none; }
+  .lecture-studio .ls-track { gap: 8px; }
+  .lecture-studio .ls-node { min-height: 75px; }
+  .lecture-studio .ls-diagram[data-kind="index"] .ls-node { min-width: 35px; }
+  .lecture-studio .ls-diagram[data-kind="flow"] .ls-node { flex: 1 1 100%; }
+  .lecture-studio .ls-diagram[data-kind="flow"] .ls-arrow { display: none; }
+}
+
+/* 7. Motion ------------------------------------------------------------------- */
+@keyframes ls-rise { from { opacity: 0; transform: translateY(12px); } to { opacity: 1; transform: translateY(0); } }
+@keyframes ls-reveal { from { opacity: 0; transform: translateY(16px) scale(.985); } to { opacity: 1; transform: translateY(0) scale(1); } }
+@keyframes ls-answer-in { from { opacity: 0; transform: translateY(-6px); } to { opacity: 1; transform: translateY(0); } }
+@keyframes ls-hero-float { 0%, 100% { transform: translateY(0) rotate(-4deg); } 50% { transform: translateY(-7px) rotate(-2deg); } }
+@keyframes ls-orbit { 0%, 100% { transform: translate(0, 0); } 50% { transform: translate(115px, -6px); } }
+@keyframes ls-sheen { 0%, 100% { transform: translateX(-30%); opacity: .4; } 50% { transform: translateX(35%); opacity: 1; } }
+.lecture-studio[data-motion="false"] *, .lecture-studio[data-motion="false"] *::before, .lecture-studio[data-motion="false"] *::after {
+  animation: none !important; transition: none !important; opacity: 1 !important;
+}
+@media (prefers-reduced-motion: reduce) {
+  .lecture-studio *, .lecture-studio *::before, .lecture-studio *::after { animation: none !important; transition: none !important; opacity: 1 !important; scroll-behavior: auto !important; }
+}
+
+/* 8. Print -------------------------------------------------------------------- */
+@media print {
+  .lecture-studio .ls-frame { -webkit-print-color-adjust: exact; print-color-adjust: exact; box-shadow: none; break-inside: avoid; }
+  .lecture-studio *, .lecture-studio *::before, .lecture-studio *::after { animation: none !important; transition: none !important; opacity: 1 !important; transform: none !important; }
+  .lecture-studio details:not([open]) > .ls-answer { display: none; }
+  .lecture-studio .ls-trace-controls, .lecture-studio .ls-step-next { display: none; }
+  .lecture-studio .ls-trace-body { grid-template-columns: 1fr; }
+  .lecture-studio .ls-trace-states { display: grid; grid-template-columns: repeat(auto-fill, minmax(170px, 1fr)); gap: 12px; }
+  .lecture-studio .ls-state { display: block; }
+}

@@ -1,0 +1,99 @@
+[build-system]
+requires = ["setuptools>=77.0.3"]
+build-backend = "setuptools.build_meta"
+
+[project]
+name = "jupyter-lecture-studio"
+dynamic = ["version"]
+description = "Bilingual (Arabic/English) teaching slides, quizzes and code walkthroughs for Jupyter, offline HTML and PDF"
+readme = {file = "README.md", content-type = "text/markdown"}
+requires-python = ">=3.10"
+license = "MIT AND OFL-1.1 AND BSD-2-Clause"
+license-files = ["LICENSE", "THIRD_PARTY_NOTICES.md", "src/lecture_studio/assets/fonts/*-OFL.txt", "docs/_static/licenses/*.txt"]
+authors = [{name = "aoos101"}]
+keywords = [
+    "jupyter", "jupyterlab", "lecture", "slides", "presentation", "teaching", "education", "notebook",
+    "arabic", "rtl", "bilingual", "quiz", "code-walkthrough", "html", "pdf",
+]
+classifiers = [
+    "Development Status :: 5 - Production/Stable",
+    "Framework :: Jupyter",
+    "Framework :: Jupyter :: JupyterLab",
+    "Intended Audience :: Education",
+    "Intended Audience :: Developers",
+    "Natural Language :: Arabic",
+    "Natural Language :: English",
+    "Programming Language :: Python :: 3",
+    "Programming Language :: Python :: 3 :: Only",
+    "Programming Language :: Python :: 3.10",
+    "Programming Language :: Python :: 3.11",
+    "Programming Language :: Python :: 3.12",
+    "Programming Language :: Python :: 3.13",
+    "Programming Language :: Python :: 3.14",
+    "Operating System :: OS Independent",
+    "Topic :: Education",
+    "Topic :: Education :: Computer Aided Instruction (CAI)",
+    "Topic :: Multimedia :: Graphics :: Presentation",
+    "Typing :: Typed",
+]
+dependencies = []
+
+[project.urls]
+Homepage = "https://pypi.org/project/jupyter-lecture-studio/"
+Documentation = "https://pypi.org/project/jupyter-lecture-studio/#description"
+Changelog = "https://pypi.org/project/jupyter-lecture-studio/#history"
+Maintainer = "https://pypi.org/user/aoos101/"
+
+[project.optional-dependencies]
+pdf = ["playwright>=1.50,<2", "reportlab>=4.2,<5", "pypdf>=5,<7", "nbconvert>=7.16,<8"]
+notebook = ["ipython>=8"]
+highlight = ["pygments>=2.15"]
+docs = ["sphinx>=8,<10", "myst-parser>=4,<6", "furo>=2024"]
+dev = ["pytest>=8", "ruff>=0.6", "mypy>=1.10", "ipython>=8", "pygments>=2.15"]
+
+[project.scripts]
+jupyter-lecture-studio = "lecture_studio.cli:main"
+lecture-studio = "lecture_studio.cli:main"
+
+[tool.setuptools.dynamic]
+version = {attr = "lecture_studio._version.__version__"}
+
+[tool.setuptools.packages.find]
+where = ["src"]
+
+[tool.setuptools.package-data]
+lecture_studio = ["assets/*.css", "assets/*.js", "assets/fonts/*.woff2", "assets/fonts/*.txt", "assets/fonts/*.json", "py.typed"]
+jupyter_lecture_studio = ["docs/**/*", "docs/*", "py.typed"]
+
+[tool.setuptools.exclude-package-data]
+"*" = [".claude-flow/**", ".swarm/**", "**/.claude-flow/**", "**/.swarm/**", "**/.DS_Store"]
+
+[tool.pytest.ini_options]
+testpaths = ["tests"]
+addopts = "-q"
+
+[tool.ruff]
+line-length = 130
+target-version = "py310"
+extend-exclude = ["revision_backup", "build", "dist", "src/jupyter_lecture_studio/docs"]
+
+[tool.ruff.lint]
+select = ["E", "F", "W", "I", "B", "UP"]
+
+[tool.ruff.lint.per-file-ignores]
+# Embedded browser scripts and Arabic teaching data read better unwrapped.
+"src/lecture_studio/pdf.py" = ["E501"]
+"src/lecture_studio/presets.py" = ["E501"]
+"tests/*" = ["E501", "E702", "E703"]
+"tools/*" = ["E501", "E702"]
+"examples/*" = ["E501"]
+
+[tool.ruff.lint.isort]
+force-sort-within-sections = true
+
+[tool.mypy]
+python_version = "3.10"
+files = ["src/lecture_studio"]
+ignore_missing_imports = true
+check_untyped_defs = true
+warn_unused_ignores = true

@@ -1,0 +1,42 @@
+/* Presentation mode: one component per screen, scaled to fit, keyboard driven. */
+html.ls-presenting, html.ls-presenting body { height: 100%; margin: 0; padding: 0 !important; overflow: hidden; }
+.lecture-studio.ls-present {
+  max-width: none; height: 100vh; margin: 0; position: relative; overflow: hidden;
+  background: radial-gradient(ellipse at 50% 0, #142231, #060b12 70%);
+}
+.lecture-studio.ls-present[data-palette="paper"] { background: radial-gradient(ellipse at 50% 0, #f4efe3, #dcd6c8 75%); }
+.lecture-studio.ls-present > section {
+  display: none; position: absolute; top: 50%; left: 50%; width: min(var(--ls-width), 100vw); margin: 0;
+  transform-origin: center center; transform: translate(-50%, -50%);
+}
+.lecture-studio.ls-present > section.ls-current { display: block; }
+.lecture-studio.ls-present.ls-scroll > section.ls-current { top: 0; transform-origin: top center; }
+.lecture-studio.ls-present.ls-scroll { overflow-y: auto; }
+.lecture-studio.ls-present .ls-hidden-step { visibility: hidden; }
+.lecture-studio .ls-present-progress { position: fixed; top: 0; inset-inline-start: 0; height: 3px; background: var(--ls-accent); z-index: 20; transition: width .3s ease; }
+.lecture-studio .ls-present-ui {
+  position: fixed; bottom: 14px; inset-inline-end: 16px; z-index: 20; display: flex; align-items: center; gap: 6px; padding: 5px;
+  border-radius: 12px; background: rgba(8,14,22,.55); color: #e7ecf2; font: 600 13px/1 var(--ls-font); backdrop-filter: blur(6px);
+  opacity: .35; transition: opacity .2s ease;
+}
+.lecture-studio .ls-present-ui:hover, .lecture-studio .ls-present-ui:focus-within { opacity: 1; }
+.lecture-studio .ls-present-ui button {
+  min-width: 34px; height: 30px; padding: 0 10px; border: 0; border-radius: 8px; background: rgba(255,255,255,.08); color: inherit;
+  font: inherit; cursor: pointer;
+}
+.lecture-studio .ls-present-ui button:hover { background: rgba(255,255,255,.18); }
+.lecture-studio .ls-present-ui button:focus-visible { outline: 2px solid var(--ls-accent); outline-offset: 2px; }
+.lecture-studio .ls-present-count { padding: 0 8px; font-family: var(--ls-font-mono); direction: ltr; }
+.lecture-studio .ls-present-notes {
+  position: fixed; bottom: 60px; inset-inline-end: 16px; z-index: 21; width: min(520px, calc(100vw - 32px)); max-height: 40vh; overflow: auto;
+  padding: 16px 18px; border-radius: 14px; background: rgba(250,248,242,.97); color: #1c2531; font: 16px/1.9 var(--ls-font);
+  box-shadow: 0 18px 40px rgba(0,0,0,.35);
+}
+.lecture-studio .ls-present-notes strong:first-child { display: block; margin-bottom: 4px; color: #7d6128; font-size: 13px; }
+@media print {
+  html.ls-presenting, html.ls-presenting body { height: auto; overflow: visible; }
+  .lecture-studio.ls-present { height: auto; overflow: visible; background: none; }
+  .lecture-studio.ls-present > section { display: block; position: static; transform: none !important; width: 100%; margin: 0 0 18px; break-after: page; }
+  .lecture-studio.ls-present .ls-hidden-step { visibility: visible; }
+  .lecture-studio .ls-present-ui, .lecture-studio .ls-present-progress, .lecture-studio .ls-present-notes { display: none; }
+}

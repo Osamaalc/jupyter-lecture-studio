@@ -1,0 +1,36 @@
+name: Bug report / بلاغ عن مشكلة
+description: Something renders or behaves incorrectly.
+labels: [bug]
+body:
+  - type: textarea
+    id: what
+    attributes:
+      label: What happened? / ماذا حدث؟
+      description: Include a screenshot if the problem is visual.
+    validations:
+      required: true
+  - type: textarea
+    id: code
+    attributes:
+      label: Minimal lecture code / أقصر كود يظهر المشكلة
+      render: python
+    validations:
+      required: true
+  - type: input
+    id: version
+    attributes:
+      label: Lecture Studio version
+      description: Output of `jupyter-lecture-studio info`
+    validations:
+      required: true
+  - type: dropdown
+    id: host
+    attributes:
+      label: Where does it happen?
+      options: [JupyterLab, Jupyter Notebook 7, VS Code, Google Colab, Exported HTML, Presentation mode, PDF export, Other]
+    validations:
+      required: true
+  - type: input
+    id: browser
+    attributes:
+      label: Browser and operating system

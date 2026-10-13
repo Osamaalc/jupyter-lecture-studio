@@ -1,0 +1,65 @@
+{
+  "brand": {
+    "course": "أساسيات بايثون",
+    "series": "PYTHON SERIES",
+    "lesson": "01",
+    "language": "python"
+  },
+  "theme": {
+    "preset": "gold",
+    "direction": "rtl",
+    "motion": true,
+    "external_fonts": false
+  },
+  "components": [
+    {
+      "type": "cover",
+      "title": "أساسيات بايثون",
+      "description": "نبني على خبرتك السابقة.\nنفهم الفكرة ونجربها ثم نفسر النتيجة.",
+      "tags": [
+        "افهم",
+        "جرّب",
+        "فسّر"
+      ],
+      "sections": [
+        {
+          "title": "المفاهيم",
+          "description": "المحور الأول"
+        },
+        {
+          "title": "التطبيق",
+          "description": "المحور الثاني"
+        }
+      ],
+      "hero_code": "name = \"Python\"\nprint(name)",
+      "hero_result": "Python",
+      "hero_label": "PYTHON LAB"
+    },
+    {
+      "type": "slide",
+      "title": "الاسم والقيمة",
+      "description": "الاسم يرتبط بكائن. إعادة الإسناد تغيّر هذا الارتباط.",
+      "cards": [
+        {
+          "title": "إسناد",
+          "explanation": "النوع خاص بالكائن وليس بالاسم.",
+          "code": "x = 10\nx = \"Ali\"\nprint(type(x))"
+        },
+        {
+          "title": "تفسير",
+          "explanation": "يمكن ربط الاسم بكائن جديد من نوع مختلف."
+        }
+      ],
+      "diagram": "names",
+      "activity": {
+        "question": "ماذا يظهر عند تنفيذ المثال؟",
+        "answer": "نوع الكائن الأخير str؛ الاسم الآن مرتبط بالنص Ali."
+      }
+    },
+    {
+      "type": "note",
+      "title": "ملخص",
+      "body": "اكتب أهم ما يجب أن يتذكره الطالب."
+    }
+  ]
+}
