@@ -39,9 +39,11 @@ classifiers = [
 dependencies = []
 
 [project.urls]
-Homepage = "https://pypi.org/project/jupyter-lecture-studio/"
+Homepage = "https://github.com/Osamaalc/jupyter-lecture-studio"
 Documentation = "https://pypi.org/project/jupyter-lecture-studio/#description"
-Changelog = "https://pypi.org/project/jupyter-lecture-studio/#history"
+Repository = "https://github.com/Osamaalc/jupyter-lecture-studio"
+Issues = "https://github.com/Osamaalc/jupyter-lecture-studio/issues"
+Changelog = "https://github.com/Osamaalc/jupyter-lecture-studio/blob/main/CHANGELOG.md"
 Maintainer = "https://pypi.org/user/aoos101/"
 
 [project.optional-dependencies]
