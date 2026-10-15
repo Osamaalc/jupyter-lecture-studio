@@ -47,7 +47,7 @@ Changelog = "https://github.com/Osamaalc/jupyter-lecture-studio/blob/main/CHANGE
 Maintainer = "https://pypi.org/user/aoos101/"
 
 [project.optional-dependencies]
-pdf = ["playwright>=1.50,<2", "reportlab>=4.2,<5", "pypdf>=5,<7", "nbconvert>=7.16,<8"]
+pdf = ["playwright>=1.50,<2", "reportlab>=4.2,<6", "pypdf>=5,<7", "nbconvert>=7.16,<8"]
 notebook = ["ipython>=8"]
 highlight = ["pygments>=2.15"]
 docs = ["sphinx>=8,<10", "myst-parser>=4,<6", "furo>=2024"]
